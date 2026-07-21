@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/settings/app_settings.dart';
 import '../core/theme/app_theme.dart';
 import 'router/app_router.dart';
 
@@ -14,13 +15,14 @@ class FittnesApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
+    final themeMode = ref.watch(appSettingsProvider.select((s) => s.themeMode));
 
     return MaterialApp.router(
       title: 'Fittnes',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.dark,
+      themeMode: themeMode,
       routerConfig: router,
     );
   }

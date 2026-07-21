@@ -6,6 +6,8 @@ import '../../features/exercises/presentation/exercise_detail_screen.dart';
 import '../../features/exercises/presentation/exercises_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
+import '../../features/programs/presentation/program_detail_screen.dart';
+import '../../features/programs/presentation/programs_screen.dart';
 import '../../features/workout/presentation/active_workout_screen.dart';
 import '../../features/workout/presentation/workout_history_screen.dart';
 import '../../features/progress/presentation/progress_screen.dart';
@@ -66,6 +68,32 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               child: child,
             );
           },
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootKey,
+        path: AppRoutes.programs,
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: const ProgramsScreen(),
+          transitionDuration: const Duration(milliseconds: 300),
+          transitionsBuilder: (context, animation, secondary, child) =>
+              FadeTransition(opacity: animation, child: child),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootKey,
+        path: '/programs/:id',
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: ProgramDetailScreen(programId: state.pathParameters['id']!),
+          transitionDuration: const Duration(milliseconds: 300),
+          transitionsBuilder: (context, animation, secondary, child) =>
+              SlideTransition(
+            position: Tween<Offset>(begin: const Offset(0, 0.04), end: Offset.zero)
+                .animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic)),
+            child: FadeTransition(opacity: animation, child: child),
+          ),
         ),
       ),
       GoRoute(

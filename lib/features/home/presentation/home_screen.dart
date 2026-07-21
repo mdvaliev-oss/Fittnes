@@ -82,6 +82,27 @@ class HomeScreen extends ConsumerWidget {
               ),
             ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.08, end: 0),
 
+            const SizedBox(height: AppSpacing.sm),
+            GlassCard(
+              onTap: () => context.push(AppRoutes.programs),
+              child: Row(
+                children: [
+                  Icon(Icons.dashboard_customize_rounded, color: glass.accent),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Программы тренировок', style: text.titleLarge?.copyWith(fontSize: 16)),
+                        Text('Full Body · Upper/Lower · PPL', style: text.bodyMedium),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.chevron_right_rounded, color: glass.textLow),
+                ],
+              ),
+            ),
+
             const SizedBox(height: AppSpacing.lg),
             Row(
               children: [

@@ -29,14 +29,32 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
   }
 
   void addExercise(Exercise exercise, {double? recommendedWeight, int? recommendedReps}) {
+    addExerciseRef(
+      exercise.id,
+      exercise.name,
+      recommendedWeight: recommendedWeight,
+      recommendedReps: recommendedReps,
+    );
+  }
+
+  /// Adds an exercise by id/name (used when seeding from a program), creating
+  /// [sets] empty sets prefilled with the recommended weight/reps.
+  void addExerciseRef(
+    String exerciseId,
+    String exerciseName, {
+    double? recommendedWeight,
+    int? recommendedReps,
+    int sets = 1,
+  }) {
     final session = state;
     if (session == null) return;
     final entry = WorkoutExerciseEntry(
       id: _id(),
-      exerciseId: exercise.id,
-      exerciseName: exercise.name,
+      exerciseId: exerciseId,
+      exerciseName: exerciseName,
       sets: [
-        WorkoutSet(id: _id(), weight: recommendedWeight, reps: recommendedReps),
+        for (var i = 0; i < (sets < 1 ? 1 : sets); i++)
+          WorkoutSet(id: _id(), weight: recommendedWeight, reps: recommendedReps),
       ],
     );
     state = session.copyWith(entries: [...session.entries, entry]);

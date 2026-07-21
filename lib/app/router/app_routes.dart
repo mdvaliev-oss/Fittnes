@@ -16,4 +16,5 @@ abstract final class AppRoutes {
   static const String onboarding = '/onboarding';
 
   static String exerciseDetail(String id) => '/exercises/$id';
+  static String programDetail(String id) => '/programs/$id';
 }
