@@ -34,7 +34,7 @@ class StrengthLineChart extends StatelessWidget {
             show: true,
             drawVerticalLine: false,
             getDrawingHorizontalLine: (_) =>
-                FlLine(color: Colors.white.withOpacity(0.06), strokeWidth: 1),
+                FlLine(color: Colors.white.withValues(alpha: 0.06), strokeWidth: 1),
           ),
           borderData: FlBorderData(show: false),
           titlesData: FlTitlesData(
@@ -80,8 +80,8 @@ class StrengthLineChart extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.primary.withOpacity(0.30),
-                    AppColors.primary.withOpacity(0.0),
+                    AppColors.primary.withValues(alpha: 0.30),
+                    AppColors.primary.withValues(alpha: 0.0),
                   ],
                 ),
               ),

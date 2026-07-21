@@ -358,9 +358,9 @@ class _MuscleLegend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
+      children: [
         _LegendDot(color: AppColors.primaryBright, label: 'Основные'),
         SizedBox(width: AppSpacing.md),
         _LegendDot(color: AppColors.primary, label: 'Второстепенные'),
@@ -408,9 +408,9 @@ class _Pill extends StatelessWidget {
         vertical: 6,
       ),
       decoration: BoxDecoration(
-        color: c.withOpacity(0.12),
+        color: c.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(AppRadius.pill),
-        border: Border.all(color: c.withOpacity(0.25)),
+        border: Border.all(color: c.withValues(alpha: 0.25)),
       ),
       child: Text(
         label,

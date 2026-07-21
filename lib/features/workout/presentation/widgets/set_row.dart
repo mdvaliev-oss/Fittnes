@@ -99,7 +99,7 @@ class _SetRowState extends ConsumerState<SetRow> {
       background: Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: AppSpacing.md),
-        color: AppColors.danger.withOpacity(0.2),
+        color: AppColors.danger.withValues(alpha: 0.2),
         child: const Icon(Icons.delete_rounded, color: AppColors.danger),
       ),
       onDismissed: (_) => _controller.removeSet(widget.entryId, set.id),
@@ -107,7 +107,7 @@ class _SetRowState extends ConsumerState<SetRow> {
         duration: AppMotion.fast,
         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: AppSpacing.xs),
         decoration: BoxDecoration(
-          color: done ? AppColors.accent.withOpacity(0.10) : Colors.transparent,
+          color: done ? AppColors.accent.withValues(alpha: 0.10) : Colors.transparent,
           borderRadius: BorderRadius.circular(AppRadius.chip),
         ),
         child: Row(
@@ -165,7 +165,7 @@ class _SetRowState extends ConsumerState<SetRow> {
   }
 
   String? get _weightHint =>
-      widget.previousHint != null ? widget.previousHint!.split('×').first : null;
+      widget.previousHint?.split('×').first;
   String? get _repsHint => widget.previousHint != null
       ? (widget.previousHint!.split('×').length > 1
           ? widget.previousHint!.split('×')[1]
@@ -202,7 +202,7 @@ class _TypeBadge extends StatelessWidget {
         height: 30,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: color.withOpacity(0.18),
+          color: color.withValues(alpha: 0.18),
           borderRadius: BorderRadius.circular(AppRadius.chip),
         ),
         child: Text(

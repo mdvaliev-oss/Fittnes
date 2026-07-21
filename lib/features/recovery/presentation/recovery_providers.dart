@@ -46,5 +46,5 @@ Color recoveryHeatColor(double fatigue) {
   final color = f < 0.5
       ? Color.lerp(AppColors.accent, AppColors.warning, f * 2)!
       : Color.lerp(AppColors.warning, AppColors.danger, (f - 0.5) * 2)!;
-  return color.withOpacity(0.9);
+  return color.withValues(alpha: 0.9);
 }

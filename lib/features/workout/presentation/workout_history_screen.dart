@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/glass_theme.dart';
@@ -119,7 +118,7 @@ class _SessionCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(e.exerciseName,
-                            style: text.bodyLarge, maxLines: 1, overflow: TextOverflow.ellipsis),
+                            style: text.bodyLarge, maxLines: 1, overflow: TextOverflow.ellipsis,),
                       ),
                       Text('${e.sets.length}×', style: text.bodyMedium),
                     ],
@@ -174,7 +173,7 @@ class _EmptyHistory extends StatelessWidget {
           Text('Пока нет тренировок', style: text.titleLarge),
           const SizedBox(height: AppSpacing.xxs),
           Text('Завершите первую тренировку — она появится здесь.',
-              style: text.bodyMedium, textAlign: TextAlign.center),
+              style: text.bodyMedium, textAlign: TextAlign.center,),
         ],
       ),
     );

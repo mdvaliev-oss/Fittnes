@@ -22,7 +22,6 @@ class RestTimerBar extends ConsumerWidget {
       duration: AppMotion.base,
       transitionBuilder: (child, animation) => SizeTransition(
         sizeFactor: animation,
-        axisAlignment: -1,
         child: FadeTransition(opacity: animation, child: child),
       ),
       child: !state.isActive
@@ -52,7 +51,7 @@ class RestTimerBar extends ConsumerWidget {
                             builder: (context, value, _) => CircularProgressIndicator(
                               value: value,
                               strokeWidth: 3,
-                              backgroundColor: Colors.white.withOpacity(0.08),
+                              backgroundColor: Colors.white.withValues(alpha: 0.08),
                               valueColor:
                                   const AlwaysStoppedAnimation(AppColors.accent),
                             ),
@@ -95,7 +94,7 @@ class _MiniAction extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
         decoration: BoxDecoration(
-          color: accent ? AppColors.accent.withOpacity(0.15) : Colors.white.withOpacity(0.06),
+          color: accent ? AppColors.accent.withValues(alpha: 0.15) : Colors.white.withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(AppRadius.pill),
         ),
         child: Text(

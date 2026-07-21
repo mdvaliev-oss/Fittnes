@@ -136,7 +136,7 @@ class _MuscleRecoveryRow extends StatelessWidget {
               child: LinearProgressIndicator(
                 value: recovery,
                 minHeight: 8,
-                backgroundColor: Colors.white.withOpacity(0.06),
+                backgroundColor: Colors.white.withValues(alpha: 0.06),
                 valueColor: AlwaysStoppedAnimation(color),
               ),
             ),
@@ -161,10 +161,10 @@ class _Legend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
-      children: const [
+      children: [
         _LegendDot(color: AppColors.accent, label: 'Восстановлено'),
         SizedBox(height: 4),
         _LegendDot(color: AppColors.warning, label: 'Частично'),
@@ -211,7 +211,7 @@ class _EmptyRecovery extends StatelessWidget {
             Text('Мышцы свежие', style: text.titleLarge),
             const SizedBox(height: AppSpacing.xxs),
             Text('За последние 7 дней тренировок нет — можно бить по любой группе.',
-                textAlign: TextAlign.center, style: text.bodyMedium),
+                textAlign: TextAlign.center, style: text.bodyMedium,),
           ],
         ),
       ),

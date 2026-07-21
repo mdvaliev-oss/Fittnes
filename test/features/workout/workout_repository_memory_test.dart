@@ -31,11 +31,11 @@ void main() {
     test('warm-up sets are excluded from volume and e1RM', () {
       const warm = WorkoutSet(id: 1, weight: 40, reps: 10, type: SetType.warmup);
       const work = WorkoutSet(id: 2, weight: 100, reps: 5);
-      final entry = WorkoutExerciseEntry(
+      const entry = WorkoutExerciseEntry(
         id: 1,
         exerciseId: 'bench',
         exerciseName: 'Bench',
-        sets: const [warm, work],
+        sets: [warm, work],
       );
       expect(entry.volume, 500); // only the working set
       expect(entry.topEstimatedOneRepMax, greaterThan(0));
@@ -72,12 +72,12 @@ void main() {
         id: 1,
         at: DateTime(2026, 1, 1),
         benchSets: const [WorkoutSet(id: 1, weight: 90, reps: 5, isCompleted: true)],
-      ));
+      ),);
       await repo.save(_session(
         id: 2,
         at: DateTime(2026, 2, 1),
         benchSets: const [WorkoutSet(id: 2, weight: 100, reps: 5, isCompleted: true)],
-      ));
+      ),);
 
       final last = await repo.lastPerformance('bench');
       expect(last, isNotNull);
@@ -90,12 +90,12 @@ void main() {
         id: 1,
         at: DateTime(2026, 1, 1),
         benchSets: const [WorkoutSet(id: 1, weight: 100, reps: 5, isCompleted: true)],
-      ));
+      ),);
       await repo.save(_session(
         id: 2,
         at: DateTime(2026, 2, 1),
         benchSets: const [WorkoutSet(id: 2, weight: 110, reps: 3, isCompleted: true)],
-      ));
+      ),);
 
       final pr = await repo.personalRecord('bench');
       expect(pr, isNotNull);
@@ -112,7 +112,7 @@ void main() {
           WorkoutSet(id: 1, weight: 200, reps: 1, isCompleted: false),
           WorkoutSet(id: 2, weight: 80, reps: 8, isCompleted: true),
         ],
-      ));
+      ),);
 
       final pr = await repo.personalRecord('bench');
       expect(pr!.bestWeight, 80); // the 200kg set was not completed

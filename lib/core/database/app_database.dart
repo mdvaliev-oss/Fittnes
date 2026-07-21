@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:drift/drift.dart';
-import 'package:drift_flutter/drift_flutter.dart';
+import 'package:drift/native.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 part 'app_database.g.dart';
 
@@ -47,7 +51,7 @@ class SetEntries extends Table {
 /// The app's local-first SQLite database.
 @DriftDatabase(tables: [Sessions, Entries, SetEntries])
 class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(driftDatabase(name: 'fittnes'));
+  AppDatabase() : super(_openConnection());
 
   /// Testing constructor with an injected (e.g. in-memory) executor.
   AppDatabase.forTesting(super.executor);
@@ -61,4 +65,13 @@ class AppDatabase extends _$AppDatabase {
           await customStatement('PRAGMA foreign_keys = ON');
         },
       );
+}
+
+/// Opens the on-device SQLite file lazily on a background isolate.
+LazyDatabase _openConnection() {
+  return LazyDatabase(() async {
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File(p.join(dir.path, 'fittnes.sqlite'));
+    return NativeDatabase.createInBackground(file);
+  });
 }

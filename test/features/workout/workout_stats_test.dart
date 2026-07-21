@@ -33,7 +33,7 @@ void main() {
         _session(1, DateTime(2026, 6, 9)), // within week: 500
         _session(2, DateTime(2026, 6, 8)), // within week: 500
         _session(3, DateTime(2026, 5, 1)), // outside week
-      ], now: now);
+      ], now: now,);
 
       expect(stats.totalWorkouts, 3);
       expect(stats.weeklyTonnage, 1000);
@@ -46,7 +46,7 @@ void main() {
         _session(2, DateTime(2026, 6, 9)),
         _session(3, DateTime(2026, 6, 8)),
         _session(4, DateTime(2026, 6, 6)), // gap breaks the streak
-      ], now: now);
+      ], now: now,);
 
       expect(stats.streakDays, 3);
     });
@@ -56,7 +56,7 @@ void main() {
       final stats = computeWorkoutStats([
         _session(1, DateTime(2026, 6, 9), weight: 100, reps: 5),
         _session(2, DateTime(2026, 6, 8), weight: 120, reps: 3),
-      ], now: now);
+      ], now: now,);
 
       // Epley(120,3) = 132 > Epley(100,5) ≈ 116.7
       expect(stats.bestE1rm, closeTo(132, 0.01));

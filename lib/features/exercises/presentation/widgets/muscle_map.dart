@@ -50,9 +50,9 @@ class MuscleMap extends StatelessWidget {
   final Map<Muscle, MuscleActivation> activation;
 
   static Color colorFor(MuscleActivation level) => switch (level) {
-        MuscleActivation.primary => AppColors.primaryBright.withOpacity(0.95),
-        MuscleActivation.secondary => AppColors.primary.withOpacity(0.5),
-        MuscleActivation.stabilizer => AppColors.accent.withOpacity(0.45),
+        MuscleActivation.primary => AppColors.primaryBright.withValues(alpha: 0.95),
+        MuscleActivation.secondary => AppColors.primary.withValues(alpha: 0.5),
+        MuscleActivation.stabilizer => AppColors.accent.withValues(alpha: 0.45),
       };
 
   @override
@@ -171,7 +171,7 @@ class _BodyPainter extends CustomPainter {
         center: Offset(cx * w, cy * h),
         width: cw * w,
         height: ch * h,
-      ));
+      ),);
     }
 
     void capsule(double cx, double cy, double cw, double ch) {

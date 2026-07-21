@@ -144,7 +144,7 @@ class _PrBadge extends StatelessWidget {
       margin: const EdgeInsets.only(right: 4),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: AppColors.accent.withOpacity(0.14),
+        color: AppColors.accent.withValues(alpha: 0.14),
         borderRadius: BorderRadius.circular(AppRadius.pill),
       ),
       child: Row(
@@ -153,7 +153,7 @@ class _PrBadge extends StatelessWidget {
           const Icon(Icons.emoji_events_rounded, size: 13, color: AppColors.accent),
           const SizedBox(width: 3),
           Text(
-            '${oneRepMax.toStringAsFixed(0)}',
+            oneRepMax.toStringAsFixed(0),
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,
@@ -203,9 +203,9 @@ class _RecommendationChip extends StatelessWidget {
       margin: const EdgeInsets.only(top: AppSpacing.xs),
       padding: const EdgeInsets.all(AppSpacing.sm),
       decoration: BoxDecoration(
-        color: advice.action.color.withOpacity(0.10),
+        color: advice.action.color.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(AppRadius.chip),
-        border: Border.all(color: advice.action.color.withOpacity(0.25)),
+        border: Border.all(color: advice.action.color.withValues(alpha: 0.25)),
       ),
       child: Row(
         children: [
@@ -251,7 +251,7 @@ class _AddSetButton extends StatelessWidget {
         icon: const Icon(Icons.add_rounded, size: 18),
         label: const Text('Добавить подход'),
         style: TextButton.styleFrom(
-          backgroundColor: Colors.white.withOpacity(0.04),
+          backgroundColor: Colors.white.withValues(alpha: 0.04),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.chip),
           ),

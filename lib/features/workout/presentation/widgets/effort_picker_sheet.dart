@@ -124,7 +124,7 @@ class _Chip extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: selected ? AppColors.primaryGradient : null,
-          color: selected ? null : Colors.white.withOpacity(0.06),
+          color: selected ? null : Colors.white.withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(AppRadius.chip),
         ),
         child: Text(

@@ -82,8 +82,8 @@ class _Thumb extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.primary.withOpacity(0.35),
-            AppColors.primaryBright.withOpacity(0.15),
+            AppColors.primary.withValues(alpha: 0.35),
+            AppColors.primaryBright.withValues(alpha: 0.15),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -92,7 +92,7 @@ class _Thumb extends StatelessWidget {
       ),
       child: Icon(
         ExerciseVisuals.categoryIcon(exercise.category),
-        color: Colors.white.withOpacity(0.9),
+        color: Colors.white.withValues(alpha: 0.9),
         size: 24,
       ),
     );

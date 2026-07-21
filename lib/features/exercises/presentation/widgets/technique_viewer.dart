@@ -75,8 +75,8 @@ class _RepPlaceholder extends StatelessWidget {
     return Stack(
       children: [
         // Motion trajectory guides.
-        Positioned.fill(
-          child: CustomPaint(painter: const _TrajectoryPainter()),
+        const Positioned.fill(
+          child: CustomPaint(painter: _TrajectoryPainter()),
         ),
         // Moving equipment marker travelling the rep path.
         AnimatedBuilder(
@@ -91,7 +91,7 @@ class _RepPlaceholder extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.primary.withOpacity(0.5),
+                      color: AppColors.primary.withValues(alpha: 0.5),
                       blurRadius: 24,
                     ),
                   ],
@@ -133,7 +133,7 @@ class _PosLabel extends StatelessWidget {
         fontSize: 11,
         fontWeight: FontWeight.w700,
         letterSpacing: 1.5,
-        color: Colors.white.withOpacity(0.45),
+        color: Colors.white.withValues(alpha: 0.45),
       ),
     );
   }
@@ -146,7 +146,7 @@ class _TrajectoryPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final x = size.width / 2;
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.12)
+      ..color = Colors.white.withValues(alpha: 0.12)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 

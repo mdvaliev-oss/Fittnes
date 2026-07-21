@@ -72,7 +72,7 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
           reps: prev?.reps,
           type: prev?.type == SetType.warmup ? SetType.normal : (prev?.type ?? SetType.normal),
         ),
-      ]);
+      ],);
     });
   }
 
@@ -91,7 +91,7 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
           rpe: rpe,
           rir: rir,
           type: type,
-        ));
+        ),);
   }
 
   /// Sets or clears RPE / RIR (null clears the respective field).
@@ -101,7 +101,7 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
           rir: rir,
           clearRpe: rpe == null,
           clearRir: rir == null,
-        ));
+        ),);
   }
 
   void toggleSetComplete(int entryId, int setId) {
@@ -119,7 +119,7 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
   void removeSet(int entryId, int setId) {
     _updateEntry(entryId, (entry) => entry.copyWith(
           sets: entry.sets.where((s) => s.id != setId).toList(),
-        ));
+        ),);
   }
 
   void removeEntry(int entryId) {
@@ -179,7 +179,7 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
           sets: [
             for (final s in entry.sets) if (s.id == setId) f(s) else s,
           ],
-        ));
+        ),);
   }
 }
 

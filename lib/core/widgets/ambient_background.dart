@@ -24,14 +24,14 @@ class AmbientBackground extends StatelessWidget {
             top: -120,
             left: -80,
             child: _Glow(
-              color: AppColors.primary.withOpacity(isDark ? 0.28 : 0.14),
+              color: AppColors.primary.withValues(alpha: isDark ? 0.28 : 0.14),
             ),
           ),
           Positioned(
             bottom: -140,
             right: -100,
             child: _Glow(
-              color: AppColors.accent.withOpacity(isDark ? 0.16 : 0.10),
+              color: AppColors.accent.withValues(alpha: isDark ? 0.16 : 0.10),
             ),
           ),
           child,
@@ -53,7 +53,7 @@ class _Glow extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: RadialGradient(
-          colors: [color, color.withOpacity(0)],
+          colors: [color, color.withValues(alpha: 0)],
         ),
       ),
     );

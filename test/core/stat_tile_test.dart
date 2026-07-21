@@ -26,7 +26,7 @@ void main() {
           label: 'Серия',
           value: '12',
           icon: Icons.local_fire_department_rounded,
-        )),
+        ),),
       );
 
       expect(find.byIcon(Icons.local_fire_department_rounded), findsOneWidget);

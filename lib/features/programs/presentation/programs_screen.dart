@@ -127,7 +127,7 @@ class _Tag extends StatelessWidget {
       margin: const EdgeInsets.only(top: AppSpacing.xxs),
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs, vertical: 4),
       decoration: BoxDecoration(
-        color: c.withOpacity(0.12),
+        color: c.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(AppRadius.pill),
       ),
       child: Row(

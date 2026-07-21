@@ -53,7 +53,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
               boxShadow: enabled
                   ? [
                       BoxShadow(
-                        color: AppColors.primary.withOpacity(0.4),
+                        color: AppColors.primary.withValues(alpha: 0.4),
                         blurRadius: 24,
                         offset: const Offset(0, 8),
                       ),

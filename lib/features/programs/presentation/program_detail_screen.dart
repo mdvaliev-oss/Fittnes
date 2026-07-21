@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -39,7 +41,7 @@ class ProgramDetailScreen extends ConsumerWidget {
         sets: pe.sets,
       );
     }
-    if (context.mounted) context.push(AppRoutes.activeWorkout);
+    if (context.mounted) unawaited(context.push(AppRoutes.activeWorkout));
   }
 
   @override
@@ -111,7 +113,7 @@ class _DayCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(pe.exerciseName,
-                          style: text.bodyLarge, maxLines: 1, overflow: TextOverflow.ellipsis),
+                          style: text.bodyLarge, maxLines: 1, overflow: TextOverflow.ellipsis,),
                     ),
                     Text(pe.repScheme, style: text.labelSmall?.copyWith(color: glass.textMid)),
                   ],

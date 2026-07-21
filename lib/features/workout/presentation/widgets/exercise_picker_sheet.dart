@@ -74,7 +74,7 @@ class _ExercisePickerSheetState extends ConsumerState<_ExercisePickerSheet> {
                           : all
                               .where((e) =>
                                   e.name.toLowerCase().contains(_query) ||
-                                  (e.altName?.toLowerCase().contains(_query) ?? false))
+                                  (e.altName?.toLowerCase().contains(_query) ?? false),)
                               .toList();
                       return ListView.builder(
                         itemCount: list.length,

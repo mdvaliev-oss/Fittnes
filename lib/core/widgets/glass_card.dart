@@ -56,7 +56,7 @@ class _GlassCardState extends State<GlassCard> {
               borderRadius: radius,
               border: Border.all(
                 color: widget.gradientBorder
-                    ? glass.accent.withOpacity(0.35)
+                    ? glass.accent.withValues(alpha: 0.35)
                     : glass.border,
               ),
             ),

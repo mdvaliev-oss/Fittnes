@@ -18,7 +18,7 @@ class TonnageBarChart extends StatelessWidget {
         height: 120,
         child: Center(
           child: Text('Нет данных о тоннаже.',
-              style: Theme.of(context).textTheme.bodyMedium),
+              style: Theme.of(context).textTheme.bodyMedium,),
         ),
       );
     }
@@ -38,7 +38,7 @@ class TonnageBarChart extends StatelessWidget {
             show: true,
             drawVerticalLine: false,
             getDrawingHorizontalLine: (_) =>
-                FlLine(color: Colors.white.withOpacity(0.06), strokeWidth: 1),
+                FlLine(color: Colors.white.withValues(alpha: 0.06), strokeWidth: 1),
           ),
           borderData: FlBorderData(show: false),
           titlesData: FlTitlesData(
@@ -66,7 +66,7 @@ class TonnageBarChart extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.only(top: 6),
                     child: Text('${d.day}.${d.month}',
-                        style: const TextStyle(color: Color(0xFF6C6C7A), fontSize: 10)),
+                        style: const TextStyle(color: Color(0xFF6C6C7A), fontSize: 10),),
                   );
                 },
               ),

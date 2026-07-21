@@ -24,7 +24,7 @@ void main() {
     test('no completed sets → finish sets', () {
       final advice = ProgressionEngine.recommend(_entry(const [
         WorkoutSet(id: 1, weight: 100, reps: 5, isCompleted: false),
-      ]));
+      ]),);
       expect(advice.action, ProgressionAction.finishSets);
     });
 
@@ -64,7 +64,7 @@ void main() {
       final advice = ProgressionEngine.recommend(_entry([
         _set(weight: 100, reps: 9, rpe: 9.5, id: 1),
         _set(weight: 100, reps: 8, rpe: 10, id: 2),
-      ]));
+      ]),);
       expect(advice.action, ProgressionAction.addRest);
     });
   });
