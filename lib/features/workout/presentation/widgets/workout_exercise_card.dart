@@ -5,6 +5,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/glass_theme.dart';
 import '../../../../core/widgets/glass_card.dart';
+import '../../../recommendations/domain/progression_advice.dart';
+import '../../../recommendations/presentation/recommendation_providers.dart';
 import '../../domain/entities/workout_exercise_entry.dart';
 import '../providers/active_workout_controller.dart';
 import '../providers/workout_providers.dart';
@@ -24,6 +26,7 @@ class WorkoutExerciseCard extends ConsumerWidget {
     final text = Theme.of(context).textTheme;
     final last = ref.watch(lastPerformanceProvider(entry.exerciseId)).valueOrNull;
     final pr = ref.watch(personalRecordProvider(entry.exerciseId)).valueOrNull;
+    final advice = ref.watch(recommendationProvider(entry.exerciseId)).valueOrNull;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
@@ -58,6 +61,18 @@ class WorkoutExerciseCard extends ConsumerWidget {
                   'Прошлый раз: ${_summary(last)}',
                   style: text.labelSmall?.copyWith(color: glass.textMid),
                 ),
+              ),
+            if (advice != null)
+              _RecommendationChip(
+                advice: advice,
+                onApply: (advice.suggestedWeight != null && entry.sets.isNotEmpty)
+                    ? () => controller.updateSet(
+                          entry.id,
+                          entry.sets.first.id,
+                          weight: advice.suggestedWeight,
+                          reps: advice.suggestedReps,
+                        )
+                    : null,
               ),
             const SizedBox(height: AppSpacing.xs),
             // Column headers
@@ -172,6 +187,53 @@ class _Menu extends StatelessWidget {
         PopupMenuItem(value: 'superset', child: Text('Суперсет с предыдущим')),
         PopupMenuItem(value: 'remove', child: Text('Удалить упражнение')),
       ],
+    );
+  }
+}
+
+class _RecommendationChip extends StatelessWidget {
+  const _RecommendationChip({required this.advice, this.onApply});
+  final ProgressionAdvice advice;
+  final VoidCallback? onApply;
+
+  @override
+  Widget build(BuildContext context) {
+    final text = Theme.of(context).textTheme;
+    return Container(
+      margin: const EdgeInsets.only(top: AppSpacing.xs),
+      padding: const EdgeInsets.all(AppSpacing.sm),
+      decoration: BoxDecoration(
+        color: advice.action.color.withOpacity(0.10),
+        borderRadius: BorderRadius.circular(AppRadius.chip),
+        border: Border.all(color: advice.action.color.withOpacity(0.25)),
+      ),
+      child: Row(
+        children: [
+          Icon(advice.action.icon, size: 18, color: advice.action.color),
+          const SizedBox(width: AppSpacing.xs),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  advice.action.label,
+                  style: text.labelLarge?.copyWith(color: advice.action.color),
+                ),
+                Text(advice.message, style: text.labelSmall),
+              ],
+            ),
+          ),
+          if (onApply != null)
+            TextButton(
+              onPressed: onApply,
+              style: TextButton.styleFrom(
+                foregroundColor: advice.action.color,
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+              ),
+              child: const Text('Применить'),
+            ),
+        ],
+      ),
     );
   }
 }

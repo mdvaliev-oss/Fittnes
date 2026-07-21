@@ -10,6 +10,7 @@ import '../../../core/theme/glass_theme.dart';
 import '../../../core/utils/duration_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/primary_button.dart';
+import '../../recommendations/domain/progression_engine.dart';
 import '../domain/entities/workout_session.dart';
 import 'providers/active_workout_controller.dart';
 import 'providers/rest_timer_controller.dart';
@@ -43,12 +44,11 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
     final last = await ref
         .read(workoutRepositoryProvider)
         .lastPerformance(exercise.id);
-    final topSet = last?.sets
-        .where((s) => s.isFilled)
-        .fold<double>(0, (m, s) => s.weight! > m ? s.weight! : m);
+    final advice = ProgressionEngine.recommend(last);
     ref.read(activeWorkoutControllerProvider.notifier).addExercise(
           exercise,
-          recommendedWeight: (topSet ?? 0) > 0 ? topSet : null,
+          recommendedWeight: advice.suggestedWeight,
+          recommendedReps: advice.suggestedReps,
         );
   }
 
