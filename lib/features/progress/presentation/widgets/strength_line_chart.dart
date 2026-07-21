@@ -28,7 +28,7 @@ class StrengthLineChart extends StatelessWidget {
       height: 200,
       child: LineChart(
         LineChartData(
-          minY: (minY - pad).clamp(0, double.infinity),
+          minY: (minY - pad).clamp(0.0, double.infinity),
           maxY: maxY + pad,
           gridData: FlGridData(
             show: true,

@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../domain/entities/muscle.dart';
 
-/// Stylised front + back body map that heat-highlights worked muscles.
+/// Renders a front + back body, coloring each supplied muscle.
 ///
-/// Fully vector / self-contained (no image assets): a flat mannequin drawn
-/// from capsules with soft-glow blobs over the active muscle regions,
-/// colored by [MuscleActivation]. Cheap enough to animate at 60fps.
-class MuscleMap extends StatelessWidget {
-  const MuscleMap({super.key, required this.activation});
+/// Geometry is shared: [MuscleMap] colors by [MuscleActivation] (exercise
+/// detail) while recovery/heat views pass an explicit `muscleColors` map.
+class MuscleBodyMap extends StatelessWidget {
+  const MuscleBodyMap({super.key, required this.muscleColors});
 
-  final Map<Muscle, MuscleActivation> activation;
+  final Map<Muscle, Color> muscleColors;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class MuscleMap extends StatelessWidget {
           child: _Figure(
             side: BodySide.front,
             label: 'Спереди',
-            activation: activation,
+            colors: muscleColors,
             silhouette: silhouette,
             outline: outline,
           ),
@@ -34,7 +33,7 @@ class MuscleMap extends StatelessWidget {
           child: _Figure(
             side: BodySide.back,
             label: 'Сзади',
-            activation: activation,
+            colors: muscleColors,
             silhouette: silhouette,
             outline: outline,
           ),
@@ -44,18 +43,40 @@ class MuscleMap extends StatelessWidget {
   }
 }
 
+/// Body map highlighting muscles by their activation level for an exercise.
+class MuscleMap extends StatelessWidget {
+  const MuscleMap({super.key, required this.activation});
+
+  final Map<Muscle, MuscleActivation> activation;
+
+  static Color colorFor(MuscleActivation level) => switch (level) {
+        MuscleActivation.primary => AppColors.primaryBright.withOpacity(0.95),
+        MuscleActivation.secondary => AppColors.primary.withOpacity(0.5),
+        MuscleActivation.stabilizer => AppColors.accent.withOpacity(0.45),
+      };
+
+  @override
+  Widget build(BuildContext context) {
+    return MuscleBodyMap(
+      muscleColors: {
+        for (final e in activation.entries) e.key: colorFor(e.value),
+      },
+    );
+  }
+}
+
 class _Figure extends StatelessWidget {
   const _Figure({
     required this.side,
     required this.label,
-    required this.activation,
+    required this.colors,
     required this.silhouette,
     required this.outline,
   });
 
   final BodySide side;
   final String label;
-  final Map<Muscle, MuscleActivation> activation;
+  final Map<Muscle, Color> colors;
   final Color silhouette;
   final Color outline;
 
@@ -69,7 +90,7 @@ class _Figure extends StatelessWidget {
           child: CustomPaint(
             painter: _BodyPainter(
               side: side,
-              activation: activation,
+              colors: colors,
               silhouette: silhouette,
               outline: outline,
             ),
@@ -78,10 +99,7 @@ class _Figure extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           label,
-          style: Theme.of(context)
-              .textTheme
-              .labelSmall
-              ?.copyWith(color: outline),
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(color: outline),
         ),
       ],
     );
@@ -106,13 +124,13 @@ class _Blob {
 class _BodyPainter extends CustomPainter {
   _BodyPainter({
     required this.side,
-    required this.activation,
+    required this.colors,
     required this.silhouette,
     required this.outline,
   });
 
   final BodySide side;
-  final Map<Muscle, MuscleActivation> activation;
+  final Map<Muscle, Color> colors;
   final Color silhouette;
   final Color outline;
 
@@ -122,13 +140,12 @@ class _BodyPainter extends CustomPainter {
 
     canvas.drawPath(body, Paint()..color = silhouette);
 
-    // Heat blobs for active muscles on this side.
     final regions = _regions[side]!;
     for (final entry in regions.entries) {
-      final level = activation[entry.key];
-      if (level == null) continue;
+      final color = colors[entry.key];
+      if (color == null) continue;
       final paint = Paint()
-        ..color = _colorFor(level)
+        ..color = color
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
       for (final blob in entry.value) {
         canvas.drawRRect(blob.toRRect(size), paint);
@@ -143,12 +160,6 @@ class _BodyPainter extends CustomPainter {
         ..color = outline,
     );
   }
-
-  Color _colorFor(MuscleActivation level) => switch (level) {
-        MuscleActivation.primary => AppColors.primaryBright.withOpacity(0.95),
-        MuscleActivation.secondary => AppColors.primary.withOpacity(0.5),
-        MuscleActivation.stabilizer => AppColors.accent.withOpacity(0.45),
-      };
 
   /// Flat mannequin assembled from capsules (unioned via non-zero fill).
   Path _mannequin(Size s) {
@@ -178,12 +189,10 @@ class _BodyPainter extends CustomPainter {
     capsule(0.5, 0.135, 0.12, 0.05); // neck
     capsule(0.5, 0.30, 0.52, 0.28); // torso
     capsule(0.5, 0.47, 0.44, 0.12); // hips
-    // arms
     capsule(0.20, 0.29, 0.14, 0.26); // upper arm L
     capsule(0.80, 0.29, 0.14, 0.26); // upper arm R
     capsule(0.14, 0.50, 0.11, 0.22); // forearm L
     capsule(0.86, 0.50, 0.11, 0.22); // forearm R
-    // legs
     capsule(0.38, 0.66, 0.20, 0.26); // thigh L
     capsule(0.62, 0.66, 0.20, 0.26); // thigh R
     capsule(0.38, 0.88, 0.14, 0.22); // shin L
@@ -194,11 +203,8 @@ class _BodyPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_BodyPainter old) =>
-      old.activation != activation ||
-      old.silhouette != silhouette ||
-      old.side != side;
+      old.colors != colors || old.silhouette != silhouette || old.side != side;
 
-  // ── Muscle region geometry (normalized) ────────────────────────────
   static const Map<BodySide, Map<Muscle, List<_Blob>>> _regions = {
     BodySide.front: {
       Muscle.chest: [_Blob(0.40, 0.25, 0.20, 0.11), _Blob(0.60, 0.25, 0.20, 0.11)],

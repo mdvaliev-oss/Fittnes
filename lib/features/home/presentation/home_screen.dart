@@ -103,6 +103,27 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
 
+            const SizedBox(height: AppSpacing.sm),
+            GlassCard(
+              onTap: () => context.push(AppRoutes.recovery),
+              child: Row(
+                children: [
+                  Icon(Icons.spa_rounded, color: glass.accent),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Восстановление мышц', style: text.titleLarge?.copyWith(fontSize: 16)),
+                        Text('Готовность по группам за 7 дней', style: text.bodyMedium),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.chevron_right_rounded, color: glass.textLow),
+                ],
+              ),
+            ),
+
             const SizedBox(height: AppSpacing.lg),
             Row(
               children: [
