@@ -127,8 +127,19 @@ class _ChartCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: Text(title, style: text.titleLarge)),
-              if (trailing != null) trailing!,
+              Expanded(
+                child: Text(
+                  title,
+                  style: text.titleLarge,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              if (trailing != null)
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 150),
+                  child: trailing,
+                ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
@@ -157,13 +168,29 @@ class _ExercisePicker extends StatelessWidget {
       child: DropdownButton<String>(
         value: selectedId,
         isDense: true,
+        isExpanded: true,
         dropdownColor: AppColors.surfaceHigh,
         borderRadius: BorderRadius.circular(AppRadius.button),
         style: TextStyle(color: glass.textHi, fontSize: 13),
         icon: Icon(Icons.expand_more_rounded, color: glass.textMid),
+        selectedItemBuilder: (context) => [
+          for (final e in exercises)
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                e.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.right,
+              ),
+            ),
+        ],
         items: [
           for (final e in exercises)
-            DropdownMenuItem(value: e.id, child: Text(e.name)),
+            DropdownMenuItem(
+              value: e.id,
+              child: Text(e.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+            ),
         ],
         onChanged: (v) {
           if (v != null) onChanged(v);
