@@ -1,0 +1,41 @@
+name: fittnes
+description: "Персональный тренер по силовым тренировкам — professional strength training companion."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management & DI
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # Navigation
+  go_router: ^14.2.0
+
+  # UI / Design system
+  google_fonts: ^6.2.1
+  flutter_animate: ^4.5.0
+  flutter_svg: ^2.0.10+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+  # Codegen (used from Module 1 onward: riverpod/freezed/drift)
+  build_runner: ^2.4.11
+  riverpod_generator: ^2.4.0
+  custom_lint: ^0.6.4
+  riverpod_lint: ^2.3.10
+
+flutter:
+  uses-material-design: true
+  # assets:
+  #   - assets/exercises/     # (Module 1) exercise media & seed data
+  #   - assets/anatomy/       # (Module 1) layered SVG body maps
