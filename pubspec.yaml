@@ -36,6 +36,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # assets:
-  #   - assets/exercises/     # (Module 1) exercise media & seed data
-  #   - assets/anatomy/       # (Module 1) layered SVG body maps
+  assets:
+    - assets/exercises/       # exercise seed data (+ media from full import)
