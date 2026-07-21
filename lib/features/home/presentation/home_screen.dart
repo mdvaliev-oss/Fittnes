@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router/app_routes.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/glass_theme.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/primary_button.dart';
 import '../../../core/widgets/stat_tile.dart';
+import '../../workout/presentation/providers/active_workout_controller.dart';
 
 /// Home dashboard.
 ///
-/// Module 0 renders the layout with placeholder data so the design system is
-/// visible end-to-end; Module 2+ wires real workout/progress providers in.
-class HomeScreen extends StatelessWidget {
+/// Renders the design system end-to-end; the "start workout" CTA launches the
+/// active-workout flow. Progress/history stats are wired in Module 3.
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
+  void _startWorkout(BuildContext context, WidgetRef ref) {
+    ref
+        .read(activeWorkoutControllerProvider.notifier)
+        .start(title: 'Push Day · Грудь и Трицепс');
+    context.push(AppRoutes.activeWorkout);
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final glass = context.glass;
     final text = Theme.of(context).textTheme;
 
@@ -63,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                   PrimaryButton(
                     label: 'Начать тренировку',
                     icon: Icons.play_arrow_rounded,
-                    onPressed: () {}, // wired in Module 2
+                    onPressed: () => _startWorkout(context, ref),
                   ),
                 ],
               ),

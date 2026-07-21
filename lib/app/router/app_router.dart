@@ -6,6 +6,7 @@ import '../../features/exercises/presentation/exercise_detail_screen.dart';
 import '../../features/exercises/presentation/exercises_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
+import '../../features/workout/presentation/active_workout_screen.dart';
 import '../../features/progress/presentation/progress_screen.dart';
 import 'app_routes.dart';
 import 'scaffold_with_nav.dart';
@@ -43,6 +44,28 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             },
           );
         },
+      ),
+      // Full-screen active workout (slides up over everything).
+      GoRoute(
+        parentNavigatorKey: _rootKey,
+        path: AppRoutes.activeWorkout,
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          fullscreenDialog: true,
+          child: const ActiveWorkoutScreen(),
+          transitionDuration: const Duration(milliseconds: 320),
+          transitionsBuilder: (context, animation, secondary, child) {
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(0, 1),
+                end: Offset.zero,
+              ).animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+              ),
+              child: child,
+            );
+          },
+        ),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => ScaffoldWithNav(navigationShell: shell),

@@ -43,9 +43,14 @@ final filteredExercisesProvider = FutureProvider<List<Exercise>>((ref) {
   return ref.watch(exerciseRepositoryProvider).search(filter);
 });
 
+/// The full catalog (used by pickers that filter locally).
+final allExercisesProvider = FutureProvider<List<Exercise>>((ref) {
+  return ref.watch(exerciseRepositoryProvider).getAll();
+});
+
 /// Total catalog size (for the header count).
 final exerciseCountProvider = FutureProvider<int>((ref) async {
-  final all = await ref.watch(exerciseRepositoryProvider).getAll();
+  final all = await ref.watch(allExercisesProvider.future);
   return all.length;
 });
 
