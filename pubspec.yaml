@@ -18,6 +18,10 @@ dependencies:
   # Navigation
   go_router: ^14.2.0
 
+  # Local-first persistence (Drift / SQLite)
+  drift: ^2.20.0
+  drift_flutter: ^0.2.0
+
   # UI / Design system
   google_fonts: ^6.2.1
   flutter_animate: ^4.5.0
@@ -28,9 +32,9 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^4.0.0
 
-  # Codegen (used from Module 1 onward: riverpod/freezed/drift)
+  # Codegen — run: dart run build_runner build --delete-conflicting-outputs
   build_runner: ^2.4.11
-  riverpod_generator: ^2.4.0
+  drift_dev: ^2.20.0
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
 

@@ -11,6 +11,7 @@ abstract final class AppRoutes {
 
   // Full-screen (outside the bottom-nav shell) — wired in later modules.
   static const String activeWorkout = '/workout/active';
+  static const String history = '/history';
   static const String programs = '/programs';
   static const String onboarding = '/onboarding';
 

@@ -7,6 +7,7 @@ import '../../features/exercises/presentation/exercises_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/workout/presentation/active_workout_screen.dart';
+import '../../features/workout/presentation/workout_history_screen.dart';
 import '../../features/progress/presentation/progress_screen.dart';
 import 'app_routes.dart';
 import 'scaffold_with_nav.dart';
@@ -65,6 +66,17 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               child: child,
             );
           },
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootKey,
+        path: AppRoutes.history,
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: const WorkoutHistoryScreen(),
+          transitionDuration: const Duration(milliseconds: 300),
+          transitionsBuilder: (context, animation, secondary, child) =>
+              FadeTransition(opacity: animation, child: child),
         ),
       ),
       StatefulShellRoute.indexedStack(

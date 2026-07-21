@@ -10,7 +10,9 @@ import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/primary_button.dart';
 import '../../../core/widgets/stat_tile.dart';
+import '../../workout/domain/services/workout_stats.dart';
 import '../../workout/presentation/providers/active_workout_controller.dart';
+import '../../workout/presentation/providers/workout_providers.dart';
 
 /// Home dashboard.
 ///
@@ -81,47 +83,68 @@ class HomeScreen extends ConsumerWidget {
             ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.08, end: 0),
 
             const SizedBox(height: AppSpacing.lg),
-            Text('Обзор', style: text.titleLarge),
-            const SizedBox(height: AppSpacing.sm),
-
-            // ── Stats grid ────────────────────────────────────────
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              mainAxisSpacing: AppSpacing.sm,
-              crossAxisSpacing: AppSpacing.sm,
-              childAspectRatio: 1.6,
-              children: const [
-                StatTile(
-                  label: 'Серия',
-                  value: '12',
-                  unit: 'дн.',
-                  icon: Icons.local_fire_department_rounded,
-                ),
-                StatTile(
-                  label: 'Тоннаж за неделю',
-                  value: '18.4',
-                  unit: 'т',
-                  icon: Icons.scale_rounded,
-                ),
-                StatTile(
-                  label: 'Тренировок',
-                  value: '48',
-                  icon: Icons.calendar_month_rounded,
-                ),
-                StatTile(
-                  label: 'Новый PR',
-                  value: '140',
-                  unit: 'кг',
-                  icon: Icons.emoji_events_rounded,
-                  accent: true,
+            Row(
+              children: [
+                Expanded(child: Text('Обзор', style: text.titleLarge)),
+                TextButton(
+                  onPressed: () => context.push(AppRoutes.history),
+                  child: const Text('История'),
                 ),
               ],
             ),
+            const SizedBox(height: AppSpacing.sm),
+
+            // ── Stats grid (live from workout history) ────────────
+            _StatsGrid(stats: ref.watch(workoutStatsProvider)),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _StatsGrid extends StatelessWidget {
+  const _StatsGrid({required this.stats});
+  final AsyncValue<WorkoutStats> stats;
+
+  @override
+  Widget build(BuildContext context) {
+    final s = stats.valueOrNull ?? WorkoutStats.empty;
+    String n(num v) => v == v.roundToDouble() ? v.toStringAsFixed(0) : v.toStringAsFixed(1);
+
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      mainAxisSpacing: AppSpacing.sm,
+      crossAxisSpacing: AppSpacing.sm,
+      childAspectRatio: 1.6,
+      children: [
+        StatTile(
+          label: 'Серия',
+          value: '${s.streakDays}',
+          unit: 'дн.',
+          icon: Icons.local_fire_department_rounded,
+        ),
+        StatTile(
+          label: 'Тоннаж за неделю',
+          value: n(s.weeklyTonnage / 1000),
+          unit: 'т',
+          icon: Icons.scale_rounded,
+        ),
+        StatTile(
+          label: 'Тренировок',
+          value: '${s.totalWorkouts}',
+          icon: Icons.calendar_month_rounded,
+        ),
+        StatTile(
+          label: 'Лучший e1RM',
+          value: n(s.bestE1rm),
+          unit: 'кг',
+          icon: Icons.emoji_events_rounded,
+          accent: s.bestE1rm > 0,
+        ),
+      ],
     );
   }
 }

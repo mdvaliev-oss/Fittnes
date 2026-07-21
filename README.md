@@ -14,7 +14,7 @@
 | State / DI | Riverpod 2 (codegen) |
 | Навигация | go_router (StatefulShellRoute) |
 | Каталог упражнений | Bundled JSON → индексированный in-memory репозиторий |
-| БД (local-first) | Drift / SQLite для логов тренировок *(Модуль 2)* |
+| БД (local-first) | Drift / SQLite — логи тренировок, история, PR |
 | Графики | fl_chart *(Модуль 3)* |
 | Анимации | flutter_animate + Hero |
 | Анатомия | flutter_svg (слоистая подсветка мышц) |
@@ -45,8 +45,14 @@ lib/
 ```bash
 flutter create . --project-name fittnes --platforms=android,ios
 flutter pub get
+dart run build_runner build --delete-conflicting-outputs   # ОБЯЗАТЕЛЬНО (Drift)
 flutter run
 ```
+
+> ⚠️ С Модуля 2B проект использует Drift. Сгенерированный
+> `lib/core/database/app_database.g.dart` намеренно не в репозитории —
+> без `build_runner` сборка упадёт. Запускайте кодоген после каждого
+> изменения схемы БД.
 
 Тесты и анализ:
 
@@ -54,9 +60,6 @@ flutter run
 flutter analyze
 flutter test
 ```
-
-> Кодогенерация (Riverpod/Drift/freezed) подключается с Модуля 1:
-> `dart run build_runner build --delete-conflicting-outputs`.
 
 ## Дорожная карта (модулями)
 
@@ -70,8 +73,9 @@ flutter test
       (вес/повторы/RPE/RIR, типы подходов, суперсеты), авто-таймер отдыха,
       подсказки прошлой тренировки и рекомендованный вес, PR — на in-memory
       репозитории за интерфейсом `WorkoutRepository`.
-- [ ] **Модуль 2B — Персистентность**: Drift/SQLite за тем же интерфейсом +
-      экран истории тренировок.
+- [x] **Модуль 2B — Персистентность**: Drift/SQLite (`WorkoutRepositoryDrift`)
+      за тем же интерфейсом, экран истории тренировок, живые метрики на главной
+      (серия, недельный тоннаж, число тренировок, лучший e1RM).
 - [ ] **Модуль 3 — Прогресс + Рекомендации**: движок e1RM, автопрогрессия,
       графики силы/тоннажа/PR.
 - [ ] **Модуль 4 — Программы, Профиль, Recovery**: готовые/пользовательские
