@@ -49,14 +49,34 @@ class ExerciseFilter {
   }
 
   /// copyWith can't set fields back to null; these toggles handle clearing.
-  ExerciseFilter toggleMuscle(Muscle? m) =>
-      ExerciseFilter(query: query, muscle: muscle == m ? null : m, equipment: equipment, level: level, category: category);
-  ExerciseFilter toggleEquipment(Equipment? e) =>
-      ExerciseFilter(query: query, muscle: muscle, equipment: equipment == e ? null : e, level: level, category: category);
-  ExerciseFilter toggleLevel(ExperienceLevel? l) =>
-      ExerciseFilter(query: query, muscle: muscle, equipment: equipment, level: level == l ? null : l, category: category);
-  ExerciseFilter toggleCategory(ExerciseCategory? c) =>
-      ExerciseFilter(query: query, muscle: muscle, equipment: equipment, level: level, category: category == c ? null : c);
+  ExerciseFilter toggleMuscle(Muscle? m) => ExerciseFilter(
+        query: query,
+        muscle: muscle == m ? null : m,
+        equipment: equipment,
+        level: level,
+        category: category,
+      );
+  ExerciseFilter toggleEquipment(Equipment? e) => ExerciseFilter(
+        query: query,
+        muscle: muscle,
+        equipment: equipment == e ? null : e,
+        level: level,
+        category: category,
+      );
+  ExerciseFilter toggleLevel(ExperienceLevel? l) => ExerciseFilter(
+        query: query,
+        muscle: muscle,
+        equipment: equipment,
+        level: level == l ? null : l,
+        category: category,
+      );
+  ExerciseFilter toggleCategory(ExerciseCategory? c) => ExerciseFilter(
+        query: query,
+        muscle: muscle,
+        equipment: equipment,
+        level: level,
+        category: category == c ? null : c,
+      );
 
   ExerciseFilter withQuery(String q) => copyWith(query: q);
 

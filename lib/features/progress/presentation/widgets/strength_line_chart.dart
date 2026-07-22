@@ -13,7 +13,9 @@ class StrengthLineChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (points.length < 2) {
-      return const _NotEnough(text: 'Нужно минимум 2 тренировки для графика силы.');
+      return const _NotEnough(
+        text: 'Нужно минимум 2 тренировки для графика силы.',
+      );
     }
 
     final spots = [
@@ -33,20 +35,25 @@ class StrengthLineChart extends StatelessWidget {
           gridData: FlGridData(
             show: true,
             drawVerticalLine: false,
-            getDrawingHorizontalLine: (_) =>
-                FlLine(color: Colors.white.withValues(alpha: 0.06), strokeWidth: 1),
+            getDrawingHorizontalLine: (_) => FlLine(
+              color: Colors.white.withValues(alpha: 0.06),
+              strokeWidth: 1,
+            ),
           ),
           borderData: FlBorderData(show: false),
           titlesData: FlTitlesData(
-            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
                 reservedSize: 36,
                 getTitlesWidget: (value, meta) => Text(
                   value.toStringAsFixed(0),
-                  style: const TextStyle(color: Color(0xFF6C6C7A), fontSize: 10),
+                  style:
+                      const TextStyle(color: Color(0xFF6C6C7A), fontSize: 10),
                 ),
               ),
             ),
@@ -54,8 +61,7 @@ class StrengthLineChart extends StatelessWidget {
               sideTitles: SideTitles(
                 showTitles: true,
                 interval: 1,
-                getTitlesWidget: (value, meta) =>
-                    _bottomLabel(value.toInt()),
+                getTitlesWidget: (value, meta) => _bottomLabel(value.toInt()),
               ),
             ),
           ),

@@ -22,8 +22,7 @@ class AppSettings {
   final ThemeMode themeMode;
   final WeightUnit unit;
 
-  AppSettings copyWith({ThemeMode? themeMode, WeightUnit? unit}) =>
-      AppSettings(
+  AppSettings copyWith({ThemeMode? themeMode, WeightUnit? unit}) => AppSettings(
         themeMode: themeMode ?? this.themeMode,
         unit: unit ?? this.unit,
       );
@@ -63,4 +62,6 @@ class AppSettingsController extends Notifier<AppSettings> {
 }
 
 final appSettingsProvider =
-    NotifierProvider<AppSettingsController, AppSettings>(AppSettingsController.new);
+    NotifierProvider<AppSettingsController, AppSettings>(
+  AppSettingsController.new,
+);

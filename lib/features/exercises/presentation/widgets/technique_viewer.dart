@@ -155,7 +155,11 @@ class _TrajectoryPainter extends CustomPainter {
     var y = size.height * 0.16;
     final end = size.height * 0.84;
     while (y < end) {
-      canvas.drawLine(Offset(x, y), Offset(x, (y + dash).clamp(0.0, end)), paint);
+      canvas.drawLine(
+        Offset(x, y),
+        Offset(x, (y + dash).clamp(0.0, end)),
+        paint,
+      );
       y += dash + gap;
     }
   }

@@ -31,7 +31,8 @@ enum Muscle {
 
   /// Maps a raw muscle name from the open dataset (free-exercise-db) onto a
   /// canonical [Muscle]. Returns `null` for names we don't map yet.
-  static Muscle? fromDataset(String raw) => _datasetMap[raw.toLowerCase().trim()];
+  static Muscle? fromDataset(String raw) =>
+      _datasetMap[raw.toLowerCase().trim()];
 
   static const Map<String, Muscle> _datasetMap = {
     'chest': Muscle.chest,

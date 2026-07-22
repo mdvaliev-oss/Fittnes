@@ -41,7 +41,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                   begin: const Offset(0, 0.04),
                   end: Offset.zero,
                 ).animate(
-                  CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+                  CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.easeOutCubic,
+                  ),
                 ),
                 child: FadeTransition(opacity: animation, child: child),
               );
@@ -91,8 +94,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           transitionDuration: const Duration(milliseconds: 300),
           transitionsBuilder: (context, animation, secondary, child) =>
               SlideTransition(
-            position: Tween<Offset>(begin: const Offset(0, 0.04), end: Offset.zero)
-                .animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic)),
+            position:
+                Tween<Offset>(begin: const Offset(0, 0.04), end: Offset.zero)
+                    .animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeOutCubic,
+              ),
+            ),
             child: FadeTransition(opacity: animation, child: child),
           ),
         ),
@@ -120,7 +129,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         ),
       ),
       StatefulShellRoute.indexedStack(
-        builder: (context, state, shell) => ScaffoldWithNav(navigationShell: shell),
+        builder: (context, state, shell) =>
+            ScaffoldWithNav(navigationShell: shell),
         branches: [
           StatefulShellBranch(
             routes: [

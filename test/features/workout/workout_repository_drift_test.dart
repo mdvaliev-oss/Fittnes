@@ -10,7 +10,12 @@ import 'package:fittnes/features/workout/domain/entities/workout_session.dart';
 import 'package:fittnes/features/workout/domain/entities/workout_set.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-WorkoutSession _bench(int id, DateTime at, {double weight = 100, int reps = 5}) {
+WorkoutSession _bench(
+  int id,
+  DateTime at, {
+  double weight = 100,
+  int reps = 5,
+}) {
   return WorkoutSession(
     id: id,
     title: 'Session $id',
@@ -23,7 +28,13 @@ WorkoutSession _bench(int id, DateTime at, {double weight = 100, int reps = 5}) 
         exerciseName: 'Жим лёжа',
         sets: [
           const WorkoutSet(id: 1, weight: 40, reps: 10, type: SetType.warmup),
-          WorkoutSet(id: 2, weight: weight, reps: reps, rpe: 8, isCompleted: true),
+          WorkoutSet(
+            id: 2,
+            weight: weight,
+            reps: reps,
+            rpe: 8,
+            isCompleted: true,
+          ),
         ],
       ),
     ],
@@ -60,7 +71,8 @@ void main() {
     expect(history.first.startedAt.isAfter(history.last.startedAt), isTrue);
   });
 
-  test('lastPerformance and personalRecord derive from persisted data', () async {
+  test('lastPerformance and personalRecord derive from persisted data',
+      () async {
     await repo.save(_bench(1, DateTime(2026, 1, 1), weight: 100, reps: 5));
     await repo.save(_bench(2, DateTime(2026, 2, 1), weight: 110, reps: 3));
 

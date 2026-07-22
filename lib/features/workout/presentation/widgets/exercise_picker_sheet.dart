@@ -26,7 +26,8 @@ class _ExercisePickerSheet extends ConsumerStatefulWidget {
   const _ExercisePickerSheet();
 
   @override
-  ConsumerState<_ExercisePickerSheet> createState() => _ExercisePickerSheetState();
+  ConsumerState<_ExercisePickerSheet> createState() =>
+      _ExercisePickerSheetState();
 }
 
 class _ExercisePickerSheetState extends ConsumerState<_ExercisePickerSheet> {
@@ -39,7 +40,8 @@ class _ExercisePickerSheetState extends ConsumerState<_ExercisePickerSheet> {
     final async = ref.watch(allExercisesProvider);
 
     return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.sheet)),
+      borderRadius:
+          const BorderRadius.vertical(top: Radius.circular(AppRadius.sheet)),
       child: AmbientBackground(
         child: SafeArea(
           top: false,
@@ -54,7 +56,8 @@ class _ExercisePickerSheetState extends ConsumerState<_ExercisePickerSheet> {
                   onChanged: (v) => setState(() => _query = v.toLowerCase()),
                   decoration: InputDecoration(
                     hintText: 'Поиск…',
-                    prefixIcon: Icon(Icons.search_rounded, color: glass.textMid),
+                    prefixIcon:
+                        Icon(Icons.search_rounded, color: glass.textMid),
                     filled: true,
                     fillColor: glass.fill,
                     border: OutlineInputBorder(
@@ -66,15 +69,21 @@ class _ExercisePickerSheetState extends ConsumerState<_ExercisePickerSheet> {
                 const SizedBox(height: AppSpacing.sm),
                 Expanded(
                   child: async.when(
-                    loading: () => const Center(child: CircularProgressIndicator()),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
                     error: (e, _) => Center(child: Text('Ошибка: $e')),
                     data: (all) {
                       final list = _query.isEmpty
                           ? all
                           : all
-                              .where((e) =>
-                                  e.name.toLowerCase().contains(_query) ||
-                                  (e.altName?.toLowerCase().contains(_query) ?? false),)
+                              .where(
+                                (e) =>
+                                    e.name.toLowerCase().contains(_query) ||
+                                    (e.altName
+                                            ?.toLowerCase()
+                                            .contains(_query) ??
+                                        false),
+                              )
                               .toList();
                       return ListView.builder(
                         itemCount: list.length,

@@ -1,4 +1,5 @@
-import '../../exercises/domain/entities/exercise_enums.dart' show ExperienceLevel;
+import '../../exercises/domain/entities/exercise_enums.dart'
+    show ExperienceLevel;
 
 enum Sex {
   male('Мужской'),
@@ -98,7 +99,8 @@ class UserProfile {
         heightCm: (json['heightCm'] as num?)?.toDouble(),
         weightKg: (json['weightKg'] as num?)?.toDouble(),
         sex: Sex.values.asNameMap()[json['sex']] ?? Sex.male,
-        goal: TrainingGoal.values.asNameMap()[json['goal']] ?? TrainingGoal.muscle,
+        goal: TrainingGoal.values.asNameMap()[json['goal']] ??
+            TrainingGoal.muscle,
         experience: ExperienceLevel.values.asNameMap()[json['experience']] ??
             ExperienceLevel.intermediate,
         benchMax: (json['benchMax'] as num?)?.toDouble(),

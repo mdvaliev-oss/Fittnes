@@ -45,8 +45,11 @@ class ModulePlaceholder extends StatelessWidget {
                       const SizedBox(height: AppSpacing.md),
                       Text('Скоро', style: text.titleLarge),
                       const SizedBox(height: AppSpacing.xxs),
-                      Text(module,
-                          style: text.bodyMedium, textAlign: TextAlign.center,),
+                      Text(
+                        module,
+                        style: text.bodyMedium,
+                        textAlign: TextAlign.center,
+                      ),
                     ],
                   ),
                 ),

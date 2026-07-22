@@ -28,7 +28,11 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
     );
   }
 
-  void addExercise(Exercise exercise, {double? recommendedWeight, int? recommendedReps}) {
+  void addExercise(
+    Exercise exercise, {
+    double? recommendedWeight,
+    int? recommendedReps,
+  }) {
     addExerciseRef(
       exercise.id,
       exercise.name,
@@ -54,7 +58,11 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
       exerciseName: exerciseName,
       sets: [
         for (var i = 0; i < (sets < 1 ? 1 : sets); i++)
-          WorkoutSet(id: _id(), weight: recommendedWeight, reps: recommendedReps),
+          WorkoutSet(
+            id: _id(),
+            weight: recommendedWeight,
+            reps: recommendedReps,
+          ),
       ],
     );
     state = session.copyWith(entries: [...session.entries, entry]);
@@ -64,15 +72,19 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
     _updateEntry(entryId, (entry) {
       // Template the new set from the previous one for fast logging.
       final prev = entry.sets.isNotEmpty ? entry.sets.last : null;
-      return entry.copyWith(sets: [
-        ...entry.sets,
-        WorkoutSet(
-          id: _id(),
-          weight: prev?.weight,
-          reps: prev?.reps,
-          type: prev?.type == SetType.warmup ? SetType.normal : (prev?.type ?? SetType.normal),
-        ),
-      ],);
+      return entry.copyWith(
+        sets: [
+          ...entry.sets,
+          WorkoutSet(
+            id: _id(),
+            weight: prev?.weight,
+            reps: prev?.reps,
+            type: prev?.type == SetType.warmup
+                ? SetType.normal
+                : (prev?.type ?? SetType.normal),
+          ),
+        ],
+      );
     });
   }
 
@@ -85,23 +97,31 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
     int? rir,
     SetType? type,
   }) {
-    _updateSet(entryId, setId, (s) => s.copyWith(
-          weight: weight,
-          reps: reps,
-          rpe: rpe,
-          rir: rir,
-          type: type,
-        ),);
+    _updateSet(
+      entryId,
+      setId,
+      (s) => s.copyWith(
+        weight: weight,
+        reps: reps,
+        rpe: rpe,
+        rir: rir,
+        type: type,
+      ),
+    );
   }
 
   /// Sets or clears RPE / RIR (null clears the respective field).
   void setEffort(int entryId, int setId, {double? rpe, int? rir}) {
-    _updateSet(entryId, setId, (s) => s.copyWith(
-          rpe: rpe,
-          rir: rir,
-          clearRpe: rpe == null,
-          clearRir: rir == null,
-        ),);
+    _updateSet(
+      entryId,
+      setId,
+      (s) => s.copyWith(
+        rpe: rpe,
+        rir: rir,
+        clearRpe: rpe == null,
+        clearRir: rir == null,
+      ),
+    );
   }
 
   void toggleSetComplete(int entryId, int setId) {
@@ -117,9 +137,12 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
   }
 
   void removeSet(int entryId, int setId) {
-    _updateEntry(entryId, (entry) => entry.copyWith(
-          sets: entry.sets.where((s) => s.id != setId).toList(),
-        ),);
+    _updateEntry(
+      entryId,
+      (entry) => entry.copyWith(
+        sets: entry.sets.where((s) => s.id != setId).toList(),
+      ),
+    );
   }
 
   void removeEntry(int entryId) {
@@ -164,22 +187,30 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
   void cancel() => state = null;
 
   // ── helpers ─────────────────────────────────────────────────────────
-  void _updateEntry(int entryId, WorkoutExerciseEntry Function(WorkoutExerciseEntry) f) {
+  void _updateEntry(
+    int entryId,
+    WorkoutExerciseEntry Function(WorkoutExerciseEntry) f,
+  ) {
     final session = state;
     if (session == null) return;
     state = session.copyWith(
       entries: [
-        for (final e in session.entries) if (e.id == entryId) f(e) else e,
+        for (final e in session.entries)
+          if (e.id == entryId) f(e) else e,
       ],
     );
   }
 
   void _updateSet(int entryId, int setId, WorkoutSet Function(WorkoutSet) f) {
-    _updateEntry(entryId, (entry) => entry.copyWith(
-          sets: [
-            for (final s in entry.sets) if (s.id == setId) f(s) else s,
-          ],
-        ),);
+    _updateEntry(
+      entryId,
+      (entry) => entry.copyWith(
+        sets: [
+          for (final s in entry.sets)
+            if (s.id == setId) f(s) else s,
+        ],
+      ),
+    );
   }
 }
 

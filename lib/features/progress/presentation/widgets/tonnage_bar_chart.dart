@@ -17,8 +17,10 @@ class TonnageBarChart extends StatelessWidget {
       return SizedBox(
         height: 120,
         child: Center(
-          child: Text('Нет данных о тоннаже.',
-              style: Theme.of(context).textTheme.bodyMedium,),
+          child: Text(
+            'Нет данных о тоннаже.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         ),
       );
     }
@@ -37,13 +39,17 @@ class TonnageBarChart extends StatelessWidget {
           gridData: FlGridData(
             show: true,
             drawVerticalLine: false,
-            getDrawingHorizontalLine: (_) =>
-                FlLine(color: Colors.white.withValues(alpha: 0.06), strokeWidth: 1),
+            getDrawingHorizontalLine: (_) => FlLine(
+              color: Colors.white.withValues(alpha: 0.06),
+              strokeWidth: 1,
+            ),
           ),
           borderData: FlBorderData(show: false),
           titlesData: FlTitlesData(
-            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
@@ -52,7 +58,8 @@ class TonnageBarChart extends StatelessWidget {
                   value >= 1000
                       ? '${(value / 1000).toStringAsFixed(1)}т'
                       : value.toStringAsFixed(0),
-                  style: const TextStyle(color: Color(0xFF6C6C7A), fontSize: 10),
+                  style:
+                      const TextStyle(color: Color(0xFF6C6C7A), fontSize: 10),
                 ),
               ),
             ),
@@ -61,12 +68,19 @@ class TonnageBarChart extends StatelessWidget {
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
                   final i = value.toInt();
-                  if (i < 0 || i >= shown.length) return const SizedBox.shrink();
+                  if (i < 0 || i >= shown.length) {
+                    return const SizedBox.shrink();
+                  }
                   final d = shown[i].date;
                   return Padding(
                     padding: const EdgeInsets.only(top: 6),
-                    child: Text('${d.day}.${d.month}',
-                        style: const TextStyle(color: Color(0xFF6C6C7A), fontSize: 10),),
+                    child: Text(
+                      '${d.day}.${d.month}',
+                      style: const TextStyle(
+                        color: Color(0xFF6C6C7A),
+                        fontSize: 10,
+                      ),
+                    ),
                   );
                 },
               ),
@@ -80,7 +94,8 @@ class TonnageBarChart extends StatelessWidget {
                   BarChartRodData(
                     toY: shown[i].tonnage,
                     width: 14,
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(6)),
                     gradient: const LinearGradient(
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,

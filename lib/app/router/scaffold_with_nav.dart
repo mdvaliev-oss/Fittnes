@@ -42,7 +42,10 @@ class ScaffoldWithNav extends StatelessWidget {
           top: Radius.circular(AppRadius.sheet),
         ),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: glass.blurSigma, sigmaY: glass.blurSigma),
+          filter: ImageFilter.blur(
+            sigmaX: glass.blurSigma,
+            sigmaY: glass.blurSigma,
+          ),
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: glass.fill,

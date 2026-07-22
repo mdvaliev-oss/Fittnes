@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   void _startWorkout(BuildContext context, WidgetRef ref) {
+    HapticFeedback.mediumImpact();
     ref
         .read(activeWorkoutControllerProvider.notifier)
         .start(title: 'Push Day · Грудь и Трицепс');
@@ -60,16 +62,20 @@ class HomeScreen extends ConsumerWidget {
                     children: [
                       Icon(Icons.bolt_rounded, color: glass.accent, size: 20),
                       const SizedBox(width: AppSpacing.xs),
-                      Text('СЕГОДНЯ',
-                          style: text.labelSmall?.copyWith(
-                            color: glass.accent,
-                            letterSpacing: 1.2,
-                          ),),
+                      Text(
+                        'СЕГОДНЯ',
+                        style: text.labelSmall?.copyWith(
+                          color: glass.accent,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.sm),
-                  Text('Push Day · Грудь и Трицепс',
-                      style: text.headlineMedium,),
+                  Text(
+                    'Push Day · Грудь и Трицепс',
+                    style: text.headlineMedium,
+                  ),
                   const SizedBox(height: AppSpacing.xxs),
                   Text('6 упражнений · ~55 мин', style: text.bodyMedium),
                   const SizedBox(height: AppSpacing.lg),
@@ -93,8 +99,14 @@ class HomeScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Программы тренировок', style: text.titleLarge?.copyWith(fontSize: 16)),
-                        Text('Full Body · Upper/Lower · PPL', style: text.bodyMedium),
+                        Text(
+                          'Программы тренировок',
+                          style: text.titleLarge?.copyWith(fontSize: 16),
+                        ),
+                        Text(
+                          'Full Body · Upper/Lower · PPL',
+                          style: text.bodyMedium,
+                        ),
                       ],
                     ),
                   ),
@@ -114,8 +126,14 @@ class HomeScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Восстановление мышц', style: text.titleLarge?.copyWith(fontSize: 16)),
-                        Text('Готовность по группам за 7 дней', style: text.bodyMedium),
+                        Text(
+                          'Восстановление мышц',
+                          style: text.titleLarge?.copyWith(fontSize: 16),
+                        ),
+                        Text(
+                          'Готовность по группам за 7 дней',
+                          style: text.bodyMedium,
+                        ),
                       ],
                     ),
                   ),
@@ -152,7 +170,8 @@ class _StatsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = stats.valueOrNull ?? WorkoutStats.empty;
-    String n(num v) => v == v.roundToDouble() ? v.toStringAsFixed(0) : v.toStringAsFixed(1);
+    String n(num v) =>
+        v == v.roundToDouble() ? v.toStringAsFixed(0) : v.toStringAsFixed(1);
 
     return GridView.count(
       crossAxisCount: 2,

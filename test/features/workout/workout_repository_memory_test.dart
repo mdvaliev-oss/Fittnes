@@ -29,7 +29,8 @@ WorkoutSession _session({
 void main() {
   group('Workout aggregates', () {
     test('warm-up sets are excluded from volume and e1RM', () {
-      const warm = WorkoutSet(id: 1, weight: 40, reps: 10, type: SetType.warmup);
+      const warm =
+          WorkoutSet(id: 1, weight: 40, reps: 10, type: SetType.warmup);
       const work = WorkoutSet(id: 2, weight: 100, reps: 5);
       const entry = WorkoutExerciseEntry(
         id: 1,
@@ -59,25 +60,36 @@ void main() {
   group('WorkoutRepositoryMemory', () {
     test('history returns finished sessions newest first', () async {
       final repo = WorkoutRepositoryMemory();
-      await repo.save(_session(id: 1, at: DateTime(2026, 1, 1), benchSets: const []));
-      await repo.save(_session(id: 2, at: DateTime(2026, 2, 1), benchSets: const []));
+      await repo
+          .save(_session(id: 1, at: DateTime(2026, 1, 1), benchSets: const []));
+      await repo
+          .save(_session(id: 2, at: DateTime(2026, 2, 1), benchSets: const []));
 
       final history = await repo.history();
       expect(history.map((s) => s.id), [2, 1]);
     });
 
-    test('lastPerformance returns the most recent entry for the exercise', () async {
+    test('lastPerformance returns the most recent entry for the exercise',
+        () async {
       final repo = WorkoutRepositoryMemory();
-      await repo.save(_session(
-        id: 1,
-        at: DateTime(2026, 1, 1),
-        benchSets: const [WorkoutSet(id: 1, weight: 90, reps: 5, isCompleted: true)],
-      ),);
-      await repo.save(_session(
-        id: 2,
-        at: DateTime(2026, 2, 1),
-        benchSets: const [WorkoutSet(id: 2, weight: 100, reps: 5, isCompleted: true)],
-      ),);
+      await repo.save(
+        _session(
+          id: 1,
+          at: DateTime(2026, 1, 1),
+          benchSets: const [
+            WorkoutSet(id: 1, weight: 90, reps: 5, isCompleted: true),
+          ],
+        ),
+      );
+      await repo.save(
+        _session(
+          id: 2,
+          at: DateTime(2026, 2, 1),
+          benchSets: const [
+            WorkoutSet(id: 2, weight: 100, reps: 5, isCompleted: true),
+          ],
+        ),
+      );
 
       final last = await repo.lastPerformance('bench');
       expect(last, isNotNull);
@@ -86,16 +98,24 @@ void main() {
 
     test('personalRecord tracks the best estimated 1RM', () async {
       final repo = WorkoutRepositoryMemory();
-      await repo.save(_session(
-        id: 1,
-        at: DateTime(2026, 1, 1),
-        benchSets: const [WorkoutSet(id: 1, weight: 100, reps: 5, isCompleted: true)],
-      ),);
-      await repo.save(_session(
-        id: 2,
-        at: DateTime(2026, 2, 1),
-        benchSets: const [WorkoutSet(id: 2, weight: 110, reps: 3, isCompleted: true)],
-      ),);
+      await repo.save(
+        _session(
+          id: 1,
+          at: DateTime(2026, 1, 1),
+          benchSets: const [
+            WorkoutSet(id: 1, weight: 100, reps: 5, isCompleted: true),
+          ],
+        ),
+      );
+      await repo.save(
+        _session(
+          id: 2,
+          at: DateTime(2026, 2, 1),
+          benchSets: const [
+            WorkoutSet(id: 2, weight: 110, reps: 3, isCompleted: true),
+          ],
+        ),
+      );
 
       final pr = await repo.personalRecord('bench');
       expect(pr, isNotNull);
@@ -105,14 +125,16 @@ void main() {
 
     test('incomplete or unfilled sets do not count towards a PR', () async {
       final repo = WorkoutRepositoryMemory();
-      await repo.save(_session(
-        id: 1,
-        at: DateTime(2026, 1, 1),
-        benchSets: const [
-          WorkoutSet(id: 1, weight: 200, reps: 1, isCompleted: false),
-          WorkoutSet(id: 2, weight: 80, reps: 8, isCompleted: true),
-        ],
-      ),);
+      await repo.save(
+        _session(
+          id: 1,
+          at: DateTime(2026, 1, 1),
+          benchSets: const [
+            WorkoutSet(id: 1, weight: 200, reps: 1, isCompleted: false),
+            WorkoutSet(id: 2, weight: 80, reps: 8, isCompleted: true),
+          ],
+        ),
+      );
 
       final pr = await repo.personalRecord('bench');
       expect(pr!.bestWeight, 80); // the 200kg set was not completed

@@ -7,7 +7,8 @@ enum ExperienceLevel {
   const ExperienceLevel(this.label);
   final String label;
 
-  static ExperienceLevel fromDataset(String raw) => switch (raw.toLowerCase().trim()) {
+  static ExperienceLevel fromDataset(String raw) =>
+      switch (raw.toLowerCase().trim()) {
         'beginner' => ExperienceLevel.beginner,
         'expert' => ExperienceLevel.advanced,
         _ => ExperienceLevel.intermediate,
@@ -22,7 +23,8 @@ enum Mechanic {
   const Mechanic(this.label);
   final String label;
 
-  static Mechanic? fromDataset(String? raw) => switch (raw?.toLowerCase().trim()) {
+  static Mechanic? fromDataset(String? raw) =>
+      switch (raw?.toLowerCase().trim()) {
         'compound' => Mechanic.compound,
         'isolation' => Mechanic.isolation,
         _ => null,
@@ -38,7 +40,8 @@ enum ForceType {
   const ForceType(this.label);
   final String label;
 
-  static ForceType? fromDataset(String? raw) => switch (raw?.toLowerCase().trim()) {
+  static ForceType? fromDataset(String? raw) =>
+      switch (raw?.toLowerCase().trim()) {
         'push' => ForceType.push,
         'pull' => ForceType.pull,
         'static' => ForceType.static_,
@@ -62,7 +65,8 @@ enum Equipment {
   const Equipment(this.label);
   final String label;
 
-  static Equipment fromDataset(String? raw) => switch (raw?.toLowerCase().trim()) {
+  static Equipment fromDataset(String? raw) =>
+      switch (raw?.toLowerCase().trim()) {
         'barbell' => Equipment.barbell,
         'dumbbell' => Equipment.dumbbell,
         'machine' => Equipment.machine,
@@ -88,7 +92,8 @@ enum ExerciseCategory {
   const ExerciseCategory(this.label);
   final String label;
 
-  static ExerciseCategory fromDataset(String? raw) => switch (raw?.toLowerCase().trim()) {
+  static ExerciseCategory fromDataset(String? raw) =>
+      switch (raw?.toLowerCase().trim()) {
         'strength' => ExerciseCategory.strength,
         'powerlifting' => ExerciseCategory.powerlifting,
         'olympic weightlifting' => ExerciseCategory.olympic,

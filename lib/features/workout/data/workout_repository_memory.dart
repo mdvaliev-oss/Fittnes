@@ -39,12 +39,16 @@ class WorkoutRepositoryMemory implements WorkoutRepository {
   Future<PersonalRecord?> personalRecord(String exerciseId) async {
     PersonalRecord? best;
     for (final session in _sessions.where((s) => s.isFinished)) {
-      for (final entry in session.entries.where((e) => e.exerciseId == exerciseId)) {
+      for (final entry
+          in session.entries.where((e) => e.exerciseId == exerciseId)) {
         for (final set in entry.sets) {
-          if (!set.isCompleted || !set.isFilled || set.estimatedOneRepMax <= 0) {
+          if (!set.isCompleted ||
+              !set.isFilled ||
+              set.estimatedOneRepMax <= 0) {
             continue;
           }
-          if (best == null || set.estimatedOneRepMax > best.bestEstimatedOneRepMax) {
+          if (best == null ||
+              set.estimatedOneRepMax > best.bestEstimatedOneRepMax) {
             best = PersonalRecord(
               exerciseId: exerciseId,
               bestWeight: set.weight!,

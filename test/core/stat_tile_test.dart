@@ -22,11 +22,13 @@ void main() {
 
     testWidgets('shows icon when provided', (tester) async {
       await tester.pumpWidget(
-        wrap(const StatTile(
-          label: 'Серия',
-          value: '12',
-          icon: Icons.local_fire_department_rounded,
-        ),),
+        wrap(
+          const StatTile(
+            label: 'Серия',
+            value: '12',
+            icon: Icons.local_fire_department_rounded,
+          ),
+        ),
       );
 
       expect(find.byIcon(Icons.local_fire_department_rounded), findsOneWidget);

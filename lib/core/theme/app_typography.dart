@@ -61,7 +61,8 @@ abstract final class AppTypography {
   }
 
   /// Large tabular-figure style for stats, timers and set weights.
-  static TextStyle numeric(Color color, {double size = 28}) => GoogleFonts.inter(
+  static TextStyle numeric(Color color, {double size = 28}) =>
+      GoogleFonts.inter(
         fontSize: size,
         fontWeight: FontWeight.w700,
         color: color,

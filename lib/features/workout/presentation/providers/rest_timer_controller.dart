@@ -46,7 +46,11 @@ class RestTimerController extends Notifier<RestTimerState> {
     if (!state.isActive) return;
     final remaining = (state.remaining + delta).clamp(0, 60 * 60);
     final total = remaining > state.total ? remaining : state.total;
-    state = state.copyWith(remaining: remaining, total: total, running: remaining > 0);
+    state = state.copyWith(
+      remaining: remaining,
+      total: total,
+      running: remaining > 0,
+    );
     if (remaining == 0) _cancel();
   }
 
@@ -71,7 +75,6 @@ class RestTimerController extends Notifier<RestTimerState> {
   }
 }
 
-final restTimerProvider =
-    NotifierProvider<RestTimerController, RestTimerState>(
+final restTimerProvider = NotifierProvider<RestTimerController, RestTimerState>(
   RestTimerController.new,
 );

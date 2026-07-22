@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,7 +25,8 @@ class ActiveWorkoutScreen extends ConsumerStatefulWidget {
   const ActiveWorkoutScreen({super.key});
 
   @override
-  ConsumerState<ActiveWorkoutScreen> createState() => _ActiveWorkoutScreenState();
+  ConsumerState<ActiveWorkoutScreen> createState() =>
+      _ActiveWorkoutScreenState();
 }
 
 class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
@@ -41,9 +43,8 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
   Future<void> _addExercise() async {
     final exercise = await showExercisePicker(context);
     if (exercise == null) return;
-    final last = await ref
-        .read(workoutRepositoryProvider)
-        .lastPerformance(exercise.id);
+    final last =
+        await ref.read(workoutRepositoryProvider).lastPerformance(exercise.id);
     final advice = ProgressionEngine.recommend(last);
     ref.read(activeWorkoutControllerProvider.notifier).addExercise(
           exercise,
@@ -56,11 +57,24 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
     final controller = ref.read(activeWorkoutControllerProvider.notifier);
     final finished = controller.finish();
     ref.read(restTimerProvider.notifier).skip();
-    if (finished != null && finished.totalSets > 0) {
+    final saved = finished != null && finished.totalSets > 0;
+    if (saved) {
       await ref.read(workoutRepositoryProvider).save(finished);
       ref.invalidate(workoutHistoryProvider);
+      await HapticFeedback.mediumImpact();
     }
-    if (mounted) context.go(AppRoutes.home);
+    if (!mounted) return;
+    final messenger = ScaffoldMessenger.of(context);
+    context.go(AppRoutes.home);
+    if (saved) {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            'Тренировка сохранена · ${finished.totalVolume.toStringAsFixed(0)} кг',
+          ),
+        ),
+      );
+    }
   }
 
   Future<void> _confirmCancel() async {
@@ -76,7 +90,10 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Отменить', style: TextStyle(color: AppColors.danger)),
+            child: const Text(
+              'Отменить',
+              style: TextStyle(color: AppColors.danger),
+            ),
           ),
         ],
       ),
@@ -137,7 +154,10 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 onPressed: _addExercise,
                 backgroundColor: AppColors.primary,
                 icon: const Icon(Icons.add_rounded, color: Colors.white),
-                label: const Text('Упражнение', style: TextStyle(color: Colors.white)),
+                label: const Text(
+                  'Упражнение',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
       ),
     );
@@ -170,7 +190,10 @@ class _Header extends StatelessWidget {
         children: [
           Row(
             children: [
-              IconButton(onPressed: onCancel, icon: const Icon(Icons.close_rounded)),
+              IconButton(
+                onPressed: onCancel,
+                icon: const Icon(Icons.close_rounded),
+              ),
               Expanded(child: Text(session.title, style: text.titleLarge)),
               SizedBox(
                 width: 130,

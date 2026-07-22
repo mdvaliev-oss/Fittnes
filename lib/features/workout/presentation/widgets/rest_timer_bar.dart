@@ -48,12 +48,15 @@ class RestTimerBar extends ConsumerWidget {
                           TweenAnimationBuilder<double>(
                             tween: Tween(begin: 0, end: state.progress),
                             duration: AppMotion.fast,
-                            builder: (context, value, _) => CircularProgressIndicator(
+                            builder: (context, value, _) =>
+                                CircularProgressIndicator(
                               value: value,
                               strokeWidth: 3,
-                              backgroundColor: Colors.white.withValues(alpha: 0.08),
-                              valueColor:
-                                  const AlwaysStoppedAnimation(AppColors.accent),
+                              backgroundColor:
+                                  Colors.white.withValues(alpha: 0.08),
+                              valueColor: const AlwaysStoppedAnimation(
+                                AppColors.accent,
+                              ),
                             ),
                           ),
                           const Icon(Icons.timer_rounded, size: 16),
@@ -64,15 +67,25 @@ class RestTimerBar extends ConsumerWidget {
                     Text(
                       'Отдых  ${formatSeconds(state.remaining)}',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontFeatures: const [],
-                          ),
+                        fontFeatures: const [],
+                      ),
                     ),
                     const Spacer(),
-                    _MiniAction(label: '-15', onTap: () => controller.addSeconds(-15)),
+                    _MiniAction(
+                      label: '-15',
+                      onTap: () => controller.addSeconds(-15),
+                    ),
                     const SizedBox(width: AppSpacing.xs),
-                    _MiniAction(label: '+15', onTap: () => controller.addSeconds(15)),
+                    _MiniAction(
+                      label: '+15',
+                      onTap: () => controller.addSeconds(15),
+                    ),
                     const SizedBox(width: AppSpacing.xs),
-                    _MiniAction(label: 'Пропустить', onTap: controller.skip, accent: true),
+                    _MiniAction(
+                      label: 'Пропустить',
+                      onTap: controller.skip,
+                      accent: true,
+                    ),
                   ],
                 ),
               ),
@@ -82,7 +95,11 @@ class RestTimerBar extends ConsumerWidget {
 }
 
 class _MiniAction extends StatelessWidget {
-  const _MiniAction({required this.label, required this.onTap, this.accent = false});
+  const _MiniAction({
+    required this.label,
+    required this.onTap,
+    this.accent = false,
+  });
   final String label;
   final VoidCallback onTap;
   final bool accent;
@@ -92,9 +109,12 @@ class _MiniAction extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
+        padding:
+            const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
         decoration: BoxDecoration(
-          color: accent ? AppColors.accent.withValues(alpha: 0.15) : Colors.white.withValues(alpha: 0.06),
+          color: accent
+              ? AppColors.accent.withValues(alpha: 0.15)
+              : Colors.white.withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(AppRadius.pill),
         ),
         child: Text(

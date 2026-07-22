@@ -1,4 +1,5 @@
-import '../../exercises/domain/entities/exercise_enums.dart' show ExperienceLevel;
+import '../../exercises/domain/entities/exercise_enums.dart'
+    show ExperienceLevel;
 
 enum ProgramCategory {
   fullBody('Full Body'),

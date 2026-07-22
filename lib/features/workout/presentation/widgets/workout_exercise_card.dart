@@ -24,9 +24,11 @@ class WorkoutExerciseCard extends ConsumerWidget {
     final controller = ref.read(activeWorkoutControllerProvider.notifier);
     final glass = context.glass;
     final text = Theme.of(context).textTheme;
-    final last = ref.watch(lastPerformanceProvider(entry.exerciseId)).valueOrNull;
+    final last =
+        ref.watch(lastPerformanceProvider(entry.exerciseId)).valueOrNull;
     final pr = ref.watch(personalRecordProvider(entry.exerciseId)).valueOrNull;
-    final advice = ref.watch(recommendationProvider(entry.exerciseId)).valueOrNull;
+    final advice =
+        ref.watch(recommendationProvider(entry.exerciseId)).valueOrNull;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
@@ -41,7 +43,8 @@ class WorkoutExerciseCard extends ConsumerWidget {
                 if (entry.isSuperset)
                   Padding(
                     padding: const EdgeInsets.only(right: AppSpacing.xs),
-                    child: Icon(Icons.link_rounded, size: 18, color: glass.accent),
+                    child:
+                        Icon(Icons.link_rounded, size: 18, color: glass.accent),
                   ),
                 Expanded(
                   child: Text(
@@ -49,8 +52,7 @@ class WorkoutExerciseCard extends ConsumerWidget {
                     style: text.titleLarge?.copyWith(fontSize: 17),
                   ),
                 ),
-                if (pr != null)
-                  _PrBadge(oneRepMax: pr.bestEstimatedOneRepMax),
+                if (pr != null) _PrBadge(oneRepMax: pr.bestEstimatedOneRepMax),
                 _Menu(entryId: entry.id, controller: controller),
               ],
             ),
@@ -65,14 +67,15 @@ class WorkoutExerciseCard extends ConsumerWidget {
             if (advice != null)
               _RecommendationChip(
                 advice: advice,
-                onApply: (advice.suggestedWeight != null && entry.sets.isNotEmpty)
-                    ? () => controller.updateSet(
-                          entry.id,
-                          entry.sets.first.id,
-                          weight: advice.suggestedWeight,
-                          reps: advice.suggestedReps,
-                        )
-                    : null,
+                onApply:
+                    (advice.suggestedWeight != null && entry.sets.isNotEmpty)
+                        ? () => controller.updateSet(
+                              entry.id,
+                              entry.sets.first.id,
+                              weight: advice.suggestedWeight,
+                              reps: advice.suggestedReps,
+                            )
+                        : null,
               ),
             const SizedBox(height: AppSpacing.xs),
             // Column headers
@@ -82,11 +85,22 @@ class WorkoutExerciseCard extends ConsumerWidget {
                 children: [
                   SizedBox(width: 30, child: Text('#', style: text.labelSmall)),
                   const SizedBox(width: AppSpacing.xs),
-                  Expanded(flex: 3, child: Center(child: Text('Вес', style: text.labelSmall))),
+                  Expanded(
+                    flex: 3,
+                    child: Center(child: Text('Вес', style: text.labelSmall)),
+                  ),
                   const SizedBox(width: AppSpacing.xs),
-                  Expanded(flex: 2, child: Center(child: Text('Повт.', style: text.labelSmall))),
+                  Expanded(
+                    flex: 2,
+                    child: Center(child: Text('Повт.', style: text.labelSmall)),
+                  ),
                   const SizedBox(width: AppSpacing.xs),
-                  SizedBox(width: 46, child: Center(child: Text('Усилие', style: text.labelSmall))),
+                  SizedBox(
+                    width: 46,
+                    child: Center(
+                      child: Text('Усилие', style: text.labelSmall),
+                    ),
+                  ),
                   const SizedBox(width: 48),
                 ],
               ),
@@ -121,7 +135,8 @@ class WorkoutExerciseCard extends ConsumerWidget {
     if (last == null || i >= last.sets.length) return null;
     final s = last.sets[i];
     if (s.weight == null || s.reps == null) return null;
-    final w = s.weight! % 1 == 0 ? s.weight!.toStringAsFixed(0) : s.weight.toString();
+    final w =
+        s.weight! % 1 == 0 ? s.weight!.toStringAsFixed(0) : s.weight.toString();
     return '$w×${s.reps}';
   }
 
@@ -129,7 +144,9 @@ class WorkoutExerciseCard extends ConsumerWidget {
     final working = last.sets.where((s) => s.isFilled).toList();
     if (working.isEmpty) return '—';
     final top = working.reduce((a, b) => a.weight! >= b.weight! ? a : b);
-    final w = top.weight! % 1 == 0 ? top.weight!.toStringAsFixed(0) : top.weight.toString();
+    final w = top.weight! % 1 == 0
+        ? top.weight!.toStringAsFixed(0)
+        : top.weight.toString();
     return '$w кг × ${top.reps} · ${working.length} подх.';
   }
 }
@@ -150,7 +167,11 @@ class _PrBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.emoji_events_rounded, size: 13, color: AppColors.accent),
+          const Icon(
+            Icons.emoji_events_rounded,
+            size: 13,
+            color: AppColors.accent,
+          ),
           const SizedBox(width: 3),
           Text(
             oneRepMax.toStringAsFixed(0),

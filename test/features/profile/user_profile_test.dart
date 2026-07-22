@@ -21,8 +21,9 @@ void main() {
         trainsAtHome: true,
       );
 
-      final decoded =
-          UserProfile.fromJson(jsonDecode(jsonEncode(profile.toJson())) as Map<String, dynamic>);
+      final decoded = UserProfile.fromJson(
+        jsonDecode(jsonEncode(profile.toJson())) as Map<String, dynamic>,
+      );
 
       expect(decoded.name, 'Марат');
       expect(decoded.age, 30);

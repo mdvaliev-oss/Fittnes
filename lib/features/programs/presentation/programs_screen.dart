@@ -52,7 +52,8 @@ class ProgramsScreen extends ConsumerWidget {
                     AppSpacing.xxl,
                   ),
                   itemCount: programs.length,
-                  itemBuilder: (context, i) => _ProgramCard(program: programs[i]),
+                  itemBuilder: (context, i) =>
+                      _ProgramCard(program: programs[i]),
                 ),
               ),
             ],
@@ -125,7 +126,8 @@ class _Tag extends StatelessWidget {
     final c = color ?? context.glass.textMid;
     return Container(
       margin: const EdgeInsets.only(top: AppSpacing.xxs),
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs, vertical: 4),
+      padding:
+          const EdgeInsets.symmetric(horizontal: AppSpacing.xs, vertical: 4),
       decoration: BoxDecoration(
         color: c.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -135,7 +137,14 @@ class _Tag extends StatelessWidget {
         children: [
           Icon(icon, size: 13, color: c),
           const SizedBox(width: 3),
-          Text(label, style: TextStyle(fontSize: 12, color: c, fontWeight: FontWeight.w600)),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: c,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     );

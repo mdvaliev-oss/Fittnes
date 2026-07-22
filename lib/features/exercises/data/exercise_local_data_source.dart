@@ -10,7 +10,8 @@ import 'models/exercise_dto.dart';
 /// The seed ships a curated subset; the full free-exercise-db import replaces
 /// this asset without any code change (the DTO already matches its schema).
 class ExerciseLocalDataSource {
-  ExerciseLocalDataSource({AssetBundle? bundle}) : _bundle = bundle ?? rootBundle;
+  ExerciseLocalDataSource({AssetBundle? bundle})
+      : _bundle = bundle ?? rootBundle;
 
   final AssetBundle _bundle;
 

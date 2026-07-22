@@ -23,7 +23,11 @@ class ProgramDetailScreen extends ConsumerWidget {
 
   final String programId;
 
-  Future<void> _startDay(BuildContext context, WidgetRef ref, ProgramDay day) async {
+  Future<void> _startDay(
+    BuildContext context,
+    WidgetRef ref,
+    ProgramDay day,
+  ) async {
     final controller = ref.read(activeWorkoutControllerProvider.notifier);
     final repo = ref.read(workoutRepositoryProvider);
     controller.start(title: day.name);
@@ -68,7 +72,9 @@ class ProgramDetailScreen extends ConsumerWidget {
                           onPressed: () => Navigator.of(context).maybePop(),
                           icon: const Icon(Icons.arrow_back_rounded),
                         ),
-                        Expanded(child: Text(program.name, style: text.headlineMedium)),
+                        Expanded(
+                          child: Text(program.name, style: text.headlineMedium),
+                        ),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.xs),
@@ -112,10 +118,17 @@ class _DayCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(pe.exerciseName,
-                          style: text.bodyLarge, maxLines: 1, overflow: TextOverflow.ellipsis,),
+                      child: Text(
+                        pe.exerciseName,
+                        style: text.bodyLarge,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    Text(pe.repScheme, style: text.labelSmall?.copyWith(color: glass.textMid)),
+                    Text(
+                      pe.repScheme,
+                      style: text.labelSmall?.copyWith(color: glass.textMid),
+                    ),
                   ],
                 ),
               ),

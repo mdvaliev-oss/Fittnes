@@ -32,7 +32,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   void initState() {
     super.initState();
     final p = ref.read(profileProvider);
-    String n(num? v) => v == null ? '' : (v % 1 == 0 ? v.toStringAsFixed(0) : '$v');
+    String n(num? v) =>
+        v == null ? '' : (v % 1 == 0 ? v.toStringAsFixed(0) : '$v');
     _name = TextEditingController(text: p.name ?? '');
     _age = TextEditingController(text: p.age?.toString() ?? '');
     _height = TextEditingController(text: n(p.heightCm));
@@ -44,7 +45,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   void dispose() {
-    for (final c in [_name, _age, _height, _weight, _bench, _squat, _deadlift]) {
+    for (final c in [
+      _name,
+      _age,
+      _height,
+      _weight,
+      _bench,
+      _squat,
+      _deadlift,
+    ]) {
       c.dispose();
     }
     super.dispose();
@@ -77,14 +86,31 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               style: text.bodyMedium,
             ),
             const SizedBox(height: AppSpacing.md),
-
             _Section(
               title: 'Личные данные',
               children: [
-                _TextField(controller: _name, label: 'Имя', onChanged: (v) => _save((p) => p.copyWith(name: v))),
-                _NumberField(controller: _age, label: 'Возраст', onChanged: (v) => _save((p) => p.copyWith(age: v?.toInt()))),
-                _NumberField(controller: _height, label: 'Рост', suffix: 'см', onChanged: (v) => _save((p) => p.copyWith(heightCm: v))),
-                _NumberField(controller: _weight, label: 'Вес', suffix: 'кг', onChanged: (v) => _save((p) => p.copyWith(weightKg: v))),
+                _TextField(
+                  controller: _name,
+                  label: 'Имя',
+                  onChanged: (v) => _save((p) => p.copyWith(name: v)),
+                ),
+                _NumberField(
+                  controller: _age,
+                  label: 'Возраст',
+                  onChanged: (v) => _save((p) => p.copyWith(age: v?.toInt())),
+                ),
+                _NumberField(
+                  controller: _height,
+                  label: 'Рост',
+                  suffix: 'см',
+                  onChanged: (v) => _save((p) => p.copyWith(heightCm: v)),
+                ),
+                _NumberField(
+                  controller: _weight,
+                  label: 'Вес',
+                  suffix: 'кг',
+                  onChanged: (v) => _save((p) => p.copyWith(weightKg: v)),
+                ),
                 const SizedBox(height: AppSpacing.xs),
                 _EnumChips<Sex>(
                   label: 'Пол',
@@ -95,7 +121,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
               ],
             ),
-
             _Section(
               title: 'Тренировки',
               children: [
@@ -114,24 +139,47 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   selected: profile.experience,
                   onSelected: (v) => _save((p) => p.copyWith(experience: v)),
                 ),
-                SwitchListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: const Text('Домашние тренировки'),
-                  value: profile.trainsAtHome,
-                  onChanged: (v) => _save((p) => p.copyWith(trainsAtHome: v)),
+                Padding(
+                  padding: const EdgeInsets.only(top: AppSpacing.sm),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child:
+                            Text('Домашние тренировки', style: text.bodyLarge),
+                      ),
+                      Switch(
+                        value: profile.trainsAtHome,
+                        onChanged: (v) =>
+                            _save((p) => p.copyWith(trainsAtHome: v)),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-
             _Section(
               title: 'Максимумы (1ПМ)',
               children: [
-                _NumberField(controller: _bench, label: 'Жим лёжа', suffix: 'кг', onChanged: (v) => _save((p) => p.copyWith(benchMax: v))),
-                _NumberField(controller: _squat, label: 'Присед', suffix: 'кг', onChanged: (v) => _save((p) => p.copyWith(squatMax: v))),
-                _NumberField(controller: _deadlift, label: 'Становая', suffix: 'кг', onChanged: (v) => _save((p) => p.copyWith(deadliftMax: v))),
+                _NumberField(
+                  controller: _bench,
+                  label: 'Жим лёжа',
+                  suffix: 'кг',
+                  onChanged: (v) => _save((p) => p.copyWith(benchMax: v)),
+                ),
+                _NumberField(
+                  controller: _squat,
+                  label: 'Присед',
+                  suffix: 'кг',
+                  onChanged: (v) => _save((p) => p.copyWith(squatMax: v)),
+                ),
+                _NumberField(
+                  controller: _deadlift,
+                  label: 'Становая',
+                  suffix: 'кг',
+                  onChanged: (v) => _save((p) => p.copyWith(deadliftMax: v)),
+                ),
               ],
             ),
-
             _Section(
               title: 'Оформление',
               children: [
@@ -140,7 +188,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   values: ThemeMode.values,
                   labelOf: _themeLabel,
                   selected: settings.themeMode,
-                  onSelected: (v) => ref.read(appSettingsProvider.notifier).setThemeMode(v),
+                  onSelected: (v) =>
+                      ref.read(appSettingsProvider.notifier).setThemeMode(v),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 _EnumChips<WeightUnit>(
@@ -148,7 +197,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   values: WeightUnit.values,
                   labelOf: (u) => u.label,
                   selected: settings.unit,
-                  onSelected: (v) => ref.read(appSettingsProvider.notifier).setUnit(v),
+                  onSelected: (v) =>
+                      ref.read(appSettingsProvider.notifier).setUnit(v),
                 ),
               ],
             ),
@@ -190,7 +240,11 @@ class _Section extends StatelessWidget {
 }
 
 class _TextField extends StatelessWidget {
-  const _TextField({required this.controller, required this.label, required this.onChanged});
+  const _TextField({
+    required this.controller,
+    required this.label,
+    required this.onChanged,
+  });
   final TextEditingController controller;
   final String label;
   final ValueChanged<String> onChanged;
@@ -227,9 +281,16 @@ class _NumberField extends StatelessWidget {
       child: TextField(
         controller: controller,
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9.,]'))],
-        onChanged: (raw) => onChanged(double.tryParse(raw.replaceAll(',', '.'))),
-        decoration: InputDecoration(labelText: label, suffixText: suffix, isDense: true),
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'[0-9.,]')),
+        ],
+        onChanged: (raw) =>
+            onChanged(double.tryParse(raw.replaceAll(',', '.'))),
+        decoration: InputDecoration(
+          labelText: label,
+          suffixText: suffix,
+          isDense: true,
+        ),
       ),
     );
   }

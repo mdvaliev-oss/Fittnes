@@ -46,7 +46,8 @@ class RecoveryScreen extends ConsumerWidget {
               ),
               Expanded(
                 child: async.when(
-                  loading: () => const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
                   error: (e, _) => Center(child: Text('Ошибка: $e')),
                   data: (recovery) => recovery.fatigue.isEmpty
                       ? const _EmptyRecovery()
@@ -72,7 +73,8 @@ class _RecoveryBody extends StatelessWidget {
     final readiness = (recovery.overallReadiness * 100).round();
 
     final colors = {
-      for (final e in recovery.fatigue.entries) e.key: recoveryHeatColor(e.value),
+      for (final e in recovery.fatigue.entries)
+        e.key: recoveryHeatColor(e.value),
     };
 
     return ListView(
@@ -91,7 +93,10 @@ class _RecoveryBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Готовность тела', style: text.bodyMedium),
-                  Text('$readiness%', style: AppTypography.numeric(glass.accent, size: 32)),
+                  Text(
+                    '$readiness%',
+                    style: AppTypography.numeric(glass.accent, size: 32),
+                  ),
                 ],
               ),
               const Spacer(),
@@ -129,7 +134,10 @@ class _MuscleRecoveryRow extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
       child: Row(
         children: [
-          SizedBox(width: 120, child: Text(muscle.label, style: text.bodyLarge)),
+          SizedBox(
+            width: 120,
+            child: Text(muscle.label, style: text.bodyLarge),
+          ),
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -185,7 +193,11 @@ class _LegendDot extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(width: 10, height: 10, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
         const SizedBox(width: 6),
         Text(label, style: Theme.of(context).textTheme.labelSmall),
       ],
@@ -210,8 +222,11 @@ class _EmptyRecovery extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text('Мышцы свежие', style: text.titleLarge),
             const SizedBox(height: AppSpacing.xxs),
-            Text('За последние 7 дней тренировок нет — можно бить по любой группе.',
-                textAlign: TextAlign.center, style: text.bodyMedium,),
+            Text(
+              'За последние 7 дней тренировок нет — можно бить по любой группе.',
+              textAlign: TextAlign.center,
+              style: text.bodyMedium,
+            ),
           ],
         ),
       ),

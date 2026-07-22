@@ -110,21 +110,33 @@ class _DetailBody extends StatelessWidget {
             _Section(
               title: 'Советы тренера',
               accent: AppColors.accent,
-              child: _BulletList(items: exercise.tips, icon: Icons.check_circle_rounded, color: AppColors.accent),
+              child: _BulletList(
+                items: exercise.tips,
+                icon: Icons.check_circle_rounded,
+                color: AppColors.accent,
+              ),
             ),
 
           if (exercise.commonMistakes.isNotEmpty)
             _Section(
               title: 'Типичные ошибки',
               accent: AppColors.warning,
-              child: _BulletList(items: exercise.commonMistakes, icon: Icons.error_rounded, color: AppColors.warning),
+              child: _BulletList(
+                items: exercise.commonMistakes,
+                icon: Icons.error_rounded,
+                color: AppColors.warning,
+              ),
             ),
 
           if (exercise.contraindications.isNotEmpty)
             _Section(
               title: 'Противопоказания',
               accent: AppColors.danger,
-              child: _BulletList(items: exercise.contraindications, icon: Icons.block_rounded, color: AppColors.danger),
+              child: _BulletList(
+                items: exercise.contraindications,
+                icon: Icons.block_rounded,
+                color: AppColors.danger,
+              ),
             ),
 
           if (exercise.variations.isNotEmpty)
@@ -212,11 +224,23 @@ class _TempoBreathing extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (exercise.tempo != null)
-            _KeyValue(icon: Icons.speed_rounded, label: 'Темп', value: exercise.tempo!),
+            _KeyValue(
+              icon: Icons.speed_rounded,
+              label: 'Темп',
+              value: exercise.tempo!,
+            ),
           if (exercise.breathing != null)
-            _KeyValue(icon: Icons.air_rounded, label: 'Дыхание', value: exercise.breathing!),
+            _KeyValue(
+              icon: Icons.air_rounded,
+              label: 'Дыхание',
+              value: exercise.breathing!,
+            ),
           if (rom != null)
-            _KeyValue(icon: Icons.open_in_full_rounded, label: 'Амплитуда', value: rom),
+            _KeyValue(
+              icon: Icons.open_in_full_rounded,
+              label: 'Амплитуда',
+              value: rom,
+            ),
         ],
       ),
     );
@@ -224,7 +248,11 @@ class _TempoBreathing extends StatelessWidget {
 }
 
 class _KeyValue extends StatelessWidget {
-  const _KeyValue({required this.icon, required this.label, required this.value});
+  const _KeyValue({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
   final IconData icon;
   final String label;
   final String value;
@@ -240,7 +268,10 @@ class _KeyValue extends StatelessWidget {
         children: [
           Icon(icon, size: 18, color: glass.textMid),
           const SizedBox(width: AppSpacing.xs),
-          Text('$label: ', style: text.bodyMedium?.copyWith(color: glass.textMid)),
+          Text(
+            '$label: ',
+            style: text.bodyMedium?.copyWith(color: glass.textMid),
+          ),
           Expanded(child: Text(value, style: text.bodyLarge)),
         ],
       ),
@@ -292,7 +323,11 @@ class _NumberedList extends StatelessWidget {
 }
 
 class _BulletList extends StatelessWidget {
-  const _BulletList({required this.items, required this.icon, required this.color});
+  const _BulletList({
+    required this.items,
+    required this.icon,
+    required this.color,
+  });
   final List<String> items;
   final IconData icon;
   final Color color;

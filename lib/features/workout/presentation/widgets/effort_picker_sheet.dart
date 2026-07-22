@@ -41,7 +41,8 @@ class _EffortSheetState extends State<_EffortSheet> {
   Widget build(BuildContext context) {
     final text = Theme.of(context).textTheme;
     return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.sheet)),
+      borderRadius:
+          const BorderRadius.vertical(top: Radius.circular(AppRadius.sheet)),
       child: AmbientBackground(
         child: SafeArea(
           top: false,
@@ -63,7 +64,8 @@ class _EffortSheetState extends State<_EffortSheet> {
                       _Chip(
                         label: v.toStringAsFixed(v % 1 == 0 ? 0 : 1),
                         selected: _rpe == v,
-                        onTap: () => setState(() => _rpe = _rpe == v ? null : v),
+                        onTap: () =>
+                            setState(() => _rpe = _rpe == v ? null : v),
                       ),
                   ],
                 ),
@@ -78,7 +80,8 @@ class _EffortSheetState extends State<_EffortSheet> {
                       _Chip(
                         label: '$v',
                         selected: _rir == v,
-                        onTap: () => setState(() => _rir = _rir == v ? null : v),
+                        onTap: () =>
+                            setState(() => _rir = _rir == v ? null : v),
                       ),
                   ],
                 ),
@@ -87,13 +90,15 @@ class _EffortSheetState extends State<_EffortSheet> {
                   children: [
                     Expanded(
                       child: TextButton(
-                        onPressed: () => Navigator.pop(context, (rpe: null, rir: null)),
+                        onPressed: () =>
+                            Navigator.pop(context, (rpe: null, rir: null)),
                         child: const Text('Сбросить'),
                       ),
                     ),
                     Expanded(
                       child: FilledButton(
-                        onPressed: () => Navigator.pop(context, (rpe: _rpe, rir: _rir)),
+                        onPressed: () =>
+                            Navigator.pop(context, (rpe: _rpe, rir: _rir)),
                         child: const Text('Готово'),
                       ),
                     ),
@@ -109,7 +114,11 @@ class _EffortSheetState extends State<_EffortSheet> {
 }
 
 class _Chip extends StatelessWidget {
-  const _Chip({required this.label, required this.selected, required this.onTap});
+  const _Chip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
   final String label;
   final bool selected;
   final VoidCallback onTap;

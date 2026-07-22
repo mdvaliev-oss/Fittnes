@@ -4,7 +4,13 @@ import 'package:fittnes/features/workout/domain/entities/workout_session.dart';
 import 'package:fittnes/features/workout/domain/entities/workout_set.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-WorkoutSession _session(int id, DateTime day, String exId, double weight, int reps) {
+WorkoutSession _session(
+  int id,
+  DateTime day,
+  String exId,
+  double weight,
+  int reps,
+) {
   return WorkoutSession(
     id: id,
     title: 'S$id',
@@ -15,7 +21,9 @@ WorkoutSession _session(int id, DateTime day, String exId, double weight, int re
         id: id,
         exerciseId: exId,
         exerciseName: exId,
-        sets: [WorkoutSet(id: id, weight: weight, reps: reps, isCompleted: true)],
+        sets: [
+          WorkoutSet(id: id, weight: weight, reps: reps, isCompleted: true),
+        ],
       ),
     ],
   );
@@ -30,7 +38,10 @@ void main() {
 
   test('strengthSeries is sorted oldest → newest for one exercise', () {
     final series = strengthSeries(history, 'bench');
-    expect(series.map((p) => p.date), [DateTime(2026, 1, 1), DateTime(2026, 2, 1)]);
+    expect(
+      series.map((p) => p.date),
+      [DateTime(2026, 1, 1), DateTime(2026, 2, 1)],
+    );
     expect(series.first.e1rm < series.last.e1rm, isTrue);
   });
 

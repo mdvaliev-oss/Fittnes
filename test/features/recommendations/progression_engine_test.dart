@@ -11,7 +11,12 @@ WorkoutExerciseEntry _entry(List<WorkoutSet> sets) => WorkoutExerciseEntry(
       sets: sets,
     );
 
-WorkoutSet _set({required double weight, required int reps, double? rpe, int id = 1}) =>
+WorkoutSet _set({
+  required double weight,
+  required int reps,
+  double? rpe,
+  int id = 1,
+}) =>
     WorkoutSet(id: id, weight: weight, reps: reps, rpe: rpe, isCompleted: true);
 
 void main() {
@@ -22,13 +27,16 @@ void main() {
     });
 
     test('no completed sets → finish sets', () {
-      final advice = ProgressionEngine.recommend(_entry(const [
-        WorkoutSet(id: 1, weight: 100, reps: 5, isCompleted: false),
-      ]),);
+      final advice = ProgressionEngine.recommend(
+        _entry(const [
+          WorkoutSet(id: 1, weight: 100, reps: 5, isCompleted: false),
+        ]),
+      );
       expect(advice.action, ProgressionAction.finishSets);
     });
 
-    test('top of range with reps in reserve → increase weight by increment', () {
+    test('top of range with reps in reserve → increase weight by increment',
+        () {
       final advice = ProgressionEngine.recommend(
         _entry([_set(weight: 100, reps: 12, rpe: 7)]),
       );
@@ -61,10 +69,12 @@ void main() {
     });
 
     test('early systemic fatigue → more rest', () {
-      final advice = ProgressionEngine.recommend(_entry([
-        _set(weight: 100, reps: 9, rpe: 9.5, id: 1),
-        _set(weight: 100, reps: 8, rpe: 10, id: 2),
-      ]),);
+      final advice = ProgressionEngine.recommend(
+        _entry([
+          _set(weight: 100, reps: 9, rpe: 9.5, id: 1),
+          _set(weight: 100, reps: 8, rpe: 10, id: 2),
+        ]),
+      );
       expect(advice.action, ProgressionAction.addRest);
     });
   });

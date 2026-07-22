@@ -56,18 +56,23 @@ class _SetRowState extends ConsumerState<SetRow> {
 
   void _commitWeight(String raw) {
     final v = double.tryParse(raw.replaceAll(',', '.'));
-    if (v != null) _controller.updateSet(widget.entryId, widget.set.id, weight: v);
+    if (v != null) {
+      _controller.updateSet(widget.entryId, widget.set.id, weight: v);
+    }
   }
 
   void _commitReps(String raw) {
     final v = int.tryParse(raw);
-    if (v != null) _controller.updateSet(widget.entryId, widget.set.id, reps: v);
+    if (v != null) {
+      _controller.updateSet(widget.entryId, widget.set.id, reps: v);
+    }
   }
 
   void _toggleComplete() {
     _controller.toggleSetComplete(widget.entryId, widget.set.id);
     final nowComplete = !widget.set.isCompleted;
     if (nowComplete) {
+      HapticFeedback.selectionClick();
       ref.read(restTimerProvider.notifier).start(widget.restSeconds);
     }
   }
@@ -105,9 +110,12 @@ class _SetRowState extends ConsumerState<SetRow> {
       onDismissed: (_) => _controller.removeSet(widget.entryId, set.id),
       child: AnimatedContainer(
         duration: AppMotion.fast,
-        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: AppSpacing.xs),
+        padding:
+            const EdgeInsets.symmetric(vertical: 6, horizontal: AppSpacing.xs),
         decoration: BoxDecoration(
-          color: done ? AppColors.accent.withValues(alpha: 0.10) : Colors.transparent,
+          color: done
+              ? AppColors.accent.withValues(alpha: 0.10)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(AppRadius.chip),
         ),
         child: Row(
@@ -148,13 +156,16 @@ class _SetRowState extends ConsumerState<SetRow> {
                   padding: EdgeInsets.zero,
                   foregroundColor: glass.textMid,
                 ),
-                child: Text(_effortLabel, style: const TextStyle(fontSize: 12.5)),
+                child:
+                    Text(_effortLabel, style: const TextStyle(fontSize: 12.5)),
               ),
             ),
             IconButton(
               onPressed: _toggleComplete,
               icon: Icon(
-                done ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded,
+                done
+                    ? Icons.check_circle_rounded
+                    : Icons.radio_button_unchecked_rounded,
                 color: done ? AppColors.accent : glass.textLow,
               ),
             ),
@@ -164,8 +175,7 @@ class _SetRowState extends ConsumerState<SetRow> {
     );
   }
 
-  String? get _weightHint =>
-      widget.previousHint?.split('×').first;
+  String? get _weightHint => widget.previousHint?.split('×').first;
   String? get _repsHint => widget.previousHint != null
       ? (widget.previousHint!.split('×').length > 1
           ? widget.previousHint!.split('×')[1]
@@ -181,7 +191,11 @@ class _SetRowState extends ConsumerState<SetRow> {
 }
 
 class _TypeBadge extends StatelessWidget {
-  const _TypeBadge({required this.set, required this.index, required this.onTap});
+  const _TypeBadge({
+    required this.set,
+    required this.index,
+    required this.onTap,
+  });
   final WorkoutSet set;
   final int index;
   final VoidCallback onTap;
@@ -207,7 +221,11 @@ class _TypeBadge extends StatelessWidget {
         ),
         child: Text(
           isNormal ? '$index' : set.type.badge,
-          style: TextStyle(fontWeight: FontWeight.w700, color: color, fontSize: 13),
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            color: color,
+            fontSize: 13,
+          ),
         ),
       ),
     );
@@ -238,7 +256,9 @@ class _NumField extends StatelessWidget {
       textAlign: TextAlign.center,
       keyboardType: TextInputType.numberWithOptions(decimal: decimal),
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(decimal ? r'[0-9.,]' : r'[0-9]')),
+        FilteringTextInputFormatter.allow(
+          RegExp(decimal ? r'[0-9.,]' : r'[0-9]'),
+        ),
       ],
       style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 16),
       decoration: InputDecoration(

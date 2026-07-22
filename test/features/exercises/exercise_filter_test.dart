@@ -33,8 +33,14 @@ void main() {
 
     test('muscle facet checks primary and secondary', () {
       expect(const ExerciseFilter(muscle: Muscle.chest).matches(bench), isTrue);
-      expect(const ExerciseFilter(muscle: Muscle.triceps).matches(bench), isTrue);
-      expect(const ExerciseFilter(muscle: Muscle.quads).matches(bench), isFalse);
+      expect(
+        const ExerciseFilter(muscle: Muscle.triceps).matches(bench),
+        isTrue,
+      );
+      expect(
+        const ExerciseFilter(muscle: Muscle.quads).matches(bench),
+        isFalse,
+      );
     });
 
     test('equipment and level facets', () {

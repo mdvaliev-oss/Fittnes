@@ -14,30 +14,49 @@ void main() {
     });
 
     test('a hard session today produces high fatigue', () {
-      final r = computeMuscleRecovery([
-        MuscleStimulusEvent(now, const {Muscle.chest: 6000}),
-      ], now: now,);
+      final r = computeMuscleRecovery(
+        [
+          MuscleStimulusEvent(now, const {Muscle.chest: 6000}),
+        ],
+        now: now,
+      );
       // 1 - e^(-6000/6000) = 1 - e^-1 ≈ 0.632
       expect(r.fatigueOf(Muscle.chest), closeTo(0.632, 0.01));
     });
 
     test('older stimulus decays with the half-life', () {
-      final today = computeMuscleRecovery([
-        MuscleStimulusEvent(now, const {Muscle.chest: 6000}),
-      ], now: now,);
-      final fourDaysAgo = computeMuscleRecovery([
-        MuscleStimulusEvent(now.subtract(const Duration(hours: 96)),
-            const {Muscle.chest: 6000},),
-      ], now: now,);
+      final today = computeMuscleRecovery(
+        [
+          MuscleStimulusEvent(now, const {Muscle.chest: 6000}),
+        ],
+        now: now,
+      );
+      final fourDaysAgo = computeMuscleRecovery(
+        [
+          MuscleStimulusEvent(
+            now.subtract(const Duration(hours: 96)),
+            const {Muscle.chest: 6000},
+          ),
+        ],
+        now: now,
+      );
 
-      expect(fourDaysAgo.fatigueOf(Muscle.chest),
-          lessThan(today.fatigueOf(Muscle.chest)),);
+      expect(
+        fourDaysAgo.fatigueOf(Muscle.chest),
+        lessThan(today.fatigueOf(Muscle.chest)),
+      );
     });
 
     test('byFatigue orders muscles most-fatigued first', () {
-      final r = computeMuscleRecovery([
-        MuscleStimulusEvent(now, const {Muscle.chest: 8000, Muscle.biceps: 1000}),
-      ], now: now,);
+      final r = computeMuscleRecovery(
+        [
+          MuscleStimulusEvent(
+            now,
+            const {Muscle.chest: 8000, Muscle.biceps: 1000},
+          ),
+        ],
+        now: now,
+      );
       expect(r.byFatigue.first.key, Muscle.chest);
       expect(r.byFatigue.last.key, Muscle.biceps);
     });

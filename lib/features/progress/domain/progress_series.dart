@@ -22,11 +22,15 @@ class ExerciseRef {
 }
 
 /// Best-e1RM-per-session series for [exerciseId], oldest → newest.
-List<StrengthPoint> strengthSeries(List<WorkoutSession> history, String exerciseId) {
+List<StrengthPoint> strengthSeries(
+  List<WorkoutSession> history,
+  String exerciseId,
+) {
   final points = <StrengthPoint>[];
   for (final session in history) {
     var best = 0.0;
-    for (final entry in session.entries.where((e) => e.exerciseId == exerciseId)) {
+    for (final entry
+        in session.entries.where((e) => e.exerciseId == exerciseId)) {
       final top = entry.topEstimatedOneRepMax;
       if (top > best) best = top;
     }
@@ -55,7 +59,9 @@ List<ExerciseRef> exercisesInHistory(List<WorkoutSession> history) {
       names[e.exerciseId] = e.exerciseName;
     }
   }
-  final refs = counts.keys.map((id) => ExerciseRef(id, names[id] ?? id)).toList()
+  final refs = counts.keys
+      .map((id) => ExerciseRef(id, names[id] ?? id))
+      .toList()
     ..sort((a, b) => counts[b.id]!.compareTo(counts[a.id]!));
   return refs;
 }

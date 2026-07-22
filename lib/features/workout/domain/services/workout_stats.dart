@@ -31,7 +31,10 @@ class WorkoutStats {
 /// Pure computation of [WorkoutStats] from [sessions] (finished only).
 ///
 /// [now] is injectable for deterministic tests.
-WorkoutStats computeWorkoutStats(List<WorkoutSession> sessions, {DateTime? now}) {
+WorkoutStats computeWorkoutStats(
+  List<WorkoutSession> sessions, {
+  DateTime? now,
+}) {
   if (sessions.isEmpty) return WorkoutStats.empty;
   final today = _dateOnly(now ?? DateTime.now());
 

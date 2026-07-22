@@ -116,9 +116,12 @@ class WorkoutRepositoryDrift implements WorkoutRepository {
   Future<PersonalRecord?> personalRecord(String exerciseId) async {
     PersonalRecord? best;
     for (final session in await history()) {
-      for (final entry in session.entries.where((e) => e.exerciseId == exerciseId)) {
+      for (final entry
+          in session.entries.where((e) => e.exerciseId == exerciseId)) {
         for (final set in entry.sets) {
-          if (!set.isCompleted || !set.isFilled || set.estimatedOneRepMax <= 0) {
+          if (!set.isCompleted ||
+              !set.isFilled ||
+              set.estimatedOneRepMax <= 0) {
             continue;
           }
           if (best == null ||
@@ -169,8 +172,7 @@ class WorkoutRepositoryDrift implements WorkoutRepository {
         entries: entries,
       );
 
-  SetType _setType(int index) =>
-      (index >= 0 && index < SetType.values.length)
-          ? SetType.values[index]
-          : SetType.normal;
+  SetType _setType(int index) => (index >= 0 && index < SetType.values.length)
+      ? SetType.values[index]
+      : SetType.normal;
 }

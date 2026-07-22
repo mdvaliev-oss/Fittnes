@@ -43,22 +43,36 @@ class WorkoutHistoryScreen extends ConsumerWidget {
                 ),
               ),
               Expanded(
-                child: history.when(
-                  loading: () => const Center(child: CircularProgressIndicator()),
-                  error: (e, _) => Center(child: Text('Ошибка: $e')),
-                  data: (sessions) => sessions.isEmpty
-                      ? const _EmptyHistory()
-                      : ListView.builder(
-                          padding: const EdgeInsets.fromLTRB(
-                            AppSpacing.md,
-                            0,
-                            AppSpacing.md,
-                            AppSpacing.xxl,
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    ref.invalidate(workoutHistoryProvider);
+                    await ref.read(workoutHistoryProvider.future);
+                  },
+                  child: history.when(
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (e, _) => Center(child: Text('Ошибка: $e')),
+                    data: (sessions) => sessions.isEmpty
+                        ? ListView(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            children: const [
+                              SizedBox(height: 160),
+                              _EmptyHistory(),
+                            ],
+                          )
+                        : ListView.builder(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            padding: const EdgeInsets.fromLTRB(
+                              AppSpacing.md,
+                              0,
+                              AppSpacing.md,
+                              AppSpacing.xxl,
+                            ),
+                            itemCount: sessions.length,
+                            itemBuilder: (context, i) =>
+                                _SessionCard(session: sessions[i]),
                           ),
-                          itemCount: sessions.length,
-                          itemBuilder: (context, i) =>
-                              _SessionCard(session: sessions[i]),
-                        ),
+                  ),
                 ),
               ),
             ],
@@ -117,8 +131,12 @@ class _SessionCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Text(e.exerciseName,
-                            style: text.bodyLarge, maxLines: 1, overflow: TextOverflow.ellipsis,),
+                        child: Text(
+                          e.exerciseName,
+                          style: text.bodyLarge,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                       Text('${e.sets.length}×', style: text.bodyMedium),
                     ],
@@ -172,8 +190,11 @@ class _EmptyHistory extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           Text('Пока нет тренировок', style: text.titleLarge),
           const SizedBox(height: AppSpacing.xxs),
-          Text('Завершите первую тренировку — она появится здесь.',
-              style: text.bodyMedium, textAlign: TextAlign.center,),
+          Text(
+            'Завершите первую тренировку — она появится здесь.',
+            style: text.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

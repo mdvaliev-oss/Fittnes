@@ -30,7 +30,8 @@ abstract final class ProgressionEngine {
     if (last == null) {
       return const ProgressionAdvice(
         action: ProgressionAction.start,
-        message: 'Первая тренировка упражнения — выбери вес на 8–10 повторений с запасом.',
+        message:
+            'Первая тренировка упражнения — выбери вес на 8–10 повторений с запасом.',
       );
     }
 
@@ -41,7 +42,8 @@ abstract final class ProgressionEngine {
     if (working.isEmpty) {
       return const ProgressionAdvice(
         action: ProgressionAction.finishSets,
-        message: 'В прошлый раз не было завершённых рабочих подходов — повтори вес и закрой их.',
+        message:
+            'В прошлый раз не было завершённых рабочих подходов — повтори вес и закрой их.',
       );
     }
 
@@ -57,7 +59,8 @@ abstract final class ProgressionEngine {
         action: ProgressionAction.addRest,
         suggestedWeight: weight,
         suggestedReps: reps,
-        message: 'Усилие росло рано — увеличь отдых между подходами на 30–60 c.',
+        message:
+            'Усилие росло рано — увеличь отдых между подходами на 30–60 c.',
       );
     }
 
@@ -67,7 +70,8 @@ abstract final class ProgressionEngine {
           action: ProgressionAction.keepWeight,
           suggestedWeight: weight,
           suggestedReps: reps,
-          message: 'Повторы есть, но усилие максимальное — закрепи $weight кг ещё раз.',
+          message:
+              'Повторы есть, но усилие максимальное — закрепи $weight кг ещё раз.',
         );
       }
       final next = _round(weight + increment);
@@ -75,7 +79,8 @@ abstract final class ProgressionEngine {
         action: ProgressionAction.increaseWeight,
         suggestedWeight: next,
         suggestedReps: target.min,
-        message: 'Верхняя граница диапазона взята с запасом — подними до $next кг.',
+        message:
+            'Верхняя граница диапазона взята с запасом — подними до $next кг.',
       );
     }
 
@@ -103,7 +108,8 @@ abstract final class ProgressionEngine {
         action: ProgressionAction.addReps,
         suggestedWeight: weight,
         suggestedReps: reps + 1,
-        message: 'Есть запас — добавь повтор на $weight кг (цель ${target.max}).',
+        message:
+            'Есть запас — добавь повтор на $weight кг (цель ${target.max}).',
       );
     }
     return ProgressionAdvice(

@@ -106,8 +106,7 @@ class ExercisesScreen extends ConsumerWidget {
             // Results
             Expanded(
               child: results.when(
-                loading: () =>
-                    const Center(child: CircularProgressIndicator()),
+                loading: () => const Center(child: CircularProgressIndicator()),
                 error: (e, _) => Center(
                   child: Text('Ошибка загрузки: $e', style: text.bodyMedium),
                 ),

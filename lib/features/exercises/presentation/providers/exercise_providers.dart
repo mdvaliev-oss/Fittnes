@@ -55,6 +55,7 @@ final exerciseCountProvider = FutureProvider<int>((ref) async {
 });
 
 /// Single exercise by id, for the detail screen.
-final exerciseByIdProvider = FutureProvider.family<Exercise?, String>((ref, id) {
+final exerciseByIdProvider =
+    FutureProvider.family<Exercise?, String>((ref, id) {
   return ref.watch(exerciseRepositoryProvider).getById(id);
 });

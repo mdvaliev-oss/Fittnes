@@ -52,46 +52,53 @@ class _ProgressBody extends ConsumerWidget {
         ? const <StrengthPoint>[]
         : strengthSeries(sessions, selectedId);
 
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.md,
-        AppSpacing.md,
-        AppSpacing.md,
-        AppSpacing.xxl * 2,
+    return RefreshIndicator(
+      onRefresh: () async {
+        ref.invalidate(workoutHistoryProvider);
+        await ref.read(workoutHistoryProvider.future);
+      },
+      child: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.md,
+          AppSpacing.md,
+          AppSpacing.md,
+          AppSpacing.xxl * 2,
+        ),
+        children: [
+          Text('Прогресс', style: text.headlineLarge),
+          const SizedBox(height: AppSpacing.md),
+          _ChartCard(
+            title: 'Тоннаж по тренировкам',
+            child: TonnageBarChart(points: tonnage),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          _ChartCard(
+            title: 'Рост силы (e1RM)',
+            trailing: exercises.isEmpty
+                ? null
+                : _ExercisePicker(
+                    exercises: exercises,
+                    selectedId: selectedId,
+                    onChanged: (id) => ref
+                        .read(selectedProgressExerciseProvider.notifier)
+                        .state = id,
+                  ),
+            child: StrengthLineChart(points: strength),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text('Личные рекорды', style: text.titleLarge),
+          const SizedBox(height: AppSpacing.sm),
+          ...(_records(sessions, exercises).map((r) => _RecordTile(record: r))),
+        ],
       ),
-      children: [
-        Text('Прогресс', style: text.headlineLarge),
-        const SizedBox(height: AppSpacing.md),
-
-        _ChartCard(
-          title: 'Тоннаж по тренировкам',
-          child: TonnageBarChart(points: tonnage),
-        ),
-        const SizedBox(height: AppSpacing.md),
-
-        _ChartCard(
-          title: 'Рост силы (e1RM)',
-          trailing: exercises.isEmpty
-              ? null
-              : _ExercisePicker(
-                  exercises: exercises,
-                  selectedId: selectedId,
-                  onChanged: (id) => ref
-                      .read(selectedProgressExerciseProvider.notifier)
-                      .state = id,
-                ),
-          child: StrengthLineChart(points: strength),
-        ),
-        const SizedBox(height: AppSpacing.md),
-
-        Text('Личные рекорды', style: text.titleLarge),
-        const SizedBox(height: AppSpacing.sm),
-        ...(_records(sessions, exercises).map((r) => _RecordTile(record: r))),
-      ],
     );
   }
 
-  List<_RecordRow> _records(List<WorkoutSession> sessions, List<ExerciseRef> exercises) {
+  List<_RecordRow> _records(
+    List<WorkoutSession> sessions,
+    List<ExerciseRef> exercises,
+  ) {
     final rows = <_RecordRow>[];
     for (final ex in exercises) {
       final series = strengthSeries(sessions, ex.id);
@@ -105,7 +112,11 @@ class _ProgressBody extends ConsumerWidget {
 }
 
 class _RecordRow {
-  const _RecordRow({required this.name, required this.e1rm, required this.date});
+  const _RecordRow({
+    required this.name,
+    required this.e1rm,
+    required this.date,
+  });
   final String name;
   final double e1rm;
   final DateTime date;
@@ -217,14 +228,24 @@ class _RecordTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Icon(Icons.emoji_events_rounded, color: AppColors.accent, size: 20),
+            const Icon(
+              Icons.emoji_events_rounded,
+              color: AppColors.accent,
+              size: 20,
+            ),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
-              child: Text(record.name,
-                  style: text.bodyLarge, maxLines: 1, overflow: TextOverflow.ellipsis,),
+              child: Text(
+                record.name,
+                style: text.bodyLarge,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            Text('${record.e1rm.toStringAsFixed(0)} кг',
-                style: AppTypography.numeric(glass.accent, size: 17),),
+            Text(
+              '${record.e1rm.toStringAsFixed(0)} кг',
+              style: AppTypography.numeric(glass.accent, size: 17),
+            ),
           ],
         ),
       ),
@@ -249,8 +270,11 @@ class _EmptyProgress extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text('Здесь появится прогресс', style: text.titleLarge),
             const SizedBox(height: AppSpacing.xxs),
-            Text('Заверши несколько тренировок — построим графики силы и тоннажа.',
-                textAlign: TextAlign.center, style: text.bodyMedium,),
+            Text(
+              'Заверши несколько тренировок — построим графики силы и тоннажа.',
+              textAlign: TextAlign.center,
+              style: text.bodyMedium,
+            ),
           ],
         ),
       ),

@@ -31,8 +31,10 @@ class WorkoutExerciseEntry {
   bool get isSuperset => supersetGroup != null;
 
   /// Best estimated 1RM across this entry's sets.
-  double get topEstimatedOneRepMax =>
-      sets.fold(0.0, (best, s) => s.estimatedOneRepMax > best ? s.estimatedOneRepMax : best);
+  double get topEstimatedOneRepMax => sets.fold(
+        0.0,
+        (best, s) => s.estimatedOneRepMax > best ? s.estimatedOneRepMax : best,
+      );
 
   WorkoutExerciseEntry copyWith({
     List<WorkoutSet>? sets,
@@ -47,7 +49,8 @@ class WorkoutExerciseEntry {
       exerciseName: exerciseName,
       sets: sets ?? this.sets,
       note: note ?? this.note,
-      supersetGroup: clearSuperset ? null : (supersetGroup ?? this.supersetGroup),
+      supersetGroup:
+          clearSuperset ? null : (supersetGroup ?? this.supersetGroup),
       restSeconds: restSeconds ?? this.restSeconds,
     );
   }
