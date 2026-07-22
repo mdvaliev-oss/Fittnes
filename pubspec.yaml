@@ -27,6 +27,10 @@ dependencies:
   # Lightweight key-value storage (settings & profile)
   shared_preferences: ^2.3.2
 
+  # Local reminder notifications
+  flutter_local_notifications: ^17.2.3
+  timezone: ^0.9.4
+
   # UI / Design system
   google_fonts: ^6.2.1
   flutter_animate: ^4.5.0

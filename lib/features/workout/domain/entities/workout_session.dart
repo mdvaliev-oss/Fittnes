@@ -42,4 +42,25 @@ class WorkoutSession {
       entries: entries ?? this.entries,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'startedAt': startedAt.toIso8601String(),
+        'finishedAt': finishedAt?.toIso8601String(),
+        'entries': entries.map((e) => e.toJson()).toList(),
+      };
+
+  factory WorkoutSession.fromJson(Map<String, dynamic> j) => WorkoutSession(
+        id: (j['id'] as num).toInt(),
+        title: j['title'] as String? ?? 'Тренировка',
+        startedAt: DateTime.parse(j['startedAt'] as String),
+        finishedAt: j['finishedAt'] == null
+            ? null
+            : DateTime.parse(j['finishedAt'] as String),
+        entries: ((j['entries'] as List?) ?? const [])
+            .map(
+                (e) => WorkoutExerciseEntry.fromJson(e as Map<String, dynamic>),)
+            .toList(),
+      );
 }

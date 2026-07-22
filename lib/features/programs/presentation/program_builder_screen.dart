@@ -45,12 +45,14 @@ class _ProgramBuilderScreenState extends ConsumerState<ProgramBuilderScreen> {
   Future<void> _addExercise(_DayDraft day) async {
     final exercise = await showExercisePicker(context);
     if (exercise == null) return;
-    setState(() => day.exercises.add(
-          ProgramExercise(
-            exerciseId: exercise.id,
-            exerciseName: exercise.name,
-          ),
-        ),);
+    setState(
+      () => day.exercises.add(
+        ProgramExercise(
+          exerciseId: exercise.id,
+          exerciseName: exercise.name,
+        ),
+      ),
+    );
   }
 
   Future<void> _renameDay(_DayDraft day) async {
@@ -282,8 +284,11 @@ class _ExerciseEditor extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: onRemove,
-                child: Icon(Icons.close_rounded,
-                    size: 18, color: AppColors.danger.withValues(alpha: 0.8),),
+                child: Icon(
+                  Icons.close_rounded,
+                  size: 18,
+                  color: AppColors.danger.withValues(alpha: 0.8),
+                ),
               ),
             ],
           ),

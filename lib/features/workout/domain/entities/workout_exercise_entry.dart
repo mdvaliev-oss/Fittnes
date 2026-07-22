@@ -54,4 +54,27 @@ class WorkoutExerciseEntry {
       restSeconds: restSeconds ?? this.restSeconds,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'exerciseId': exerciseId,
+        'exerciseName': exerciseName,
+        'note': note,
+        'supersetGroup': supersetGroup,
+        'restSeconds': restSeconds,
+        'sets': sets.map((s) => s.toJson()).toList(),
+      };
+
+  factory WorkoutExerciseEntry.fromJson(Map<String, dynamic> j) =>
+      WorkoutExerciseEntry(
+        id: (j['id'] as num).toInt(),
+        exerciseId: j['exerciseId'] as String,
+        exerciseName: j['exerciseName'] as String,
+        note: j['note'] as String?,
+        supersetGroup: (j['supersetGroup'] as num?)?.toInt(),
+        restSeconds: (j['restSeconds'] as num?)?.toInt() ?? 120,
+        sets: ((j['sets'] as List?) ?? const [])
+            .map((s) => WorkoutSet.fromJson(s as Map<String, dynamic>))
+            .toList(),
+      );
 }

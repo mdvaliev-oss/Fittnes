@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/backup/backup_service.dart';
+import '../../../core/reminders/reminder_service.dart';
 import '../../../core/settings/app_settings.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/glass_theme.dart';
@@ -61,6 +63,84 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   void _save(UserProfile Function(UserProfile) f) {
     ref.read(profileProvider.notifier).update(f(ref.read(profileProvider)));
+  }
+
+  Future<void> _setReminders(bool enabled) async {
+    final s = ref.read(appSettingsProvider);
+    await ref.read(appSettingsProvider.notifier).setReminders(enabled: enabled);
+    final reminders = ref.read(reminderServiceProvider);
+    if (enabled) {
+      await reminders.scheduleDaily(s.reminderHour, s.reminderMinute);
+    } else {
+      await reminders.cancel();
+    }
+  }
+
+  Future<void> _pickReminderTime() async {
+    final s = ref.read(appSettingsProvider);
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: s.reminderTime,
+    );
+    if (picked == null) return;
+    await ref
+        .read(appSettingsProvider.notifier)
+        .setReminders(hour: picked.hour, minute: picked.minute);
+    if (s.remindersEnabled) {
+      await ref
+          .read(reminderServiceProvider)
+          .scheduleDaily(picked.hour, picked.minute);
+    }
+  }
+
+  Future<void> _exportData() async {
+    final json = await ref.read(backupServiceProvider).export();
+    await Clipboard.setData(ClipboardData(text: json));
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Данные скопированы в буфер обмена')),
+    );
+  }
+
+  Future<void> _importData() async {
+    final controller = TextEditingController();
+    final raw = await showDialog<String>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Импорт данных'),
+        content: TextField(
+          controller: controller,
+          maxLines: 6,
+          decoration: const InputDecoration(hintText: 'Вставьте JSON…'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Отмена'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, controller.text),
+            child: const Text('Импорт'),
+          ),
+        ],
+      ),
+    );
+    if (raw == null || raw.trim().isEmpty || !mounted) return;
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      final result = await ref.read(backupServiceProvider).import(raw);
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            'Импортировано: ${result.sessions} трен., ${result.programs} прогр.',
+          ),
+        ),
+      );
+    } catch (_) {
+      messenger.showSnackBar(
+        const SnackBar(content: Text('Не удалось прочитать данные')),
+      );
+    }
   }
 
   @override
@@ -202,6 +282,54 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
               ],
             ),
+            _Section(
+              title: 'Напоминания',
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text('Напоминать о тренировке',
+                          style: text.bodyLarge,),
+                    ),
+                    Switch(
+                      value: settings.remindersEnabled,
+                      onChanged: _setReminders,
+                    ),
+                  ],
+                ),
+                if (settings.remindersEnabled)
+                  Row(
+                    children: [
+                      Expanded(child: Text('Время', style: text.bodyLarge)),
+                      TextButton(
+                        onPressed: _pickReminderTime,
+                        child: Text(
+                          settings.reminderTime.format(context),
+                          style: text.titleLarge,
+                        ),
+                      ),
+                    ],
+                  ),
+              ],
+            ),
+            _Section(
+              title: 'Данные',
+              children: [
+                _DataAction(
+                  icon: Icons.ios_share_rounded,
+                  label: 'Экспорт данных',
+                  subtitle: 'Скопировать резервную копию (JSON)',
+                  onTap: _exportData,
+                ),
+                const SizedBox(height: AppSpacing.xs),
+                _DataAction(
+                  icon: Icons.download_rounded,
+                  label: 'Импорт данных',
+                  subtitle: 'Восстановить из JSON',
+                  onTap: _importData,
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -232,6 +360,49 @@ class _Section extends StatelessWidget {
             Text(title, style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: AppSpacing.sm),
             ...children,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DataAction extends StatelessWidget {
+  const _DataAction({
+    required this.icon,
+    required this.label,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final glass = context.glass;
+    final text = Theme.of(context).textTheme;
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(AppRadius.chip),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+        child: Row(
+          children: [
+            Icon(icon, color: glass.accent),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: text.bodyLarge),
+                  Text(subtitle, style: text.labelSmall),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right_rounded, color: glass.textLow),
           ],
         ),
       ),

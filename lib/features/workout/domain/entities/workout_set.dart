@@ -67,4 +67,26 @@ class WorkoutSet {
       note: note ?? this.note,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'weight': weight,
+        'reps': reps,
+        'rpe': rpe,
+        'rir': rir,
+        'type': type.name,
+        'isCompleted': isCompleted,
+        'note': note,
+      };
+
+  factory WorkoutSet.fromJson(Map<String, dynamic> j) => WorkoutSet(
+        id: (j['id'] as num).toInt(),
+        weight: (j['weight'] as num?)?.toDouble(),
+        reps: (j['reps'] as num?)?.toInt(),
+        rpe: (j['rpe'] as num?)?.toDouble(),
+        rir: (j['rir'] as num?)?.toInt(),
+        type: SetType.values.asNameMap()[j['type']] ?? SetType.normal,
+        isCompleted: j['isCompleted'] as bool? ?? false,
+        note: j['note'] as String?,
+      );
 }

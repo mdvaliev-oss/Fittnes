@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app.dart';
+import 'core/reminders/reminder_service.dart';
 import 'core/settings/app_settings.dart';
 
 Future<void> main() async {
@@ -21,9 +22,24 @@ Future<void> main() async {
 
   final prefs = await SharedPreferences.getInstance();
 
+  final container = ProviderContainer(
+    overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+  );
+
+  // Initialise reminders and (re)schedule if enabled.
+  final reminders = container.read(reminderServiceProvider);
+  await reminders.init();
+  final settings = container.read(appSettingsProvider);
+  if (settings.remindersEnabled) {
+    await reminders.scheduleDaily(
+      settings.reminderHour,
+      settings.reminderMinute,
+    );
+  }
+
   runApp(
-    ProviderScope(
-      overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+    UncontrolledProviderScope(
+      container: container,
       child: const FittnesApp(),
     ),
   );
