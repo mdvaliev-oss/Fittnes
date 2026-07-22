@@ -150,11 +150,26 @@ class _BodyPainter extends CustomPainter {
     for (final entry in regions.entries) {
       final color = colors[entry.key];
       if (color == null) continue;
-      final paint = Paint()
-        ..color = color
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
       for (final blob in entry.value) {
-        canvas.drawRRect(blob.toRRect(size), paint);
+        final rrect = blob.toRRect(size);
+        final rect = rrect.outerRect.inflate(rrect.width * 0.25);
+        // Radial heat: bright core fading out — reads like real activation.
+        final glow = Paint()
+          ..shader = RadialGradient(
+            colors: [
+              color,
+              color.withValues(alpha: (color.a * 0.35).clamp(0.0, 1.0)),
+              color.withValues(alpha: 0.0),
+            ],
+            stops: const [0.0, 0.55, 1.0],
+          ).createShader(rect)
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(rect, Radius.circular(rect.shortestSide / 2)),
+          glow,
+        );
+        // Crisp core so the muscle stays legible over the glow.
+        canvas.drawRRect(rrect, Paint()..color = color);
       }
     }
 
