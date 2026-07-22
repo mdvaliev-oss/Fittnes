@@ -17,10 +17,16 @@ class ProgramsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final programs = ref.watch(presetProgramsProvider);
+    final presets = ref.watch(presetProgramsProvider);
+    final custom = ref.watch(customProgramsProvider);
     final text = Theme.of(context).textTheme;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => context.push(AppRoutes.programBuilder),
+        icon: const Icon(Icons.add_rounded),
+        label: const Text('Создать'),
+      ),
       body: AmbientBackground(
         child: SafeArea(
           child: Column(
@@ -44,16 +50,24 @@ class ProgramsScreen extends ConsumerWidget {
                 ),
               ),
               Expanded(
-                child: ListView.builder(
+                child: ListView(
                   padding: const EdgeInsets.fromLTRB(
                     AppSpacing.md,
                     0,
                     AppSpacing.md,
-                    AppSpacing.xxl,
+                    AppSpacing.xxl * 2,
                   ),
-                  itemCount: programs.length,
-                  itemBuilder: (context, i) =>
-                      _ProgramCard(program: programs[i]),
+                  children: [
+                    if (custom.isNotEmpty) ...[
+                      Text('Мои программы', style: text.titleLarge),
+                      const SizedBox(height: AppSpacing.sm),
+                      for (final p in custom) _ProgramCard(program: p),
+                      const SizedBox(height: AppSpacing.md),
+                    ],
+                    Text('Готовые программы', style: text.titleLarge),
+                    const SizedBox(height: AppSpacing.sm),
+                    for (final p in presets) _ProgramCard(program: p),
+                  ],
                 ),
               ),
             ],
@@ -106,6 +120,8 @@ class _ProgramCard extends StatelessWidget {
                   icon: Icons.event_repeat_rounded,
                   label: '${program.dayCount} дн./цикл',
                 ),
+                if (program.isCustom)
+                  const _Tag(icon: Icons.person_rounded, label: 'Моя'),
               ],
             ),
           ],

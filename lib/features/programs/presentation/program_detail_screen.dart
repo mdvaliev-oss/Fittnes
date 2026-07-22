@@ -48,6 +48,29 @@ class ProgramDetailScreen extends ConsumerWidget {
     if (context.mounted) unawaited(context.push(AppRoutes.activeWorkout));
   }
 
+  Future<void> _confirmDelete(BuildContext context, WidgetRef ref) async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Удалить программу?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Отмена'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Удалить'),
+          ),
+        ],
+      ),
+    );
+    if (ok ?? false) {
+      await ref.read(customProgramsProvider.notifier).delete(programId);
+      if (context.mounted) unawaited(Navigator.of(context).maybePop());
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final program = ref.watch(programByIdProvider(programId));
@@ -75,6 +98,11 @@ class ProgramDetailScreen extends ConsumerWidget {
                         Expanded(
                           child: Text(program.name, style: text.headlineMedium),
                         ),
+                        if (program.isCustom)
+                          IconButton(
+                            onPressed: () => _confirmDelete(context, ref),
+                            icon: const Icon(Icons.delete_outline_rounded),
+                          ),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.xs),
