@@ -45,11 +45,13 @@ class BackupService {
 
     if (data['profile'] is Map) {
       await _ref.read(profileProvider.notifier).update(
-          UserProfile.fromJson(data['profile'] as Map<String, dynamic>),);
+            UserProfile.fromJson(data['profile'] as Map<String, dynamic>),
+          );
     }
     if (data['settings'] is Map) {
       await _ref.read(appSettingsProvider.notifier).replace(
-          AppSettings.fromJson(data['settings'] as Map<String, dynamic>),);
+            AppSettings.fromJson(data['settings'] as Map<String, dynamic>),
+          );
     }
 
     var programs = 0;

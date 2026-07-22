@@ -60,7 +60,8 @@ class WorkoutSession {
             : DateTime.parse(j['finishedAt'] as String),
         entries: ((j['entries'] as List?) ?? const [])
             .map(
-                (e) => WorkoutExerciseEntry.fromJson(e as Map<String, dynamic>),)
+              (e) => WorkoutExerciseEntry.fromJson(e as Map<String, dynamic>),
+            )
             .toList(),
       );
 }

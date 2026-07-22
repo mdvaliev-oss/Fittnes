@@ -288,8 +288,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: Text('Напоминать о тренировке',
-                          style: text.bodyLarge,),
+                      child: Text(
+                        'Напоминать о тренировке',
+                        style: text.bodyLarge,
+                      ),
                     ),
                     Switch(
                       value: settings.remindersEnabled,
