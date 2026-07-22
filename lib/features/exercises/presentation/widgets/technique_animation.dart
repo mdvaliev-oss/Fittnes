@@ -197,14 +197,25 @@ class AnimatedTechniqueFigure extends StatelessWidget {
   final MovementPattern pattern;
   final Equipment equipment;
 
+  /// Patterns that read best facing the viewer (symmetric limbs): the "T" of
+  /// a lateral raise and the knees-out drop of a squat.
+  static bool _isFrontView(MovementPattern p) =>
+      p == MovementPattern.squat || p == MovementPattern.lateralRaise;
+
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _FigurePainter(
-        t: progress,
-        pattern: pattern,
-        equipment: equipment,
-      ),
+      painter: _isFrontView(pattern)
+          ? _FrontFigurePainter(
+              t: progress,
+              pattern: pattern,
+              equipment: equipment,
+            )
+          : _FigurePainter(
+              t: progress,
+              pattern: pattern,
+              equipment: equipment,
+            ),
       size: Size.infinite,
     );
   }
@@ -693,4 +704,471 @@ class _FigurePainter extends CustomPainter {
   @override
   bool shouldRepaint(_FigurePainter old) =>
       old.t != t || old.pattern != pattern || old.equipment != equipment;
+}
+
+/// Symmetric front-facing figure for [MovementPattern.squat] and
+/// [MovementPattern.lateralRaise], where facing the viewer reads far better
+/// than a profile (knees tracking out; the classic lateral-raise "T").
+class _FrontFigurePainter extends CustomPainter {
+  _FrontFigurePainter({
+    required this.t,
+    required this.pattern,
+    required this.equipment,
+  });
+
+  final double t;
+  final MovementPattern pattern;
+  final Equipment equipment;
+
+  static const double _groundY = 90;
+  static const double _shoulderHalf = 11;
+  static const double _shoulderY = 31;
+  static const double _upperArm = 12;
+  static const double _foreArm = 11;
+
+  bool get _barbell =>
+      equipment == Equipment.barbell ||
+      equipment == Equipment.smithMachine ||
+      equipment == Equipment.ezBar;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final pose = _resolve(t);
+    final poseStart = _resolve(0);
+    final poseEnd = _resolve(1);
+
+    final scale = size.height / 100;
+    final dx = size.width / 2 - 50 * scale;
+    Offset m(Offset p) => Offset(dx + p.dx * scale, p.dy * scale);
+    double s(double v) => v * scale;
+
+    _drawGround(canvas, size, m);
+    _drawGuide(canvas, m(poseStart.focus), m(poseEnd.focus), s);
+
+    // Legs first (behind torso), then torso/head, then arms + implement.
+    _drawLimb(
+      canvas,
+      [pose.hipL, pose.kneeL, pose.ankleL],
+      m,
+      s,
+      s(7),
+      Colors.white.withValues(alpha: 0.85),
+    );
+    _drawLimb(
+      canvas,
+      [pose.hipR, pose.kneeR, pose.ankleR],
+      m,
+      s,
+      s(7),
+      Colors.white.withValues(alpha: 0.85),
+    );
+    _drawFoot(canvas, m(pose.ankleL), s);
+    _drawFoot(canvas, m(pose.ankleR), s);
+
+    _drawTorso(canvas, pose, m, s);
+
+    _drawLimb(
+      canvas,
+      [pose.shoulderL, pose.elbowL, pose.handL],
+      m,
+      s,
+      s(6),
+      Colors.white.withValues(alpha: 0.92),
+    );
+    _drawLimb(
+      canvas,
+      [pose.shoulderR, pose.elbowR, pose.handR],
+      m,
+      s,
+      s(6),
+      Colors.white.withValues(alpha: 0.92),
+    );
+
+    _drawHands(canvas, pose, m, s);
+    _drawImplement(canvas, pose, m, s);
+  }
+
+  // ── Geometry ────────────────────────────────────────────────────────
+  _FrontPose _resolve(double raw) {
+    final tt = Curves.easeInOut.transform(raw);
+    double d(double a, double b) => a + (b - a) * tt;
+
+    if (pattern == MovementPattern.squat) {
+      final hipY = d(50, 66);
+      final kneeX = d(9, 15);
+      final kneeY = d(72, 75);
+      final ankleX = d(11, 12.5);
+      const hipHalf = 7.0;
+      final hipL = Offset(50 - hipHalf, hipY);
+      final hipR = Offset(50 + hipHalf, hipY);
+
+      // The whole upper body descends with the hips so the torso keeps its
+      // length instead of stretching — shoulders/head/arms sink together.
+      final sink = (hipY - 50) * 0.92;
+      final neck = Offset(50, _shoulderY - 1 + sink);
+      final shoulderL = Offset(50 - _shoulderHalf, _shoulderY + sink);
+      final shoulderR = Offset(50 + _shoulderHalf, _shoulderY + sink);
+      final head = Offset(50, 18 + sink);
+      final sy = Offset(0, sink);
+
+      // Arms: barbell across the shoulders, otherwise a goblet hold at chest.
+      final _FrontArms arms = _barbell
+          ? _FrontArms(
+              elbowL: const Offset(36, 37) + sy,
+              handL: const Offset(31, _shoulderY - 3) + sy,
+              elbowR: const Offset(64, 37) + sy,
+              handR: const Offset(69, _shoulderY - 3) + sy,
+            )
+          : _FrontArms(
+              elbowL: const Offset(35, 41) + sy,
+              handL: const Offset(46, 45) + sy,
+              elbowR: const Offset(65, 41) + sy,
+              handR: const Offset(54, 45) + sy,
+            );
+
+      return _FrontPose(
+        head: head,
+        neck: neck,
+        shoulderL: shoulderL,
+        shoulderR: shoulderR,
+        hipC: Offset(50, hipY),
+        hipL: hipL,
+        hipR: hipR,
+        kneeL: Offset(50 - kneeX, kneeY),
+        kneeR: Offset(50 + kneeX, kneeY),
+        ankleL: Offset(50 - ankleX, _groundY),
+        ankleR: Offset(50 + ankleX, _groundY),
+        elbowL: arms.elbowL,
+        handL: arms.handL,
+        elbowR: arms.elbowR,
+        handR: arms.handR,
+        focus: Offset(50, hipY), // hips drop = the tell
+      );
+    }
+
+    // Lateral raise: legs static, arms abduct from the sides to horizontal.
+    const neck = Offset(50, _shoulderY - 1);
+    const shoulderL = Offset(50 - _shoulderHalf, _shoulderY);
+    const shoulderR = Offset(50 + _shoulderHalf, _shoulderY);
+    const head = Offset(50, 18);
+    final ang = d(9, 92) * math.pi / 180;
+    final dirR = Offset(math.sin(ang), math.cos(ang));
+    final dirL = Offset(-math.sin(ang), math.cos(ang));
+    final elbowR = shoulderR + dirR * _upperArm;
+    final handR = elbowR + dirR * _foreArm;
+    final elbowL = shoulderL + dirL * _upperArm;
+    final handL = elbowL + dirL * _foreArm;
+
+    const hipY = 54.0;
+    return _FrontPose(
+      head: head,
+      neck: neck,
+      shoulderL: shoulderL,
+      shoulderR: shoulderR,
+      hipC: const Offset(50, hipY),
+      hipL: const Offset(50 - 7, hipY),
+      hipR: const Offset(50 + 7, hipY),
+      kneeL: const Offset(50 - 8, 72),
+      kneeR: const Offset(50 + 8, 72),
+      ankleL: const Offset(50 - 10, _groundY),
+      ankleR: const Offset(50 + 10, _groundY),
+      elbowL: elbowL,
+      handL: handL,
+      elbowR: elbowR,
+      handR: handR,
+      focus: handR, // the hand tracing the raise
+    );
+  }
+
+  // ── Drawing ─────────────────────────────────────────────────────────
+  void _drawGround(Canvas canvas, Size size, Offset Function(Offset) m) {
+    final y = m(const Offset(0, _groundY + 1)).dy;
+    final paint = Paint()
+      ..shader = LinearGradient(
+        colors: [
+          Colors.white.withValues(alpha: 0),
+          Colors.white.withValues(alpha: 0.14),
+          Colors.white.withValues(alpha: 0),
+        ],
+      ).createShader(Rect.fromLTWH(0, y, size.width, 1))
+      ..strokeWidth = 1.5;
+    canvas.drawLine(
+      Offset(size.width * 0.12, y),
+      Offset(size.width * 0.88, y),
+      paint,
+    );
+  }
+
+  void _drawGuide(
+    Canvas canvas,
+    Offset p1,
+    Offset p2,
+    double Function(double) s,
+  ) {
+    if ((p1 - p2).distance < 4) return;
+    final paint = Paint()
+      ..color = AppColors.accent.withValues(alpha: 0.35)
+      ..strokeWidth = s(1.4)
+      ..strokeCap = StrokeCap.round;
+    const segments = 7;
+    for (var i = 0; i < segments; i += 2) {
+      canvas.drawLine(
+        Offset.lerp(p1, p2, i / segments)!,
+        Offset.lerp(p1, p2, (i + 1) / segments)!,
+        paint,
+      );
+    }
+    final dot = Paint()..color = AppColors.accent.withValues(alpha: 0.5);
+    canvas.drawCircle(p1, s(1.8), dot);
+    canvas.drawCircle(p2, s(1.8), dot);
+  }
+
+  void _drawLimb(
+    Canvas canvas,
+    List<Offset> pts,
+    Offset Function(Offset) m,
+    double Function(double) s,
+    double width,
+    Color color,
+  ) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = width
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..style = PaintingStyle.stroke;
+    final path = Path()..moveTo(m(pts.first).dx, m(pts.first).dy);
+    for (final p in pts.skip(1)) {
+      path.lineTo(m(p).dx, m(p).dy);
+    }
+    canvas.drawPath(path, paint);
+  }
+
+  void _drawFoot(Canvas canvas, Offset ankle, double Function(double) s) {
+    final paint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.85)
+      ..strokeWidth = s(5)
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(
+      Offset(ankle.dx - s(3), ankle.dy),
+      Offset(ankle.dx + s(4), ankle.dy),
+      paint,
+    );
+  }
+
+  void _drawTorso(
+    Canvas canvas,
+    _FrontPose pose,
+    Offset Function(Offset) m,
+    double Function(double) s,
+  ) {
+    // Filled trapezoid shoulders → hips.
+    final torso = Path()
+      ..moveTo(m(pose.shoulderL).dx, m(pose.shoulderL).dy)
+      ..lineTo(m(pose.shoulderR).dx, m(pose.shoulderR).dy)
+      ..lineTo(m(pose.hipR).dx, m(pose.hipR).dy)
+      ..lineTo(m(pose.hipL).dx, m(pose.hipL).dy)
+      ..close();
+    final rect = torso.getBounds();
+    canvas.drawShadow(torso, AppColors.primary, s(3), true);
+    canvas.drawPath(
+      torso,
+      Paint()
+        ..shader = const LinearGradient(
+          colors: [AppColors.primary, AppColors.primaryBright],
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+        ).createShader(rect),
+    );
+    // Neck.
+    canvas.drawLine(
+      m(pose.neck),
+      m(pose.head),
+      Paint()
+        ..color = AppColors.primaryBright
+        ..strokeWidth = s(5)
+        ..strokeCap = StrokeCap.round,
+    );
+    // Head.
+    final c = m(pose.head);
+    canvas.drawCircle(c, s(7), Paint()..color = AppColors.primaryBright);
+    canvas.drawCircle(
+      c,
+      s(7),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = s(1.2)
+        ..color = Colors.white.withValues(alpha: 0.55),
+    );
+  }
+
+  void _drawHands(
+    Canvas canvas,
+    _FrontPose pose,
+    Offset Function(Offset) m,
+    double Function(double) s,
+  ) {
+    final paint = Paint()..color = AppColors.accent;
+    canvas.drawCircle(m(pose.handL), s(2.4), paint);
+    canvas.drawCircle(m(pose.handR), s(2.4), paint);
+  }
+
+  void _drawImplement(
+    Canvas canvas,
+    _FrontPose pose,
+    Offset Function(Offset) m,
+    double Function(double) s,
+  ) {
+    if (pattern == MovementPattern.squat) {
+      if (_barbell) {
+        // Bar across the shoulders with plates at both ends.
+        final bar = Paint()
+          ..color = const Color(0xFFB8BAC6)
+          ..strokeWidth = s(2.4)
+          ..strokeCap = StrokeCap.round;
+        final y = m(pose.handL).dy;
+        canvas.drawLine(
+          Offset(m(const Offset(26, 0)).dx, y),
+          Offset(m(const Offset(74, 0)).dx, y),
+          bar,
+        );
+        final plate = Paint()..color = AppColors.primaryBright;
+        for (final vx in [26.0, 74.0]) {
+          canvas.drawRRect(
+            RRect.fromRectAndRadius(
+              Rect.fromCenter(
+                center: Offset(m(Offset(vx, 0)).dx, y),
+                width: s(4),
+                height: s(12),
+              ),
+              Radius.circular(s(2)),
+            ),
+            plate,
+          );
+        }
+      } else if (equipment == Equipment.dumbbell ||
+          equipment == Equipment.kettlebell) {
+        // Goblet: one vertical dumbbell held between the hands.
+        final center = Offset(
+          (m(pose.handL).dx + m(pose.handR).dx) / 2,
+          (m(pose.handL).dy + m(pose.handR).dy) / 2 + s(1),
+        );
+        _verticalDumbbell(canvas, center, s);
+      }
+      return;
+    }
+
+    // Lateral raise: an implement in each hand.
+    if (equipment == Equipment.dumbbell || equipment == Equipment.kettlebell) {
+      _horizontalDumbbell(canvas, m(pose.handL), s);
+      _horizontalDumbbell(canvas, m(pose.handR), s);
+    } else if (equipment == Equipment.cable) {
+      final paint = Paint()
+        ..color = Colors.white.withValues(alpha: 0.4)
+        ..strokeWidth = s(1.4);
+      for (final h in [m(pose.handL), m(pose.handR)]) {
+        canvas.drawLine(
+          h,
+          Offset(h.dx, m(const Offset(0, _groundY)).dy),
+          paint,
+        );
+      }
+    }
+  }
+
+  void _verticalDumbbell(Canvas canvas, Offset c, double Function(double) s) {
+    final bar = Paint()
+      ..color = const Color(0xFFB8BAC6)
+      ..strokeWidth = s(2)
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(
+      Offset(c.dx, c.dy - s(5)),
+      Offset(c.dx, c.dy + s(5)),
+      bar,
+    );
+    final bell = Paint()..color = AppColors.primaryBright;
+    for (final side in [-1.0, 1.0]) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: Offset(c.dx, c.dy + side * s(5)),
+            width: s(7),
+            height: s(4),
+          ),
+          Radius.circular(s(1.5)),
+        ),
+        bell,
+      );
+    }
+  }
+
+  void _horizontalDumbbell(Canvas canvas, Offset c, double Function(double) s) {
+    final bar = Paint()
+      ..color = const Color(0xFFB8BAC6)
+      ..strokeWidth = s(2)
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(
+      Offset(c.dx - s(5), c.dy),
+      Offset(c.dx + s(5), c.dy),
+      bar,
+    );
+    final bell = Paint()..color = AppColors.primaryBright;
+    for (final side in [-1.0, 1.0]) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: Offset(c.dx + side * s(5), c.dy),
+            width: s(4),
+            height: s(7),
+          ),
+          Radius.circular(s(1.5)),
+        ),
+        bell,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_FrontFigurePainter old) =>
+      old.t != t || old.pattern != pattern || old.equipment != equipment;
+}
+
+/// Resolved front-view joints (symmetric left/right).
+class _FrontPose {
+  const _FrontPose({
+    required this.head,
+    required this.neck,
+    required this.shoulderL,
+    required this.shoulderR,
+    required this.hipC,
+    required this.hipL,
+    required this.hipR,
+    required this.kneeL,
+    required this.kneeR,
+    required this.ankleL,
+    required this.ankleR,
+    required this.elbowL,
+    required this.handL,
+    required this.elbowR,
+    required this.handR,
+    required this.focus,
+  });
+
+  final Offset head, neck, shoulderL, shoulderR, hipC, hipL, hipR;
+  final Offset kneeL, kneeR, ankleL, ankleR, elbowL, handL, elbowR, handR;
+
+  /// The point whose start→end travel the motion guide traces.
+  final Offset focus;
+}
+
+/// Compact carrier for the four arm points of a front-view pose.
+class _FrontArms {
+  const _FrontArms({
+    required this.elbowL,
+    required this.handL,
+    required this.elbowR,
+    required this.handR,
+  });
+
+  final Offset elbowL, handL, elbowR, handR;
 }
