@@ -4,9 +4,16 @@
     "name": "Жим штанги лёжа",
     "altName": "Bench Press",
     "description": "Базовое горизонтальное жимовое движение для развития силы и массы верхней части тела.",
-    "primaryMuscles": ["chest"],
-    "secondaryMuscles": ["triceps", "shoulders"],
-    "stabilizers": ["abdominals"],
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "shoulders"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
     "category": "strength",
     "level": "intermediate",
     "equipment": "barbell",
@@ -28,8 +35,15 @@
       "Разведение локтей на 90° — травмоопасно для плеч.",
       "Отбив штанги от груди."
     ],
-    "contraindications": ["Острые боли в плече", "Травмы ротаторной манжеты"],
-    "variations": ["Жим гантелей лёжа", "Жим в наклоне", "Жим узким хватом"],
+    "contraindications": [
+      "Острые боли в плече",
+      "Травмы ротаторной манжеты"
+    ],
+    "variations": [
+      "Жим гантелей лёжа",
+      "Жим в наклоне",
+      "Жим узким хватом"
+    ],
     "tempo": "2-1-1",
     "breathing": "Вдох на опускании, выдох на подъёме."
   },
@@ -38,9 +52,17 @@
     "name": "Приседания со штангой",
     "altName": "Back Squat",
     "description": "Король упражнений для ног: развивает силу квадрицепсов, ягодиц и всего кора.",
-    "primaryMuscles": ["quadriceps", "glutes"],
-    "secondaryMuscles": ["hamstrings", "lower back"],
-    "stabilizers": ["abdominals"],
+    "primaryMuscles": [
+      "quadriceps",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "hamstrings",
+      "lower back"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
     "category": "strength",
     "level": "intermediate",
     "equipment": "barbell",
@@ -62,8 +84,15 @@
       "Сведение коленей внутрь.",
       "Отрыв пяток от пола."
     ],
-    "contraindications": ["Грыжи поясничного отдела", "Острые травмы колена"],
-    "variations": ["Фронтальные приседания", "Приседания в Смите", "Гоблет-приседания"],
+    "contraindications": [
+      "Грыжи поясничного отдела",
+      "Острые травмы колена"
+    ],
+    "variations": [
+      "Фронтальные приседания",
+      "Приседания в Смите",
+      "Гоблет-приседания"
+    ],
     "tempo": "3-1-1",
     "breathing": "Вдох перед опусканием, выдох после прохождения нижней точки."
   },
@@ -72,9 +101,20 @@
     "name": "Становая тяга",
     "altName": "Deadlift",
     "description": "Фундаментальное движение тазового шарнира — максимальная нагрузка на заднюю цепь.",
-    "primaryMuscles": ["glutes", "hamstrings", "lower back"],
-    "secondaryMuscles": ["quadriceps", "traps", "lats"],
-    "stabilizers": ["abdominals", "forearms"],
+    "primaryMuscles": [
+      "glutes",
+      "hamstrings",
+      "lower back"
+    ],
+    "secondaryMuscles": [
+      "quadriceps",
+      "traps",
+      "lats"
+    ],
+    "stabilizers": [
+      "abdominals",
+      "forearms"
+    ],
     "category": "powerlifting",
     "level": "advanced",
     "equipment": "barbell",
@@ -96,8 +136,15 @@
       "Ранний подъём таза (превращение в наклон).",
       "Отрыв штанги рывком."
     ],
-    "contraindications": ["Грыжи и протрузии", "Острые боли в спине"],
-    "variations": ["Румынская тяга", "Сумо", "Тяга с плинтов"],
+    "contraindications": [
+      "Грыжи и протрузии",
+      "Острые боли в спине"
+    ],
+    "variations": [
+      "Румынская тяга",
+      "Сумо",
+      "Тяга с плинтов"
+    ],
     "tempo": "1-0-2",
     "breathing": "Вдох и задержка перед тягой, выдох вверху."
   },
@@ -106,9 +153,16 @@
     "name": "Жим штанги стоя",
     "altName": "Overhead / Military Press",
     "description": "Вертикальный жим для плеч и силы всего плечевого пояса.",
-    "primaryMuscles": ["shoulders"],
-    "secondaryMuscles": ["triceps", "traps"],
-    "stabilizers": ["abdominals"],
+    "primaryMuscles": [
+      "shoulders"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "traps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
     "category": "strength",
     "level": "intermediate",
     "equipment": "barbell",
@@ -129,8 +183,15 @@
       "Чрезмерный прогиб в пояснице.",
       "Выжимание за счёт ног (это уже швунг)."
     ],
-    "contraindications": ["Нестабильность плеча", "Боли в пояснице"],
-    "variations": ["Жим гантелей сидя", "Арнольд-жим", "Швунг жимовой"],
+    "contraindications": [
+      "Нестабильность плеча",
+      "Боли в пояснице"
+    ],
+    "variations": [
+      "Жим гантелей сидя",
+      "Арнольд-жим",
+      "Швунг жимовой"
+    ],
     "tempo": "2-0-1",
     "breathing": "Выдох на подъёме, вдох на опускании."
   },
@@ -139,9 +200,17 @@
     "name": "Подтягивания",
     "altName": "Pull-up",
     "description": "Базовое вертикальное тяговое движение для широчайших и бицепсов.",
-    "primaryMuscles": ["lats"],
-    "secondaryMuscles": ["biceps", "traps"],
-    "stabilizers": ["abdominals", "forearms"],
+    "primaryMuscles": [
+      "lats"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "traps"
+    ],
+    "stabilizers": [
+      "abdominals",
+      "forearms"
+    ],
     "category": "strength",
     "level": "intermediate",
     "equipment": "body only",
@@ -158,9 +227,19 @@
       "Начинайте движение со сведения лопаток.",
       "Избегайте раскачки и рывков."
     ],
-    "commonMistakes": ["Неполная амплитуда", "Раскачивание корпусом"],
-    "contraindications": ["Острые боли в локте", "Травмы плеча"],
-    "variations": ["Подтягивания обратным хватом", "В гравитроне", "С резиной"],
+    "commonMistakes": [
+      "Неполная амплитуда",
+      "Раскачивание корпусом"
+    ],
+    "contraindications": [
+      "Острые боли в локте",
+      "Травмы плеча"
+    ],
+    "variations": [
+      "Подтягивания обратным хватом",
+      "В гравитроне",
+      "С резиной"
+    ],
     "tempo": "2-0-2",
     "breathing": "Выдох на подъёме, вдох на опускании."
   },
@@ -169,9 +248,18 @@
     "name": "Тяга штанги в наклоне",
     "altName": "Barbell Row",
     "description": "Горизонтальная тяга для толщины спины и мышц середины спины.",
-    "primaryMuscles": ["lats", "middle back"],
-    "secondaryMuscles": ["biceps", "rear delts"],
-    "stabilizers": ["lower back", "abdominals"],
+    "primaryMuscles": [
+      "lats",
+      "middle back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "rear delts"
+    ],
+    "stabilizers": [
+      "lower back",
+      "abdominals"
+    ],
     "category": "strength",
     "level": "intermediate",
     "equipment": "barbell",
@@ -184,10 +272,22 @@
       "Подтяните штангу к нижней части живота, сводя лопатки.",
       "Контролируемо опустите штангу."
     ],
-    "tips": ["Ведите локти вдоль корпуса", "Не поднимайте корпус рывком"],
-    "commonMistakes": ["Округление спины", "Читинг корпусом"],
-    "contraindications": ["Боли в пояснице"],
-    "variations": ["Тяга Т-грифа", "Тяга гантели в наклоне", "Тяга Пендли"],
+    "tips": [
+      "Ведите локти вдоль корпуса",
+      "Не поднимайте корпус рывком"
+    ],
+    "commonMistakes": [
+      "Округление спины",
+      "Читинг корпусом"
+    ],
+    "contraindications": [
+      "Боли в пояснице"
+    ],
+    "variations": [
+      "Тяга Т-грифа",
+      "Тяга гантели в наклоне",
+      "Тяга Пендли"
+    ],
     "tempo": "2-1-2",
     "breathing": "Выдох на подтягивании, вдох на опускании."
   },
@@ -196,9 +296,16 @@
     "name": "Жим гантелей в наклоне",
     "altName": "Incline Dumbbell Press",
     "description": "Акцент на верхнюю часть грудных мышц.",
-    "primaryMuscles": ["chest"],
-    "secondaryMuscles": ["shoulders", "triceps"],
-    "stabilizers": ["abdominals"],
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "shoulders",
+      "triceps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
     "category": "hypertrophy",
     "level": "beginner",
     "equipment": "dumbbell",
@@ -211,10 +318,21 @@
       "Опустите гантели, чувствуя растяжение груди.",
       "Выжмите гантели вверх, слегка сводя их."
     ],
-    "tips": ["Не сталкивайте гантели вверху", "Контролируйте негатив"],
-    "commonMistakes": ["Слишком крутой угол наклона", "Разведение локтей"],
-    "contraindications": ["Боли в плече"],
-    "variations": ["Жим штанги в наклоне", "Жим в тренажёре"],
+    "tips": [
+      "Не сталкивайте гантели вверху",
+      "Контролируйте негатив"
+    ],
+    "commonMistakes": [
+      "Слишком крутой угол наклона",
+      "Разведение локтей"
+    ],
+    "contraindications": [
+      "Боли в плече"
+    ],
+    "variations": [
+      "Жим штанги в наклоне",
+      "Жим в тренажёре"
+    ],
     "tempo": "2-1-1",
     "breathing": "Вдох вниз, выдох вверх."
   },
@@ -223,9 +341,17 @@
     "name": "Румынская тяга",
     "altName": "Romanian Deadlift",
     "description": "Изолированный тазовый шарнир для бицепса бедра и ягодиц.",
-    "primaryMuscles": ["hamstrings", "glutes"],
-    "secondaryMuscles": ["lower back"],
-    "stabilizers": ["abdominals", "forearms"],
+    "primaryMuscles": [
+      "hamstrings",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "lower back"
+    ],
+    "stabilizers": [
+      "abdominals",
+      "forearms"
+    ],
     "category": "hypertrophy",
     "level": "intermediate",
     "equipment": "barbell",
@@ -238,10 +364,21 @@
       "Опуститесь до растяжения бицепса бедра.",
       "Выпрямитесь, сводя ягодицы."
     ],
-    "tips": ["Держите штангу близко к ногам", "Сохраняйте нейтральную спину"],
-    "commonMistakes": ["Сгибание в пояснице", "Приседание вместо наклона"],
-    "contraindications": ["Грыжи поясницы"],
-    "variations": ["РТ с гантелями", "На одной ноге"],
+    "tips": [
+      "Держите штангу близко к ногам",
+      "Сохраняйте нейтральную спину"
+    ],
+    "commonMistakes": [
+      "Сгибание в пояснице",
+      "Приседание вместо наклона"
+    ],
+    "contraindications": [
+      "Грыжи поясницы"
+    ],
+    "variations": [
+      "РТ с гантелями",
+      "На одной ноге"
+    ],
     "tempo": "3-1-1",
     "breathing": "Вдох вниз, выдох вверх."
   },
@@ -250,8 +387,12 @@
     "name": "Махи гантелями в стороны",
     "altName": "Lateral Raise",
     "description": "Изоляция средних дельт для ширины плеч.",
-    "primaryMuscles": ["side delts"],
-    "secondaryMuscles": ["traps"],
+    "primaryMuscles": [
+      "side delts"
+    ],
+    "secondaryMuscles": [
+      "traps"
+    ],
     "stabilizers": [],
     "category": "hypertrophy",
     "level": "beginner",
@@ -265,10 +406,21 @@
       "Локти чуть впереди кистей, мизинцы вверх.",
       "Медленно опустите."
     ],
-    "tips": ["Ведите движение локтями", "Без рывков и раскачки"],
-    "commonMistakes": ["Заброс веса корпусом", "Подъём выше плеч"],
-    "contraindications": ["Импинджмент плеча"],
-    "variations": ["Махи на блоке", "В наклоне на задние дельты"],
+    "tips": [
+      "Ведите движение локтями",
+      "Без рывков и раскачки"
+    ],
+    "commonMistakes": [
+      "Заброс веса корпусом",
+      "Подъём выше плеч"
+    ],
+    "contraindications": [
+      "Импинджмент плеча"
+    ],
+    "variations": [
+      "Махи на блоке",
+      "В наклоне на задние дельты"
+    ],
     "tempo": "2-1-2",
     "breathing": "Выдох на подъёме."
   },
@@ -277,8 +429,12 @@
     "name": "Подъём штанги на бицепс",
     "altName": "Barbell Curl",
     "description": "Базовое изолирующее движение для бицепсов.",
-    "primaryMuscles": ["biceps"],
-    "secondaryMuscles": ["forearms"],
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearms"
+    ],
     "stabilizers": [],
     "category": "hypertrophy",
     "level": "beginner",
@@ -292,10 +448,23 @@
       "Согните руки, поднимая штангу к плечам.",
       "Медленно опустите в исходное положение."
     ],
-    "tips": ["Не раскачивайте корпус", "Держите локти на месте"],
-    "commonMistakes": ["Читинг", "Неполная амплитуда"],
-    "contraindications": ["Боли в локте", "Тендинит бицепса"],
-    "variations": ["Подъём EZ-грифа", "Молотковые сгибания", "На скамье Скотта"],
+    "tips": [
+      "Не раскачивайте корпус",
+      "Держите локти на месте"
+    ],
+    "commonMistakes": [
+      "Читинг",
+      "Неполная амплитуда"
+    ],
+    "contraindications": [
+      "Боли в локте",
+      "Тендинит бицепса"
+    ],
+    "variations": [
+      "Подъём EZ-грифа",
+      "Молотковые сгибания",
+      "На скамье Скотта"
+    ],
     "tempo": "2-1-2",
     "breathing": "Выдох на подъёме."
   },
@@ -304,9 +473,13 @@
     "name": "Разгибания на блоке",
     "altName": "Triceps Pushdown",
     "description": "Изоляция трицепса на верхнем блоке.",
-    "primaryMuscles": ["triceps"],
+    "primaryMuscles": [
+      "triceps"
+    ],
     "secondaryMuscles": [],
-    "stabilizers": ["abdominals"],
+    "stabilizers": [
+      "abdominals"
+    ],
     "category": "hypertrophy",
     "level": "beginner",
     "equipment": "cable",
@@ -319,10 +492,22 @@
       "Задержитесь в нижней точке.",
       "Контролируемо вернитесь."
     ],
-    "tips": ["Фиксируйте локти на месте", "Полностью выпрямляйте руки"],
-    "commonMistakes": ["Движение локтями", "Наклон корпуса для помощи"],
-    "contraindications": ["Боли в локте"],
-    "variations": ["С канатом", "Обратным хватом", "Французский жим"],
+    "tips": [
+      "Фиксируйте локти на месте",
+      "Полностью выпрямляйте руки"
+    ],
+    "commonMistakes": [
+      "Движение локтями",
+      "Наклон корпуса для помощи"
+    ],
+    "contraindications": [
+      "Боли в локте"
+    ],
+    "variations": [
+      "С канатом",
+      "Обратным хватом",
+      "Французский жим"
+    ],
     "tempo": "2-1-2",
     "breathing": "Выдох на разгибании."
   },
@@ -331,8 +516,13 @@
     "name": "Жим ногами",
     "altName": "Leg Press",
     "description": "Мощное движение для ног в безопасной траектории тренажёра.",
-    "primaryMuscles": ["quadriceps", "glutes"],
-    "secondaryMuscles": ["hamstrings"],
+    "primaryMuscles": [
+      "quadriceps",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "hamstrings"
+    ],
     "stabilizers": [],
     "category": "hypertrophy",
     "level": "beginner",
@@ -346,10 +536,21 @@
       "Опустите платформу, сгибая колени до ~90°.",
       "Выжмите платформу, не разгибая колени в замок."
     ],
-    "tips": ["Не отрывайте таз", "Колени по линии носков"],
-    "commonMistakes": ["Отрыв поясницы от спинки", "Полный замок коленей"],
-    "contraindications": ["Травмы колена"],
-    "variations": ["Узкая/широкая постановка", "Одной ногой"],
+    "tips": [
+      "Не отрывайте таз",
+      "Колени по линии носков"
+    ],
+    "commonMistakes": [
+      "Отрыв поясницы от спинки",
+      "Полный замок коленей"
+    ],
+    "contraindications": [
+      "Травмы колена"
+    ],
+    "variations": [
+      "Узкая/широкая постановка",
+      "Одной ногой"
+    ],
     "tempo": "2-1-1",
     "breathing": "Вдох вниз, выдох вверх."
   },
@@ -358,9 +559,16 @@
     "name": "Тяга верхнего блока",
     "altName": "Lat Pulldown",
     "description": "Вертикальная тяга для широчайших — альтернатива подтягиваниям.",
-    "primaryMuscles": ["lats"],
-    "secondaryMuscles": ["biceps", "rear delts"],
-    "stabilizers": ["abdominals"],
+    "primaryMuscles": [
+      "lats"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "rear delts"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
     "category": "hypertrophy",
     "level": "beginner",
     "equipment": "cable",
@@ -373,10 +581,22 @@
       "Сведите лопатки в нижней точке.",
       "Контролируемо вернитесь вверх."
     ],
-    "tips": ["Не отклоняйтесь сильно назад", "Ведите локти вниз-назад"],
-    "commonMistakes": ["Читинг корпусом", "Тяга за голову с круглой спиной"],
-    "contraindications": ["Боли в плече"],
-    "variations": ["Обратным хватом", "Узкой рукоятью", "Одной рукой"],
+    "tips": [
+      "Не отклоняйтесь сильно назад",
+      "Ведите локти вниз-назад"
+    ],
+    "commonMistakes": [
+      "Читинг корпусом",
+      "Тяга за голову с круглой спиной"
+    ],
+    "contraindications": [
+      "Боли в плече"
+    ],
+    "variations": [
+      "Обратным хватом",
+      "Узкой рукоятью",
+      "Одной рукой"
+    ],
     "tempo": "2-1-2",
     "breathing": "Выдох на тяге."
   },
@@ -385,9 +605,17 @@
     "name": "Горизонтальная тяга блока",
     "altName": "Seated Cable Row",
     "description": "Тяга для середины спины и толщины.",
-    "primaryMuscles": ["middle back", "lats"],
-    "secondaryMuscles": ["biceps", "rear delts"],
-    "stabilizers": ["lower back"],
+    "primaryMuscles": [
+      "middle back",
+      "lats"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "rear delts"
+    ],
+    "stabilizers": [
+      "lower back"
+    ],
     "category": "hypertrophy",
     "level": "beginner",
     "equipment": "cable",
@@ -400,10 +628,21 @@
       "Тяните рукоять к животу, сводя лопатки.",
       "Контролируемо вернитесь."
     ],
-    "tips": ["Не круглите спину при возврате", "Работайте лопатками"],
-    "commonMistakes": ["Раскачка корпусом", "Тяга только руками"],
-    "contraindications": ["Боли в пояснице"],
-    "variations": ["Узкой/широкой рукоятью", "Одной рукой"],
+    "tips": [
+      "Не круглите спину при возврате",
+      "Работайте лопатками"
+    ],
+    "commonMistakes": [
+      "Раскачка корпусом",
+      "Тяга только руками"
+    ],
+    "contraindications": [
+      "Боли в пояснице"
+    ],
+    "variations": [
+      "Узкой/широкой рукоятью",
+      "Одной рукой"
+    ],
     "tempo": "2-1-2",
     "breathing": "Выдох на тяге."
   },
@@ -412,8 +651,13 @@
     "name": "Подъём ног в висе",
     "altName": "Hanging Leg Raise",
     "description": "Мощное упражнение для нижнего пресса.",
-    "primaryMuscles": ["abdominals"],
-    "secondaryMuscles": ["obliques", "forearms"],
+    "primaryMuscles": [
+      "abdominals"
+    ],
+    "secondaryMuscles": [
+      "obliques",
+      "forearms"
+    ],
     "stabilizers": [],
     "category": "hypertrophy",
     "level": "advanced",
@@ -427,10 +671,22 @@
       "Задержитесь в верхней точке.",
       "Медленно опустите без раскачки."
     ],
-    "tips": ["Скручивайте таз, а не просто поднимайте ноги", "Без инерции"],
-    "commonMistakes": ["Раскачивание", "Работа только сгибателями бедра"],
-    "contraindications": ["Боли в пояснице", "Проблемы с хватом"],
-    "variations": ["Подъём коленей", "В упоре на локтях"],
+    "tips": [
+      "Скручивайте таз, а не просто поднимайте ноги",
+      "Без инерции"
+    ],
+    "commonMistakes": [
+      "Раскачивание",
+      "Работа только сгибателями бедра"
+    ],
+    "contraindications": [
+      "Боли в пояснице",
+      "Проблемы с хватом"
+    ],
+    "variations": [
+      "Подъём коленей",
+      "В упоре на локтях"
+    ],
     "tempo": "2-1-2",
     "breathing": "Выдох на подъёме."
   },
@@ -439,7 +695,9 @@
     "name": "Подъём на носки стоя",
     "altName": "Standing Calf Raise",
     "description": "Изоляция икроножных мышц.",
-    "primaryMuscles": ["calves"],
+    "primaryMuscles": [
+      "calves"
+    ],
     "secondaryMuscles": [],
     "stabilizers": [],
     "category": "hypertrophy",
@@ -454,10 +712,22 @@
       "Поднимитесь максимально высоко на носки.",
       "Задержитесь и медленно опуститесь."
     ],
-    "tips": ["Полная амплитуда", "Пауза в верхней точке"],
-    "commonMistakes": ["Короткая амплитуда", "Пружинящие рывки"],
-    "contraindications": ["Травмы ахилла"],
-    "variations": ["Сидя", "На одной ноге", "В Смите"],
+    "tips": [
+      "Полная амплитуда",
+      "Пауза в верхней точке"
+    ],
+    "commonMistakes": [
+      "Короткая амплитуда",
+      "Пружинящие рывки"
+    ],
+    "contraindications": [
+      "Травмы ахилла"
+    ],
+    "variations": [
+      "Сидя",
+      "На одной ноге",
+      "В Смите"
+    ],
     "tempo": "2-1-2",
     "breathing": "Выдох на подъёме."
   },
@@ -466,9 +736,16 @@
     "name": "Гоблет-приседания",
     "altName": "Goblet Squat",
     "description": "Доступное приседание с гантелью у груди для новичков.",
-    "primaryMuscles": ["quadriceps", "glutes"],
-    "secondaryMuscles": ["hamstrings"],
-    "stabilizers": ["abdominals"],
+    "primaryMuscles": [
+      "quadriceps",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "hamstrings"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
     "category": "strength",
     "level": "beginner",
     "equipment": "dumbbell",
@@ -481,10 +758,21 @@
       "Присядьте, держа спину прямой.",
       "Встаньте, толкаясь пятками."
     ],
-    "tips": ["Держите локти внутри коленей внизу", "Грудь раскрыта"],
-    "commonMistakes": ["Наклон корпуса вперёд", "Сведение коленей"],
-    "contraindications": ["Острые травмы колена"],
-    "variations": ["С гирей", "Сумо-присед"],
+    "tips": [
+      "Держите локти внутри коленей внизу",
+      "Грудь раскрыта"
+    ],
+    "commonMistakes": [
+      "Наклон корпуса вперёд",
+      "Сведение коленей"
+    ],
+    "contraindications": [
+      "Острые травмы колена"
+    ],
+    "variations": [
+      "С гирей",
+      "Сумо-присед"
+    ],
     "tempo": "2-1-1",
     "breathing": "Вдох вниз, выдох вверх."
   },
@@ -493,8 +781,13 @@
     "name": "Тяга к лицу",
     "altName": "Face Pull",
     "description": "Здоровье плеч и развитие задних дельт и вращателей.",
-    "primaryMuscles": ["rear delts"],
-    "secondaryMuscles": ["traps", "middle back"],
+    "primaryMuscles": [
+      "rear delts"
+    ],
+    "secondaryMuscles": [
+      "traps",
+      "middle back"
+    ],
     "stabilizers": [],
     "category": "hypertrophy",
     "level": "beginner",
@@ -508,10 +801,19 @@
       "Сведите лопатки, локти высоко.",
       "Контролируемо вернитесь."
     ],
-    "tips": ["Внешнее вращение плеч вверху", "Лёгкий вес, чистая техника"],
-    "commonMistakes": ["Тяга слишком большим весом", "Опущенные локти"],
+    "tips": [
+      "Внешнее вращение плеч вверху",
+      "Лёгкий вес, чистая техника"
+    ],
+    "commonMistakes": [
+      "Тяга слишком большим весом",
+      "Опущенные локти"
+    ],
     "contraindications": [],
-    "variations": ["С резиной", "Одной рукой"],
+    "variations": [
+      "С резиной",
+      "Одной рукой"
+    ],
     "tempo": "2-1-2",
     "breathing": "Выдох на тяге."
   },
@@ -520,9 +822,16 @@
     "name": "Планка",
     "altName": "Plank",
     "description": "Изометрическая стабилизация кора.",
-    "primaryMuscles": ["abdominals"],
-    "secondaryMuscles": ["obliques", "lower back"],
-    "stabilizers": ["shoulders"],
+    "primaryMuscles": [
+      "abdominals"
+    ],
+    "secondaryMuscles": [
+      "obliques",
+      "lower back"
+    ],
+    "stabilizers": [
+      "shoulders"
+    ],
     "category": "strength",
     "level": "beginner",
     "equipment": "body only",
@@ -535,10 +844,21 @@
       "Удерживайте нейтральное положение таза.",
       "Держите заданное время."
     ],
-    "tips": ["Не прогибайте поясницу", "Дышите ровно"],
-    "commonMistakes": ["Провисание таза", "Поднятые ягодицы"],
-    "contraindications": ["Боли в пояснице при провисании"],
-    "variations": ["Боковая планка", "С поднятой ногой"],
+    "tips": [
+      "Не прогибайте поясницу",
+      "Дышите ровно"
+    ],
+    "commonMistakes": [
+      "Провисание таза",
+      "Поднятые ягодицы"
+    ],
+    "contraindications": [
+      "Боли в пояснице при провисании"
+    ],
+    "variations": [
+      "Боковая планка",
+      "С поднятой ногой"
+    ],
     "tempo": "hold",
     "breathing": "Ровное непрерывное дыхание."
   },
@@ -547,9 +867,16 @@
     "name": "Ягодичный мост со штангой",
     "altName": "Hip Thrust",
     "description": "Лучшее изолирующее движение для ягодичных мышц.",
-    "primaryMuscles": ["glutes"],
-    "secondaryMuscles": ["hamstrings", "quadriceps"],
-    "stabilizers": ["abdominals"],
+    "primaryMuscles": [
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "hamstrings",
+      "quadriceps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
     "category": "hypertrophy",
     "level": "intermediate",
     "equipment": "barbell",
@@ -562,11 +889,2215 @@
       "Поднимите таз, сводя ягодицы, до прямой линии тела.",
       "Опустите таз под контролем."
     ],
-    "tips": ["Подкрутите таз вверху", "Взгляд вперёд, подбородок к груди"],
-    "commonMistakes": ["Переразгибание поясницы", "Короткая амплитуда"],
-    "contraindications": ["Боли в пояснице"],
-    "variations": ["На одной ноге", "С резиной", "Ягодичный мост с пола"],
+    "tips": [
+      "Подкрутите таз вверху",
+      "Взгляд вперёд, подбородок к груди"
+    ],
+    "commonMistakes": [
+      "Переразгибание поясницы",
+      "Короткая амплитуда"
+    ],
+    "contraindications": [
+      "Боли в пояснице"
+    ],
+    "variations": [
+      "На одной ноге",
+      "С резиной",
+      "Ягодичный мост с пола"
+    ],
     "tempo": "2-1-1",
     "breathing": "Выдох на подъёме таза."
+  },
+  {
+    "id": "dumbbell-bench-press",
+    "name": "Жим гантелей лёжа",
+    "altName": "Dumbbell Bench Press",
+    "description": "Жимовое движение с гантелями — больше амплитуда и работа стабилизаторов, чем со штангой.",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "shoulders"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От уровня груди до полного выпрямления рук.",
+    "instructions": [
+      "Лягте на скамью, гантели у нижней части груди, локти под ~45°.",
+      "Сведите лопатки и упритесь стопами в пол.",
+      "Выжмите гантели вверх, сближая их над грудью.",
+      "Подконтрольно опустите до лёгкого растяжения груди."
+    ],
+    "tips": [
+      "Не стучите гантелями вверху",
+      "Держите запястья ровными"
+    ],
+    "commonMistakes": [
+      "Разведённые локти",
+      "Отрыв таза от скамьи"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "Жим на наклонной",
+      "Жим нейтральным хватом"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на жиме."
+  },
+  {
+    "id": "incline-barbell-press",
+    "name": "Жим штанги на наклонной",
+    "altName": "Incline Barbell Press",
+    "description": "Жим под углом 30–45° смещает нагрузку на верх грудных и передние дельты.",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "shoulders",
+      "triceps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "barbell",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От верхней части груди до выпрямления рук.",
+    "instructions": [
+      "Установите скамью под углом 30–45°.",
+      "Снимите штангу и держите над верхом груди.",
+      "Опустите гриф к ключицам, локти под ~45°.",
+      "Выжмите штангу вверх по слегка диагональной траектории."
+    ],
+    "tips": [
+      "Не задирайте угол выше 45°",
+      "Лопатки сведены"
+    ],
+    "commonMistakes": [
+      "Слишком высокий угол",
+      "Отбив от груди"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "Жим гантелей на наклонной",
+      "Жим в Смите"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на жиме."
+  },
+  {
+    "id": "dumbbell-fly",
+    "name": "Разведение гантелей лёжа",
+    "altName": "Dumbbell Fly",
+    "description": "Изолирующее движение на грудь через приведение рук по дуге.",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "shoulders"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "push",
+    "rangeOfMotion": "От разведённых рук до сведения над грудью.",
+    "instructions": [
+      "Лягте на скамью, гантели над грудью, локти слегка согнуты.",
+      "Разведите руки в стороны по дуге до растяжения груди.",
+      "Сведите гантели над грудью тем же движением."
+    ],
+    "tips": [
+      "Фиксируйте лёгкий сгиб локтя",
+      "Не превращайте в жим"
+    ],
+    "commonMistakes": [
+      "Прямые руки",
+      "Чрезмерная глубина с болью в плече"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "Сведение в кроссовере",
+      "Наклонные разведения"
+    ],
+    "tempo": "3-1-2",
+    "breathing": "Выдох на сведении."
+  },
+  {
+    "id": "cable-crossover",
+    "name": "Сведение рук в кроссовере",
+    "altName": "Cable Crossover",
+    "description": "Изоляция груди с постоянным натяжением по всей амплитуде.",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "shoulders"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "cable",
+    "mechanic": "isolation",
+    "force": "push",
+    "rangeOfMotion": "От разведённых рук до сведения перед корпусом.",
+    "instructions": [
+      "Возьмите рукояти верхних блоков, шаг вперёд, лёгкий наклон.",
+      "Локти чуть согнуты, руки разведены.",
+      "Сведите рукояти перед собой, напрягая грудь.",
+      "Подконтрольно вернитесь."
+    ],
+    "tips": [
+      "Держите постоянное натяжение",
+      "Не роняйте вес"
+    ],
+    "commonMistakes": [
+      "Работа спиной",
+      "Слишком большой вес"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "Сведение снизу вверх",
+      "Разведение гантелей"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на сведении."
+  },
+  {
+    "id": "push-up",
+    "name": "Отжимания от пола",
+    "altName": "Push-up",
+    "description": "Базовое жимовое движение с собственным весом.",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "shoulders"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "strength",
+    "level": "beginner",
+    "equipment": "body only",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От касания грудью пола до выпрямления рук.",
+    "instructions": [
+      "Упор лёжа, ладони чуть шире плеч, тело в линию.",
+      "Опуститесь, локти под ~45°.",
+      "Выжмите себя вверх до выпрямления рук."
+    ],
+    "tips": [
+      "Держите корпус жёстким",
+      "Не проваливайте поясницу"
+    ],
+    "commonMistakes": [
+      "Провисание таза",
+      "Локти в стороны"
+    ],
+    "contraindications": [],
+    "variations": [
+      "С колен",
+      "С возвышения",
+      "Со жгутом"
+    ],
+    "tempo": "2-1-1",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "chest-dip",
+    "name": "Отжимания на брусьях",
+    "altName": "Chest Dip",
+    "description": "Отжимания на брусьях с наклоном вперёд — акцент на низ груди.",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "shoulders"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "strength",
+    "level": "intermediate",
+    "equipment": "body only",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От сгиба рук с наклоном до полного выпрямления.",
+    "instructions": [
+      "Займите упор на брусьях, наклоните корпус вперёд.",
+      "Опуститесь, разводя локти в стороны, до растяжения груди.",
+      "Выжмите себя вверх, не выпрямляясь полностью в замок."
+    ],
+    "tips": [
+      "Контролируйте глубину",
+      "Наклон корпуса вперёд"
+    ],
+    "commonMistakes": [
+      "Слишком глубокий провал",
+      "Рывки"
+    ],
+    "contraindications": [
+      "Боль в плече",
+      "Проблемы с грудино-ключичным суставом"
+    ],
+    "variations": [
+      "В гравитроне",
+      "С весом"
+    ],
+    "tempo": "3-0-1",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "machine-chest-press",
+    "name": "Жим в тренажёре",
+    "altName": "Machine Chest Press",
+    "description": "Стабильный жим в тренажёре — удобно для новичков и добивочных подходов.",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "shoulders"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "machine",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От уровня груди до выпрямления рук.",
+    "instructions": [
+      "Отрегулируйте сиденье: рукояти на уровне середины груди.",
+      "Прижмите лопатки к спинке.",
+      "Выжмите рукояти вперёд, не выпрямляя локти в замок.",
+      "Подконтрольно вернитесь."
+    ],
+    "tips": [
+      "Не отрывайте спину",
+      "Полная амплитуда"
+    ],
+    "commonMistakes": [
+      "Высокое сиденье",
+      "Рывковый жим"
+    ],
+    "contraindications": [],
+    "variations": [
+      "Одной рукой",
+      "Хаммер-жим"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на жиме."
+  },
+  {
+    "id": "pec-deck",
+    "name": "Сведение в тренажёре «бабочка»",
+    "altName": "Pec Deck",
+    "description": "Изоляция грудных в тренажёре по фиксированной дуге.",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "shoulders"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "machine",
+    "mechanic": "isolation",
+    "force": "push",
+    "rangeOfMotion": "От разведённых рук до сведения перед грудью.",
+    "instructions": [
+      "Сядьте, прижмите спину, предплечья на подушки.",
+      "Сведите руки перед собой, напрягая грудь.",
+      "Медленно разведите до растяжения."
+    ],
+    "tips": [
+      "Пауза в точке сведения",
+      "Не роняйте вес"
+    ],
+    "commonMistakes": [
+      "Инерция",
+      "Слишком большой вес"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "Сведение на блоке"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на сведении."
+  },
+  {
+    "id": "one-arm-dumbbell-row",
+    "name": "Тяга гантели одной рукой",
+    "altName": "One-Arm Dumbbell Row",
+    "description": "Односторонняя тяга с упором — большая амплитуда для широчайших.",
+    "primaryMuscles": [
+      "lats",
+      "middle back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "rear delts"
+    ],
+    "stabilizers": [
+      "lower back"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "compound",
+    "force": "pull",
+    "rangeOfMotion": "От вытянутой руки до подтягивания гантели к поясу.",
+    "instructions": [
+      "Упор коленом и рукой на скамью, спина параллельна полу.",
+      "Гантель в свободной руке, рука прямая.",
+      "Подтяните гантель к поясу, ведя локоть назад.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Тяните локтем, не бицепсом",
+      "Не скручивайте корпус"
+    ],
+    "commonMistakes": [
+      "Рывки",
+      "Разворот корпуса"
+    ],
+    "contraindications": [
+      "Боль в пояснице"
+    ],
+    "variations": [
+      "Тяга на наклонной скамье"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на тяге."
+  },
+  {
+    "id": "t-bar-row",
+    "name": "Тяга Т-грифа",
+    "altName": "T-Bar Row",
+    "description": "Тяга Т-грифа в наклоне для толщины середины спины.",
+    "primaryMuscles": [
+      "middle back",
+      "lats"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "rear delts",
+      "traps"
+    ],
+    "stabilizers": [
+      "lower back"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "barbell",
+    "mechanic": "compound",
+    "force": "pull",
+    "rangeOfMotion": "От вытянутых рук до подтягивания к животу.",
+    "instructions": [
+      "Встаньте над грифом, возьмите рукоять, спина ровная, наклон ~45°.",
+      "Подтяните вес к животу, сводя лопатки.",
+      "Подконтрольно опустите до растяжения широчайших."
+    ],
+    "tips": [
+      "Держите спину нейтральной",
+      "Сводите лопатки"
+    ],
+    "commonMistakes": [
+      "Круглая спина",
+      "Читинг корпусом"
+    ],
+    "contraindications": [
+      "Боль в пояснице"
+    ],
+    "variations": [
+      "Узкий/широкий хват"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на тяге."
+  },
+  {
+    "id": "chin-up",
+    "name": "Подтягивания обратным хватом",
+    "altName": "Chin-up",
+    "description": "Подтягивания обратным хватом с большим включением бицепса.",
+    "primaryMuscles": [
+      "lats"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "middle back"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "strength",
+    "level": "intermediate",
+    "equipment": "body only",
+    "mechanic": "compound",
+    "force": "pull",
+    "rangeOfMotion": "От виса на прямых руках до подбородка над перекладиной.",
+    "instructions": [
+      "Возьмите перекладину обратным хватом на ширине плеч.",
+      "Подтянитесь, сводя лопатки, до подбородка над перекладиной.",
+      "Подконтрольно опуститесь до полного виса."
+    ],
+    "tips": [
+      "Без раскачки",
+      "Полная амплитуда"
+    ],
+    "commonMistakes": [
+      "Рывки",
+      "Неполный вис"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "С резиной",
+      "Негативные",
+      "С весом"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "straight-arm-pulldown",
+    "name": "Пуловер на блоке прямыми руками",
+    "altName": "Straight-Arm Pulldown",
+    "description": "Изоляция широчайших на верхнем блоке прямыми руками.",
+    "primaryMuscles": [
+      "lats"
+    ],
+    "secondaryMuscles": [
+      "triceps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "cable",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От вытянутых вверх рук до приведения к бёдрам.",
+    "instructions": [
+      "Встаньте перед верхним блоком, возьмите прямую рукоять.",
+      "Руки почти прямые, лёгкий наклон вперёд.",
+      "Опустите рукоять к бёдрам, напрягая широчайшие.",
+      "Подконтрольно вернитесь."
+    ],
+    "tips": [
+      "Минимально сгибайте локти",
+      "Чувствуйте широчайшие"
+    ],
+    "commonMistakes": [
+      "Работа трицепсом",
+      "Сгибание рук"
+    ],
+    "contraindications": [],
+    "variations": [
+      "С канатом"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на приведении."
+  },
+  {
+    "id": "sumo-deadlift",
+    "name": "Становая тяга сумо",
+    "altName": "Sumo Deadlift",
+    "description": "Становая с широкой постановкой ног — короче амплитуда, больше ног и приводящих.",
+    "primaryMuscles": [
+      "glutes",
+      "hamstrings",
+      "quadriceps"
+    ],
+    "secondaryMuscles": [
+      "lower back",
+      "traps",
+      "adductors"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "powerlifting",
+    "level": "intermediate",
+    "equipment": "barbell",
+    "mechanic": "compound",
+    "force": "pull",
+    "rangeOfMotion": "От пола до полного выпрямления таза и коленей.",
+    "instructions": [
+      "Широкая стойка, носки развёрнуты, хват внутри ног.",
+      "Спина ровная, грудь вверх, таз ниже, чем в классике.",
+      "Оттолкнитесь ногами и выпрямитесь, штанга вдоль голеней.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Разводите колени по носкам",
+      "Держите гриф близко"
+    ],
+    "commonMistakes": [
+      "Круглая спина",
+      "Тяга спиной"
+    ],
+    "contraindications": [
+      "Боль в пояснице"
+    ],
+    "variations": [
+      "Классическая тяга",
+      "Тяга с плинтов"
+    ],
+    "tempo": "2-0-1",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "inverted-row",
+    "name": "Австралийские подтягивания",
+    "altName": "Inverted Row",
+    "description": "Горизонтальная тяга собственного веса под низкой перекладиной.",
+    "primaryMuscles": [
+      "middle back",
+      "lats"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "rear delts"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "strength",
+    "level": "beginner",
+    "equipment": "body only",
+    "mechanic": "compound",
+    "force": "pull",
+    "rangeOfMotion": "От вытянутых рук до касания грудью грифа.",
+    "instructions": [
+      "Возьмите низкую перекладину, тело в прямую линию под ней.",
+      "Подтяните грудь к грифу, сводя лопатки.",
+      "Подконтрольно опуститесь."
+    ],
+    "tips": [
+      "Держите корпус жёстким",
+      "Сводите лопатки"
+    ],
+    "commonMistakes": [
+      "Провисание таза",
+      "Неполная амплитуда"
+    ],
+    "contraindications": [],
+    "variations": [
+      "Ноги на возвышении",
+      "В кольцах"
+    ],
+    "tempo": "2-1-1",
+    "breathing": "Выдох на тяге."
+  },
+  {
+    "id": "dumbbell-pullover",
+    "name": "Пуловер с гантелью",
+    "altName": "Dumbbell Pullover",
+    "description": "Пуловер через голову — растяжение широчайших и грудных.",
+    "primaryMuscles": [
+      "lats"
+    ],
+    "secondaryMuscles": [
+      "chest",
+      "triceps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От заведённой за голову гантели до положения над грудью.",
+    "instructions": [
+      "Лягте поперёк или вдоль скамьи, гантель над грудью.",
+      "Опустите гантель за голову по дуге до растяжения.",
+      "Верните над грудь, напрягая широчайшие."
+    ],
+    "tips": [
+      "Лёгкий сгиб локтей",
+      "Не прогибайте поясницу"
+    ],
+    "commonMistakes": [
+      "Чрезмерный прогиб",
+      "Слишком большой вес"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "На блоке"
+    ],
+    "tempo": "3-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "dumbbell-shoulder-press",
+    "name": "Жим гантелей сидя",
+    "altName": "Dumbbell Shoulder Press",
+    "description": "Вертикальный жим гантелей на дельты с большей амплитудой.",
+    "primaryMuscles": [
+      "shoulders"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "traps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От уровня плеч до выпрямления рук над головой.",
+    "instructions": [
+      "Сядьте, спина прижата, гантели у плеч.",
+      "Выжмите гантели вверх, сближая их над головой.",
+      "Подконтрольно опустите до уровня ушей."
+    ],
+    "tips": [
+      "Не прогибайте поясницу",
+      "Запястья над локтями"
+    ],
+    "commonMistakes": [
+      "Чрезмерный прогиб",
+      "Неполная амплитуда"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "Жим Арнольда",
+      "Стоя"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на жиме."
+  },
+  {
+    "id": "arnold-press",
+    "name": "Жим Арнольда",
+    "altName": "Arnold Press",
+    "description": "Жим гантелей с разворотом — прорабатывает все пучки дельт.",
+    "primaryMuscles": [
+      "shoulders"
+    ],
+    "secondaryMuscles": [
+      "triceps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "dumbbell",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От гантелей у груди с разворотом до выпрямления над головой.",
+    "instructions": [
+      "Сядьте, гантели у груди ладонями к себе.",
+      "Выжимая вверх, разворачивайте кисти наружу.",
+      "Вверху ладони от себя; вернитесь тем же движением."
+    ],
+    "tips": [
+      "Плавный разворот",
+      "Контролируйте темп"
+    ],
+    "commonMistakes": [
+      "Рывки",
+      "Слишком большой вес"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "Обычный жим гантелей"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на жиме."
+  },
+  {
+    "id": "front-raise",
+    "name": "Подъёмы гантелей перед собой",
+    "altName": "Front Raise",
+    "description": "Изоляция передних дельт подъёмом прямых рук вперёд.",
+    "primaryMuscles": [
+      "front delts"
+    ],
+    "secondaryMuscles": [
+      "shoulders"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "push",
+    "rangeOfMotion": "От бёдер до уровня плеч перед собой.",
+    "instructions": [
+      "Встаньте, гантели перед бёдрами.",
+      "Поднимите одну или обе руки вперёд до уровня плеч.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Без раскачки",
+      "Лёгкий сгиб локтя"
+    ],
+    "commonMistakes": [
+      "Читинг корпусом",
+      "Подъём выше плеч"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "Со штангой",
+      "На блоке"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "rear-delt-fly",
+    "name": "Разведение гантелей в наклоне",
+    "altName": "Rear Delt Fly",
+    "description": "Изоляция задних дельт разведением в наклоне.",
+    "primaryMuscles": [
+      "rear delts"
+    ],
+    "secondaryMuscles": [
+      "traps",
+      "middle back"
+    ],
+    "stabilizers": [
+      "lower back"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От сведённых под грудью рук до разведения в стороны.",
+    "instructions": [
+      "Наклонитесь до параллели с полом, гантели под грудью.",
+      "Разведите руки в стороны, сводя лопатки.",
+      "Подконтрольно вернитесь."
+    ],
+    "tips": [
+      "Локти чуть согнуты",
+      "Тяните задней дельтой"
+    ],
+    "commonMistakes": [
+      "Работа трапецией",
+      "Читинг"
+    ],
+    "contraindications": [],
+    "variations": [
+      "В тренажёре",
+      "На блоках"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на разведении."
+  },
+  {
+    "id": "upright-row",
+    "name": "Тяга к подбородку",
+    "altName": "Upright Row",
+    "description": "Вертикальная тяга к подбородку на средние дельты и трапеции.",
+    "primaryMuscles": [
+      "side delts"
+    ],
+    "secondaryMuscles": [
+      "traps",
+      "biceps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "barbell",
+    "mechanic": "compound",
+    "force": "pull",
+    "rangeOfMotion": "От бёдер до уровня ключиц.",
+    "instructions": [
+      "Возьмите штангу хватом чуть уже плеч.",
+      "Тяните гриф вверх вдоль корпуса, ведя локти вверх.",
+      "Опустите подконтрольно."
+    ],
+    "tips": [
+      "Локти выше кистей",
+      "Не поднимайте до боли в плече"
+    ],
+    "commonMistakes": [
+      "Слишком узкий хват",
+      "Заброс локтей"
+    ],
+    "contraindications": [
+      "Боль в плече",
+      "Импинджмент"
+    ],
+    "variations": [
+      "С гантелями",
+      "На блоке"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "cable-lateral-raise",
+    "name": "Махи в блоке в сторону",
+    "altName": "Cable Lateral Raise",
+    "description": "Средние дельты с постоянным натяжением на нижнем блоке.",
+    "primaryMuscles": [
+      "side delts"
+    ],
+    "secondaryMuscles": [
+      "traps"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "cable",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От руки у бедра до уровня плеча в сторону.",
+    "instructions": [
+      "Встаньте боком к нижнему блоку, рукоять в дальней руке.",
+      "Поднимите руку в сторону до уровня плеча.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Постоянное натяжение",
+      "Без раскачки"
+    ],
+    "commonMistakes": [
+      "Читинг",
+      "Подъём трапецией"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "С гантелями"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "barbell-shrug",
+    "name": "Шраги со штангой",
+    "altName": "Barbell Shrug",
+    "description": "Изоляция трапеций подъёмом плеч со штангой.",
+    "primaryMuscles": [
+      "traps"
+    ],
+    "secondaryMuscles": [
+      "forearms"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "barbell",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От опущенных плеч до максимального подъёма вверх.",
+    "instructions": [
+      "Держите штангу перед бёдрами прямыми руками.",
+      "Поднимите плечи максимально вверх.",
+      "Пауза и подконтрольное опускание."
+    ],
+    "tips": [
+      "Не вращайте плечами",
+      "Пауза вверху"
+    ],
+    "commonMistakes": [
+      "Круговые движения",
+      "Сгибание рук"
+    ],
+    "contraindications": [],
+    "variations": [
+      "С гантелями",
+      "В Смите"
+    ],
+    "tempo": "1-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "dumbbell-shrug",
+    "name": "Шраги с гантелями",
+    "altName": "Dumbbell Shrug",
+    "description": "Шраги с гантелями — удобная траектория для трапеций.",
+    "primaryMuscles": [
+      "traps"
+    ],
+    "secondaryMuscles": [
+      "forearms"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От опущенных плеч до подъёма вверх.",
+    "instructions": [
+      "Гантели по бокам, руки прямые.",
+      "Поднимите плечи вверх, пауза.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Пауза вверху",
+      "Без вращения плечами"
+    ],
+    "commonMistakes": [
+      "Круговые движения",
+      "Читинг"
+    ],
+    "contraindications": [],
+    "variations": [
+      "Со штангой"
+    ],
+    "tempo": "1-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "front-squat",
+    "name": "Фронтальные приседания",
+    "altName": "Front Squat",
+    "description": "Присед со штангой на груди — вертикальный корпус, акцент на квадрицепс.",
+    "primaryMuscles": [
+      "quadriceps",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "hamstrings",
+      "abdominals"
+    ],
+    "stabilizers": [
+      "lower back"
+    ],
+    "category": "strength",
+    "level": "expert",
+    "equipment": "barbell",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От положения стоя до бёдер ниже параллели.",
+    "instructions": [
+      "Гриф на передних дельтах, локти высоко.",
+      "Присядьте, держа корпус вертикально.",
+      "Оттолкнитесь пятками до полного выпрямления."
+    ],
+    "tips": [
+      "Держите локти высоко",
+      "Колени по носкам"
+    ],
+    "commonMistakes": [
+      "Опускание локтей",
+      "Круглая спина"
+    ],
+    "contraindications": [
+      "Боль в колене",
+      "Проблемы с запястьями"
+    ],
+    "variations": [
+      "Присед со штангой на спине",
+      "Гоблет-присед"
+    ],
+    "tempo": "3-0-1",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "bulgarian-split-squat",
+    "name": "Болгарские выпады",
+    "altName": "Bulgarian Split Squat",
+    "description": "Односторонний присед с задней ногой на возвышении — сила и баланс.",
+    "primaryMuscles": [
+      "quadriceps",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "hamstrings",
+      "adductors"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "dumbbell",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От выпрямленной ноги до бедра параллельно полу.",
+    "instructions": [
+      "Заднюю стопу на скамью, гантели в руках.",
+      "Опуститесь на передней ноге до параллели бедра.",
+      "Оттолкнитесь пяткой передней ноги вверх."
+    ],
+    "tips": [
+      "Вес на передней ноге",
+      "Колено по носку"
+    ],
+    "commonMistakes": [
+      "Завал колена внутрь",
+      "Слишком близкая стойка"
+    ],
+    "contraindications": [
+      "Боль в колене"
+    ],
+    "variations": [
+      "Со штангой",
+      "Со своим весом"
+    ],
+    "tempo": "2-1-1",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "walking-lunge",
+    "name": "Выпады при ходьбе",
+    "altName": "Walking Lunge",
+    "description": "Динамические выпады с шагом вперёд на ноги и ягодицы.",
+    "primaryMuscles": [
+      "quadriceps",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "hamstrings",
+      "adductors"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От шага вперёд до сгиба обоих коленей ~90°.",
+    "instructions": [
+      "Гантели по бокам, шагните вперёд.",
+      "Опуститесь, пока оба колена не согнутся ~90°.",
+      "Оттолкнитесь и шагните следующей ногой."
+    ],
+    "tips": [
+      "Корпус вертикально",
+      "Колено не за носок"
+    ],
+    "commonMistakes": [
+      "Наклон вперёд",
+      "Короткий шаг"
+    ],
+    "contraindications": [
+      "Боль в колене"
+    ],
+    "variations": [
+      "На месте",
+      "Обратные выпады"
+    ],
+    "tempo": "2-0-1",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "leg-extension",
+    "name": "Разгибания ног в тренажёре",
+    "altName": "Leg Extension",
+    "description": "Изоляция квадрицепса в тренажёре.",
+    "primaryMuscles": [
+      "quadriceps"
+    ],
+    "secondaryMuscles": [],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "machine",
+    "mechanic": "isolation",
+    "force": "push",
+    "rangeOfMotion": "От согнутых коленей до полного выпрямления.",
+    "instructions": [
+      "Сядьте, валик на нижней части голеней.",
+      "Разогните ноги до полного выпрямления.",
+      "Пауза и подконтрольное опускание."
+    ],
+    "tips": [
+      "Пауза вверху",
+      "Не бросайте вес"
+    ],
+    "commonMistakes": [
+      "Рывки",
+      "Отрыв таза"
+    ],
+    "contraindications": [
+      "Боль в колене"
+    ],
+    "variations": [
+      "Одной ногой"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на разгибании."
+  },
+  {
+    "id": "lying-leg-curl",
+    "name": "Сгибания ног лёжа",
+    "altName": "Lying Leg Curl",
+    "description": "Изоляция бицепса бедра в тренажёре лёжа.",
+    "primaryMuscles": [
+      "hamstrings"
+    ],
+    "secondaryMuscles": [
+      "calves"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "machine",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От прямых ног до максимального сгибания.",
+    "instructions": [
+      "Лягте, валик над пятками.",
+      "Согните ноги, подтягивая пятки к ягодицам.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Не отрывайте таз",
+      "Полная амплитуда"
+    ],
+    "commonMistakes": [
+      "Отрыв таза",
+      "Рывки"
+    ],
+    "contraindications": [],
+    "variations": [
+      "Сидя",
+      "Стоя одной ногой"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на сгибании."
+  },
+  {
+    "id": "seated-leg-curl",
+    "name": "Сгибания ног сидя",
+    "altName": "Seated Leg Curl",
+    "description": "Бицепс бедра в тренажёре сидя с хорошим растяжением.",
+    "primaryMuscles": [
+      "hamstrings"
+    ],
+    "secondaryMuscles": [
+      "calves"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "machine",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От прямых ног до сгибания под сиденье.",
+    "instructions": [
+      "Сядьте, зафиксируйте бёдра, валик над голенями.",
+      "Согните ноги вниз под сиденье.",
+      "Подконтрольно вернитесь."
+    ],
+    "tips": [
+      "Прижмите бёдра",
+      "Пауза внизу"
+    ],
+    "commonMistakes": [
+      "Рывки",
+      "Неполная амплитуда"
+    ],
+    "contraindications": [],
+    "variations": [
+      "Лёжа"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на сгибании."
+  },
+  {
+    "id": "hack-squat",
+    "name": "Гакк-приседания",
+    "altName": "Hack Squat",
+    "description": "Присед в гакк-тренажёре с акцентом на квадрицепс.",
+    "primaryMuscles": [
+      "quadriceps",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "hamstrings"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "machine",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От выпрямленных ног до бёдер ниже параллели.",
+    "instructions": [
+      "Встаньте в тренажёр, спина к платформе, плечи под упоры.",
+      "Присядьте до параллели, колени по носкам.",
+      "Выжмите платформу вверх пятками."
+    ],
+    "tips": [
+      "Прижмите спину",
+      "Колени по носкам"
+    ],
+    "commonMistakes": [
+      "Отрыв пяток",
+      "Завал коленей"
+    ],
+    "contraindications": [
+      "Боль в колене"
+    ],
+    "variations": [
+      "Жим ногами",
+      "Присед со штангой"
+    ],
+    "tempo": "3-0-1",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "good-morning",
+    "name": "Наклоны со штангой (гуд-морнинг)",
+    "altName": "Good Morning",
+    "description": "Тазобедренный шарнир со штангой на спине для задней цепи.",
+    "primaryMuscles": [
+      "hamstrings",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "lower back"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "strength",
+    "level": "expert",
+    "equipment": "barbell",
+    "mechanic": "compound",
+    "force": "pull",
+    "rangeOfMotion": "От вертикали до наклона корпуса ~90°.",
+    "instructions": [
+      "Штанга на верхней части спины, колени мягкие.",
+      "Отводя таз назад, наклоните корпус вперёд.",
+      "Вернитесь в вертикаль, напрягая ягодицы."
+    ],
+    "tips": [
+      "Спина ровная",
+      "Движение от таза"
+    ],
+    "commonMistakes": [
+      "Круглая спина",
+      "Сгибание коленей вместо таза"
+    ],
+    "contraindications": [
+      "Боль в пояснице"
+    ],
+    "variations": [
+      "Румынская тяга",
+      "Гиперэкстензия"
+    ],
+    "tempo": "3-0-1",
+    "breathing": "Вдох на наклоне, выдох на подъёме."
+  },
+  {
+    "id": "step-up",
+    "name": "Зашагивания на платформу",
+    "altName": "Step-up",
+    "description": "Зашагивание на возвышение на ноги и ягодицы.",
+    "primaryMuscles": [
+      "quadriceps",
+      "glutes"
+    ],
+    "secondaryMuscles": [
+      "hamstrings"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От пола до полного выпрямления на платформе.",
+    "instructions": [
+      "Гантели по бокам, поставьте стопу на платформу.",
+      "Оттолкнитесь пяткой опорной ноги и встаньте на платформу.",
+      "Подконтрольно опуститесь."
+    ],
+    "tips": [
+      "Толкайтесь пяткой",
+      "Не отталкивайтесь задней ногой"
+    ],
+    "commonMistakes": [
+      "Инерция",
+      "Низкая платформа для нагрузки"
+    ],
+    "contraindications": [
+      "Боль в колене"
+    ],
+    "variations": [
+      "Со штангой"
+    ],
+    "tempo": "2-0-1",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "seated-calf-raise",
+    "name": "Подъём на носки сидя",
+    "altName": "Seated Calf Raise",
+    "description": "Изоляция камбаловидной мышцы с согнутыми коленями.",
+    "primaryMuscles": [
+      "calves"
+    ],
+    "secondaryMuscles": [],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "machine",
+    "mechanic": "isolation",
+    "force": "push",
+    "rangeOfMotion": "От опущенных пяток до подъёма на носки.",
+    "instructions": [
+      "Сядьте, подушки на бёдрах, стопы на платформе.",
+      "Опустите пятки до растяжения.",
+      "Поднимитесь на носки максимально высоко."
+    ],
+    "tips": [
+      "Полная амплитуда",
+      "Пауза вверху"
+    ],
+    "commonMistakes": [
+      "Короткая амплитуда",
+      "Рывки"
+    ],
+    "contraindications": [],
+    "variations": [
+      "Стоя",
+      "В жиме ногами"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "dumbbell-curl",
+    "name": "Подъём гантелей на бицепс",
+    "altName": "Dumbbell Curl",
+    "description": "Базовое сгибание на бицепс с гантелями и супинацией.",
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearms"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От прямых рук до полного сгибания.",
+    "instructions": [
+      "Встаньте, гантели у бёдер ладонями вперёд.",
+      "Согните руки, поднимая гантели к плечам.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Локти на месте",
+      "Без раскачки"
+    ],
+    "commonMistakes": [
+      "Читинг",
+      "Неполная амплитуда"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "Поочерёдно",
+      "С супинацией"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "hammer-curl",
+    "name": "Молотковые сгибания",
+    "altName": "Hammer Curl",
+    "description": "Сгибание нейтральным хватом на брахиалис и предплечья.",
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearms"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От прямых рук до полного сгибания.",
+    "instructions": [
+      "Гантели у бёдер нейтральным хватом (ладони друг к другу).",
+      "Согните руки, сохраняя хват.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Локти прижаты",
+      "Без раскачки"
+    ],
+    "commonMistakes": [
+      "Читинг",
+      "Разворот кистей"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "Кроссовер-хват",
+      "На блоке с канатом"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "preacher-curl",
+    "name": "Сгибания на скамье Скотта",
+    "altName": "Preacher Curl",
+    "description": "Сгибание с упором на пюпитр — строгая изоляция бицепса.",
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearms"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "ez curl bar",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От почти прямых рук до полного сгибания.",
+    "instructions": [
+      "Плечи на пюпитре, возьмите EZ-гриф.",
+      "Согните руки, поднимая гриф к плечам.",
+      "Подконтрольно опустите, не выпрямляя локти в замок."
+    ],
+    "tips": [
+      "Не выпрямляйте локти рывком",
+      "Плечи на подушке"
+    ],
+    "commonMistakes": [
+      "Рывковое разгибание",
+      "Отрыв плеч"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "С гантелью",
+      "На блоке"
+    ],
+    "tempo": "3-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "concentration-curl",
+    "name": "Концентрированный подъём",
+    "altName": "Concentration Curl",
+    "description": "Строгая изоляция бицепса с упором локтя в бедро.",
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearms"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От прямой руки до полного сгибания.",
+    "instructions": [
+      "Сядьте, локоть упёрт во внутреннюю часть бедра.",
+      "Согните руку, поднимая гантель к плечу.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Не двигайте плечом",
+      "Пиковое сокращение"
+    ],
+    "commonMistakes": [
+      "Раскачка",
+      "Движение плечом"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "На блоке"
+    ],
+    "tempo": "3-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "ez-bar-curl",
+    "name": "Подъём EZ-грифа на бицепс",
+    "altName": "EZ-Bar Curl",
+    "description": "Сгибание на бицепс с EZ-грифом — мягче для запястий.",
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearms"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "ez curl bar",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От прямых рук до полного сгибания.",
+    "instructions": [
+      "Возьмите EZ-гриф на изгибах, локти у корпуса.",
+      "Согните руки к плечам.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Локти на месте",
+      "Без читинга"
+    ],
+    "commonMistakes": [
+      "Раскачка",
+      "Неполная амплитуда"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "На скамье Скотта"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "cable-curl",
+    "name": "Сгибания на бицепс в блоке",
+    "altName": "Cable Curl",
+    "description": "Сгибание на бицепс с постоянным натяжением на нижнем блоке.",
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearms"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "cable",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От прямых рук до полного сгибания.",
+    "instructions": [
+      "Возьмите рукоять нижнего блока, локти у корпуса.",
+      "Согните руки к плечам.",
+      "Подконтрольно вернитесь."
+    ],
+    "tips": [
+      "Постоянное натяжение",
+      "Локти зафиксированы"
+    ],
+    "commonMistakes": [
+      "Читинг",
+      "Движение локтей"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "С канатом",
+      "Одной рукой"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "close-grip-bench-press",
+    "name": "Жим лёжа узким хватом",
+    "altName": "Close-Grip Bench Press",
+    "description": "Жим лёжа узким хватом с акцентом на трицепс.",
+    "primaryMuscles": [
+      "triceps"
+    ],
+    "secondaryMuscles": [
+      "chest",
+      "shoulders"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "strength",
+    "level": "intermediate",
+    "equipment": "barbell",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От касания груди до полного выпрямления рук.",
+    "instructions": [
+      "Хват на ширине плеч, локти близко к корпусу.",
+      "Опустите гриф к низу груди.",
+      "Выжмите вверх, разгибая локти."
+    ],
+    "tips": [
+      "Локти вдоль корпуса",
+      "Запястья ровные"
+    ],
+    "commonMistakes": [
+      "Слишком узкий хват",
+      "Разведённые локти"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "В Смите",
+      "С гантелями"
+    ],
+    "tempo": "2-1-1",
+    "breathing": "Выдох на жиме."
+  },
+  {
+    "id": "overhead-triceps-extension",
+    "name": "Французский жим над головой",
+    "altName": "Overhead Triceps Extension",
+    "description": "Разгибание рук над головой на длинную головку трицепса.",
+    "primaryMuscles": [
+      "triceps"
+    ],
+    "secondaryMuscles": [],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "push",
+    "rangeOfMotion": "От согнутых за головой рук до полного выпрямления.",
+    "instructions": [
+      "Держите гантель обеими руками над головой.",
+      "Опустите её за голову, сгибая локти.",
+      "Разогните руки вверх."
+    ],
+    "tips": [
+      "Локти близко",
+      "Не разводите локти"
+    ],
+    "commonMistakes": [
+      "Разведение локтей",
+      "Прогиб поясницы"
+    ],
+    "contraindications": [
+      "Боль в локте",
+      "Боль в плече"
+    ],
+    "variations": [
+      "На блоке с канатом",
+      "Со штангой"
+    ],
+    "tempo": "3-1-2",
+    "breathing": "Выдох на разгибании."
+  },
+  {
+    "id": "skullcrusher",
+    "name": "Французский жим лёжа",
+    "altName": "Skullcrusher",
+    "description": "Разгибание рук лёжа со штангой ко лбу на трицепс.",
+    "primaryMuscles": [
+      "triceps"
+    ],
+    "secondaryMuscles": [],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "ez curl bar",
+    "mechanic": "isolation",
+    "force": "push",
+    "rangeOfMotion": "От согнутых рук у лба до полного выпрямления.",
+    "instructions": [
+      "Лягте, держите EZ-гриф над лбом на прямых руках.",
+      "Сгибая локти, опустите гриф ко лбу.",
+      "Разогните руки в исходное."
+    ],
+    "tips": [
+      "Локти неподвижны",
+      "Контролируйте опускание"
+    ],
+    "commonMistakes": [
+      "Движение локтей",
+      "Слишком большой вес"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "С гантелями",
+      "На наклонной"
+    ],
+    "tempo": "3-1-1",
+    "breathing": "Выдох на разгибании."
+  },
+  {
+    "id": "bench-dip",
+    "name": "Отжимания от скамьи на трицепс",
+    "altName": "Bench Dip",
+    "description": "Обратные отжимания от скамьи с акцентом на трицепс.",
+    "primaryMuscles": [
+      "triceps"
+    ],
+    "secondaryMuscles": [
+      "chest",
+      "shoulders"
+    ],
+    "stabilizers": [
+      "abdominals"
+    ],
+    "category": "strength",
+    "level": "beginner",
+    "equipment": "body only",
+    "mechanic": "compound",
+    "force": "push",
+    "rangeOfMotion": "От согнутых рук ~90° до полного выпрямления.",
+    "instructions": [
+      "Руки на краю скамьи, таз перед ней, ноги впереди.",
+      "Опуститесь, сгибая локти до ~90°.",
+      "Выжмите себя вверх."
+    ],
+    "tips": [
+      "Локти назад, не в стороны",
+      "Плечи опущены"
+    ],
+    "commonMistakes": [
+      "Слишком глубокий провал",
+      "Локти в стороны"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "С весом на бёдрах",
+      "Ноги на возвышении"
+    ],
+    "tempo": "2-1-1",
+    "breathing": "Выдох на подъёме."
+  },
+  {
+    "id": "triceps-kickback",
+    "name": "Разгибание руки в наклоне (кикбэк)",
+    "altName": "Triceps Kickback",
+    "description": "Изоляция трицепса разгибанием в наклоне.",
+    "primaryMuscles": [
+      "triceps"
+    ],
+    "secondaryMuscles": [],
+    "stabilizers": [
+      "lower back"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "push",
+    "rangeOfMotion": "От согнутого локтя до полного выпрямления назад.",
+    "instructions": [
+      "Наклонитесь, плечо параллельно полу, локоть согнут.",
+      "Разогните руку назад до прямой.",
+      "Подконтрольно верните."
+    ],
+    "tips": [
+      "Плечо неподвижно",
+      "Пиковое сокращение"
+    ],
+    "commonMistakes": [
+      "Движение плечом",
+      "Раскачка"
+    ],
+    "contraindications": [
+      "Боль в локте"
+    ],
+    "variations": [
+      "На блоке"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на разгибании."
+  },
+  {
+    "id": "wrist-curl",
+    "name": "Сгибания запястий",
+    "altName": "Wrist Curl",
+    "description": "Изоляция сгибателей предплечья.",
+    "primaryMuscles": [
+      "forearms"
+    ],
+    "secondaryMuscles": [],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "dumbbell",
+    "mechanic": "isolation",
+    "force": "pull",
+    "rangeOfMotion": "От разогнутых запястий до полного сгибания.",
+    "instructions": [
+      "Предплечья на бёдрах, кисти свисают, ладони вверх.",
+      "Согните запястья, поднимая вес.",
+      "Подконтрольно опустите."
+    ],
+    "tips": [
+      "Полная амплитуда",
+      "Изолируйте предплечья"
+    ],
+    "commonMistakes": [
+      "Работа бицепсом",
+      "Рывки"
+    ],
+    "contraindications": [],
+    "variations": [
+      "Обратные сгибания",
+      "Со штангой"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на сгибании."
+  },
+  {
+    "id": "crunch",
+    "name": "Скручивания",
+    "altName": "Crunch",
+    "description": "Базовое скручивание на прямую мышцу живота.",
+    "primaryMuscles": [
+      "abdominals"
+    ],
+    "secondaryMuscles": [],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "body only",
+    "mechanic": "isolation",
+    "force": "static",
+    "rangeOfMotion": "От лопаток на полу до скручивания корпуса.",
+    "instructions": [
+      "Лягте на спину, колени согнуты, руки у висков.",
+      "Скрутите корпус, отрывая лопатки от пола.",
+      "Подконтрольно опуститесь."
+    ],
+    "tips": [
+      "Не тяните шею руками",
+      "Выдох на усилии"
+    ],
+    "commonMistakes": [
+      "Тяга за голову",
+      "Рывки"
+    ],
+    "contraindications": [
+      "Боль в шее"
+    ],
+    "variations": [
+      "С весом",
+      "На наклонной"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на скручивании."
+  },
+  {
+    "id": "cable-crunch",
+    "name": "Скручивания на блоке",
+    "altName": "Cable Crunch",
+    "description": "Скручивание на верхнем блоке с отягощением на пресс.",
+    "primaryMuscles": [
+      "abdominals"
+    ],
+    "secondaryMuscles": [
+      "obliques"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "intermediate",
+    "equipment": "cable",
+    "mechanic": "isolation",
+    "force": "static",
+    "rangeOfMotion": "От вертикали до скручивания корпуса вниз.",
+    "instructions": [
+      "Встаньте на колени у верхнего блока, канат у головы.",
+      "Скрутите корпус вниз, округляя спину прессом.",
+      "Подконтрольно вернитесь."
+    ],
+    "tips": [
+      "Тяните прессом, не руками",
+      "Округляйте спину"
+    ],
+    "commonMistakes": [
+      "Работа руками",
+      "Движение от таза"
+    ],
+    "contraindications": [
+      "Боль в пояснице"
+    ],
+    "variations": [
+      "Обычные скручивания"
+    ],
+    "tempo": "2-1-2",
+    "breathing": "Выдох на скручивании."
+  },
+  {
+    "id": "russian-twist",
+    "name": "Русские скручивания",
+    "altName": "Russian Twist",
+    "description": "Повороты корпуса на косые мышцы живота.",
+    "primaryMuscles": [
+      "obliques"
+    ],
+    "secondaryMuscles": [
+      "abdominals"
+    ],
+    "stabilizers": [
+      "lower back"
+    ],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "body only",
+    "mechanic": "isolation",
+    "force": "static",
+    "rangeOfMotion": "От поворота в одну сторону до поворота в другую.",
+    "instructions": [
+      "Сядьте, колени согнуты, корпус отклонён назад.",
+      "Поворачивайте корпус вправо и влево, ведя руки.",
+      "Держите пресс в напряжении."
+    ],
+    "tips": [
+      "Двигайтесь корпусом, не руками",
+      "Держите спину ровной"
+    ],
+    "commonMistakes": [
+      "Круглая спина",
+      "Движение только руками"
+    ],
+    "contraindications": [
+      "Боль в пояснице"
+    ],
+    "variations": [
+      "С отягощением",
+      "С отрывом стоп"
+    ],
+    "tempo": "2-0-2",
+    "breathing": "Дыхание ровное."
+  },
+  {
+    "id": "bicycle-crunch",
+    "name": "Скручивания «велосипед»",
+    "altName": "Bicycle Crunch",
+    "description": "Динамические скручивания с разворотом на пресс и косые.",
+    "primaryMuscles": [
+      "abdominals"
+    ],
+    "secondaryMuscles": [
+      "obliques"
+    ],
+    "stabilizers": [],
+    "category": "hypertrophy",
+    "level": "beginner",
+    "equipment": "body only",
+    "mechanic": "isolation",
+    "force": "static",
+    "rangeOfMotion": "От разноимённого сведения локтя и колена до смены сторон.",
+    "instructions": [
+      "Лягте, руки у висков, ноги на весу.",
+      "Сводите локоть с противоположным коленом попеременно.",
+      "Держите поясницу прижатой."
+    ],
+    "tips": [
+      "Не тяните шею",
+      "Полное скручивание"
+    ],
+    "commonMistakes": [
+      "Тяга за голову",
+      "Прогиб поясницы"
+    ],
+    "contraindications": [
+      "Боль в шее"
+    ],
+    "variations": [
+      "Медленный темп"
+    ],
+    "tempo": "2-0-2",
+    "breathing": "Дыхание ровное."
+  },
+  {
+    "id": "ab-wheel-rollout",
+    "name": "Ролик для пресса",
+    "altName": "Ab Wheel Rollout",
+    "description": "Выкат ролика — мощная антиэкстензионная работа кора.",
+    "primaryMuscles": [
+      "abdominals"
+    ],
+    "secondaryMuscles": [
+      "obliques",
+      "lats"
+    ],
+    "stabilizers": [
+      "lower back"
+    ],
+    "category": "strength",
+    "level": "expert",
+    "equipment": "body only",
+    "mechanic": "compound",
+    "force": "static",
+    "rangeOfMotion": "От положения на коленях до максимального выката вперёд.",
+    "instructions": [
+      "Встаньте на колени, ролик под плечами.",
+      "Выкатывайте ролик вперёд, удерживая прямую линию тела.",
+      "Прессом верните ролик назад."
+    ],
+    "tips": [
+      "Не проваливайте поясницу",
+      "Держите пресс жёстким"
+    ],
+    "commonMistakes": [
+      "Прогиб поясницы",
+      "Слишком дальний выкат без контроля"
+    ],
+    "contraindications": [
+      "Боль в пояснице"
+    ],
+    "variations": [
+      "С колен у стены",
+      "Стоя"
+    ],
+    "tempo": "3-0-2",
+    "breathing": "Вдох на выкате, выдох на возврате."
+  },
+  {
+    "id": "side-plank",
+    "name": "Боковая планка",
+    "altName": "Side Plank",
+    "description": "Статическое удержание на боку для косых мышц и стабилизаторов.",
+    "primaryMuscles": [
+      "obliques"
+    ],
+    "secondaryMuscles": [
+      "abdominals",
+      "glutes"
+    ],
+    "stabilizers": [
+      "shoulders"
+    ],
+    "category": "strength",
+    "level": "beginner",
+    "equipment": "body only",
+    "mechanic": "compound",
+    "force": "static",
+    "rangeOfMotion": "Статическое удержание корпуса в линию на боку.",
+    "instructions": [
+      "Обопритесь на предплечье, тело в прямую линию боком.",
+      "Поднимите таз, удерживайте позицию.",
+      "Повторите на другую сторону."
+    ],
+    "tips": [
+      "Таз не провисает",
+      "Тело в линию"
+    ],
+    "commonMistakes": [
+      "Провисание таза",
+      "Разворот корпуса"
+    ],
+    "contraindications": [
+      "Боль в плече"
+    ],
+    "variations": [
+      "С подъёмом ноги",
+      "На вытянутой руке"
+    ],
+    "tempo": "0-0-0",
+    "breathing": "Дыхание ровное."
+  },
+  {
+    "id": "mountain-climber",
+    "name": "Альпинист",
+    "altName": "Mountain Climber",
+    "description": "Динамическое упражнение на кор и кардио с подтягиванием коленей.",
+    "primaryMuscles": [
+      "abdominals"
+    ],
+    "secondaryMuscles": [
+      "obliques",
+      "quadriceps"
+    ],
+    "stabilizers": [
+      "shoulders"
+    ],
+    "category": "cardio",
+    "level": "beginner",
+    "equipment": "body only",
+    "mechanic": "compound",
+    "force": "static",
+    "rangeOfMotion": "От упора лёжа до попеременного подтягивания коленей к груди.",
+    "instructions": [
+      "Примите упор лёжа, тело в линию.",
+      "Попеременно подтягивайте колени к груди в темпе.",
+      "Держите таз стабильным."
+    ],
+    "tips": [
+      "Не поднимайте таз",
+      "Держите темп"
+    ],
+    "commonMistakes": [
+      "Высокий таз",
+      "Провисание поясницы"
+    ],
+    "contraindications": [],
+    "variations": [
+      "Медленно на технику",
+      "Скрёстно на косые"
+    ],
+    "tempo": "0-0-0",
+    "breathing": "Дыхание ритмичное."
   }
 ]

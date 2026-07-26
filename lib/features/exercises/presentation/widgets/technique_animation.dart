@@ -92,6 +92,12 @@ enum MovementPattern {
     if (has(['curl', 'сгибан', 'на бицепс', 'бицепс'])) {
       return MovementPattern.curl;
     }
+    // Chest flyes read as a press, not a lateral raise — catch them before the
+    // ambiguous "разведение" keyword below.
+    if (has(['сведение', 'кроссовер', 'crossover', 'pec deck', 'бабочка']) ||
+        (hay.contains('разведен') && hay.contains('лёж'))) {
+      return MovementPattern.horizontalPress;
+    }
     if (has([
       'махи',
       'lateral',
