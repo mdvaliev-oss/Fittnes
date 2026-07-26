@@ -149,6 +149,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
         ),
       );
+    } on BackupException catch (e) {
+      messenger.showSnackBar(SnackBar(content: Text(e.message)));
     } catch (_) {
       messenger.showSnackBar(
         const SnackBar(content: Text('Не удалось прочитать данные')),

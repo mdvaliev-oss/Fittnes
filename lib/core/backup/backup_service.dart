@@ -17,6 +17,15 @@ class BackupImportResult {
   final int programs;
 }
 
+/// Thrown when a backup can't be imported (malformed JSON or a newer schema).
+class BackupException implements Exception {
+  const BackupException(this.message);
+  final String message;
+
+  @override
+  String toString() => message;
+}
+
 /// Serializes the whole app state (profile, settings, custom programs and
 /// workout history) to JSON and restores it. Enables data export / import.
 class BackupService {
@@ -41,7 +50,21 @@ class BackupService {
   }
 
   Future<BackupImportResult> import(String raw) async {
-    final data = jsonDecode(raw) as Map<String, dynamic>;
+    final Map<String, dynamic> data;
+    try {
+      data = jsonDecode(raw) as Map<String, dynamic>;
+    } catch (_) {
+      throw const BackupException('Не удалось прочитать JSON бэкапа.');
+    }
+
+    // Reject a backup written by a newer schema than we understand, rather
+    // than silently importing fields we can't interpret.
+    final version = (data['version'] as num?)?.toInt();
+    if (version != null && version > schemaVersion) {
+      throw BackupException(
+        'Бэкап новее версии приложения (v$version). Обновите приложение.',
+      );
+    }
 
     if (data['profile'] is Map) {
       await _ref.read(profileProvider.notifier).update(

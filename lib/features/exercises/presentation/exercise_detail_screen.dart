@@ -57,6 +57,7 @@ class _DetailBody extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () => Navigator.of(context).maybePop(),
+                tooltip: 'Назад',
                 icon: const Icon(Icons.arrow_back_rounded),
               ),
               Expanded(

@@ -92,38 +92,13 @@ class _ProgressBody extends ConsumerWidget {
           const SizedBox(height: AppSpacing.md),
           Text('Личные рекорды', style: text.titleLarge),
           const SizedBox(height: AppSpacing.sm),
-          ...(_records(sessions, exercises)
-              .map((r) => _RecordTile(record: r, unit: unit))),
+          ...ref
+              .watch(personalRecordsProvider)
+              .map((r) => _RecordTile(record: r, unit: unit)),
         ],
       ),
     );
   }
-
-  List<_RecordRow> _records(
-    List<WorkoutSession> sessions,
-    List<ExerciseRef> exercises,
-  ) {
-    final rows = <_RecordRow>[];
-    for (final ex in exercises) {
-      final series = strengthSeries(sessions, ex.id);
-      if (series.isEmpty) continue;
-      final best = series.reduce((a, b) => a.e1rm >= b.e1rm ? a : b);
-      rows.add(_RecordRow(name: ex.name, e1rm: best.e1rm, date: best.date));
-    }
-    rows.sort((a, b) => b.e1rm.compareTo(a.e1rm));
-    return rows;
-  }
-}
-
-class _RecordRow {
-  const _RecordRow({
-    required this.name,
-    required this.e1rm,
-    required this.date,
-  });
-  final String name;
-  final double e1rm;
-  final DateTime date;
 }
 
 class _ChartCard extends StatelessWidget {
@@ -217,7 +192,7 @@ class _ExercisePicker extends StatelessWidget {
 
 class _RecordTile extends StatelessWidget {
   const _RecordTile({required this.record, required this.unit});
-  final _RecordRow record;
+  final PersonalRecord record;
   final WeightUnit unit;
 
   @override

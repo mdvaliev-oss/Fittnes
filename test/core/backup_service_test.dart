@@ -63,6 +63,41 @@ void main() {
     expect(restored.single.totalVolume, 500);
   });
 
+  test('import rejects a backup from a newer schema', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final container = ProviderContainer(
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue(prefs),
+        workoutRepositoryProvider.overrideWithValue(WorkoutRepositoryMemory()),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    const future = '{"app":"fittnes","version":999,"sessions":[]}';
+    expect(
+      () => container.read(backupServiceProvider).import(future),
+      throwsA(isA<BackupException>()),
+    );
+  });
+
+  test('import rejects malformed JSON with a BackupException', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final container = ProviderContainer(
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue(prefs),
+        workoutRepositoryProvider.overrideWithValue(WorkoutRepositoryMemory()),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    expect(
+      () => container.read(backupServiceProvider).import('not json'),
+      throwsA(isA<BackupException>()),
+    );
+  });
+
   test('exported JSON carries settings and is valid', () async {
     SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();

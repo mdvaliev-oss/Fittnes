@@ -38,6 +38,7 @@ class WorkoutHistoryScreen extends ConsumerWidget {
                   children: [
                     IconButton(
                       onPressed: () => Navigator.of(context).maybePop(),
+                      tooltip: 'Назад',
                       icon: const Icon(Icons.arrow_back_rounded),
                     ),
                     Text('История', style: text.headlineLarge),

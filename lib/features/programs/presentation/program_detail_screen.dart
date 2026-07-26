@@ -101,6 +101,7 @@ class ProgramDetailScreen extends ConsumerWidget {
                         if (program.isCustom)
                           IconButton(
                             onPressed: () => _confirmDelete(context, ref),
+                            tooltip: 'Удалить программу',
                             icon: const Icon(Icons.delete_outline_rounded),
                           ),
                       ],

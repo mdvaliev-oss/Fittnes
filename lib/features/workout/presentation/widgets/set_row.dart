@@ -173,6 +173,7 @@ class _SetRowState extends ConsumerState<SetRow> {
             ),
             IconButton(
               onPressed: _toggleComplete,
+              tooltip: done ? 'Отменить подход' : 'Завершить подход',
               icon: Icon(
                 done
                     ? Icons.check_circle_rounded

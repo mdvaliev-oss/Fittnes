@@ -196,6 +196,7 @@ class _Header extends ConsumerWidget {
             children: [
               IconButton(
                 onPressed: onCancel,
+                tooltip: 'Отменить тренировку',
                 icon: const Icon(Icons.close_rounded),
               ),
               Expanded(child: Text(session.title, style: text.titleLarge)),

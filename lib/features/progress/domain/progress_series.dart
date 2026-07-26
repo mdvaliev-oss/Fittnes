@@ -21,6 +21,31 @@ class ExerciseRef {
   final String name;
 }
 
+/// An exercise's best estimated 1RM ever, with the date it was hit.
+class PersonalRecord {
+  const PersonalRecord({
+    required this.name,
+    required this.e1rm,
+    required this.date,
+  });
+  final String name;
+  final double e1rm;
+  final DateTime date;
+}
+
+/// Best-e1RM personal record per exercise across [history], strongest first.
+List<PersonalRecord> personalRecords(List<WorkoutSession> history) {
+  final rows = <PersonalRecord>[];
+  for (final ex in exercisesInHistory(history)) {
+    final series = strengthSeries(history, ex.id);
+    if (series.isEmpty) continue;
+    final best = series.reduce((a, b) => a.e1rm >= b.e1rm ? a : b);
+    rows.add(PersonalRecord(name: ex.name, e1rm: best.e1rm, date: best.date));
+  }
+  rows.sort((a, b) => b.e1rm.compareTo(a.e1rm));
+  return rows;
+}
+
 /// Best-e1RM-per-session series for [exerciseId], oldest → newest.
 List<StrengthPoint> strengthSeries(
   List<WorkoutSession> history,
