@@ -11,6 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Localization (Russian-first built-in widgets)
+  flutter_localizations:
+    sdk: flutter
+
   # State management & DI
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
@@ -48,7 +52,31 @@ dev_dependencies:
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
 
+  # Branding asset generators (run manually — see below)
+  #   dart run flutter_launcher_icons
+  #   dart run flutter_native_splash:create
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.1
+
 flutter:
   uses-material-design: true
   assets:
     - assets/exercises/       # exercise seed data (+ media from full import)
+    - assets/branding/        # app icon / splash source art
+
+# App launcher icon — regenerate with: dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/branding/icon.png"
+  adaptive_icon_background: "#0A0A0F"
+  adaptive_icon_foreground: "assets/branding/icon_foreground.png"
+  remove_alpha_ios: true
+
+# Native splash — regenerate with: dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#0A0A0F"
+  image: "assets/branding/splash_logo.png"
+  android_12:
+    color: "#0A0A0F"
+    image: "assets/branding/splash_logo.png"
