@@ -7,6 +7,7 @@ import '../../../core/reminders/reminder_service.dart';
 import '../../../core/settings/app_settings.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/glass_theme.dart';
+import '../../../core/units/weight_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../exercises/domain/entities/exercise_enums.dart';
@@ -30,19 +31,31 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   late final TextEditingController _squat;
   late final TextEditingController _deadlift;
 
+  // Weight fields are stored in kg but shown/edited in the user's unit.
+  late WeightUnit _unit;
+
+  static String _n(num? v) =>
+      v == null ? '' : (v % 1 == 0 ? v.toStringAsFixed(0) : '$v');
+
+  /// A canonical kg value formatted in [u] for a text field.
+  static String _fmtKg(double? kg, WeightUnit u) =>
+      kg == null ? '' : formatValue(u.fromKg(kg), u);
+
+  /// Parses a value typed in [_unit] back to canonical kg.
+  double? _toKg(double? v) => v == null ? null : _unit.toKg(v);
+
   @override
   void initState() {
     super.initState();
     final p = ref.read(profileProvider);
-    String n(num? v) =>
-        v == null ? '' : (v % 1 == 0 ? v.toStringAsFixed(0) : '$v');
+    _unit = ref.read(appSettingsProvider).unit;
     _name = TextEditingController(text: p.name ?? '');
     _age = TextEditingController(text: p.age?.toString() ?? '');
-    _height = TextEditingController(text: n(p.heightCm));
-    _weight = TextEditingController(text: n(p.weightKg));
-    _bench = TextEditingController(text: n(p.benchMax));
-    _squat = TextEditingController(text: n(p.squatMax));
-    _deadlift = TextEditingController(text: n(p.deadliftMax));
+    _height = TextEditingController(text: _n(p.heightCm));
+    _weight = TextEditingController(text: _fmtKg(p.weightKg, _unit));
+    _bench = TextEditingController(text: _fmtKg(p.benchMax, _unit));
+    _squat = TextEditingController(text: _fmtKg(p.squatMax, _unit));
+    _deadlift = TextEditingController(text: _fmtKg(p.deadliftMax, _unit));
   }
 
   @override
@@ -149,6 +162,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final settings = ref.watch(appSettingsProvider);
     final text = Theme.of(context).textTheme;
 
+    // The unit switcher lives on this screen — reformat weight fields live when
+    // it changes (values stay canonical kg; only the displayed unit differs).
+    ref.listen(appSettingsProvider.select((s) => s.unit), (_, next) {
+      final p = ref.read(profileProvider);
+      _weight.text = _fmtKg(p.weightKg, next);
+      _bench.text = _fmtKg(p.benchMax, next);
+      _squat.text = _fmtKg(p.squatMax, next);
+      _deadlift.text = _fmtKg(p.deadliftMax, next);
+      setState(() => _unit = next);
+    });
+
     return AmbientBackground(
       child: SafeArea(
         bottom: false,
@@ -188,8 +212,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 _NumberField(
                   controller: _weight,
                   label: 'Вес',
-                  suffix: 'кг',
-                  onChanged: (v) => _save((p) => p.copyWith(weightKg: v)),
+                  suffix: _unit.label,
+                  onChanged: (v) =>
+                      _save((p) => p.copyWith(weightKg: _toKg(v))),
                 ),
                 const SizedBox(height: AppSpacing.xs),
                 _EnumChips<Sex>(
@@ -243,20 +268,23 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 _NumberField(
                   controller: _bench,
                   label: 'Жим лёжа',
-                  suffix: 'кг',
-                  onChanged: (v) => _save((p) => p.copyWith(benchMax: v)),
+                  suffix: _unit.label,
+                  onChanged: (v) =>
+                      _save((p) => p.copyWith(benchMax: _toKg(v))),
                 ),
                 _NumberField(
                   controller: _squat,
                   label: 'Присед',
-                  suffix: 'кг',
-                  onChanged: (v) => _save((p) => p.copyWith(squatMax: v)),
+                  suffix: _unit.label,
+                  onChanged: (v) =>
+                      _save((p) => p.copyWith(squatMax: _toKg(v))),
                 ),
                 _NumberField(
                   controller: _deadlift,
                   label: 'Становая',
-                  suffix: 'кг',
-                  onChanged: (v) => _save((p) => p.copyWith(deadliftMax: v)),
+                  suffix: _unit.label,
+                  onChanged: (v) =>
+                      _save((p) => p.copyWith(deadliftMax: _toKg(v))),
                 ),
               ],
             ),

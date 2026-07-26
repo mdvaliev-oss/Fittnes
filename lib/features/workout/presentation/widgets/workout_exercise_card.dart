@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/settings/app_settings.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/glass_theme.dart';
+import '../../../../core/units/weight_format.dart';
 import '../../../../core/widgets/glass_card.dart';
 import '../../../recommendations/domain/progression_advice.dart';
 import '../../../recommendations/presentation/recommendation_providers.dart';
@@ -24,6 +26,7 @@ class WorkoutExerciseCard extends ConsumerWidget {
     final controller = ref.read(activeWorkoutControllerProvider.notifier);
     final glass = context.glass;
     final text = Theme.of(context).textTheme;
+    final unit = ref.watch(appSettingsProvider.select((s) => s.unit));
     final last =
         ref.watch(lastPerformanceProvider(entry.exerciseId)).valueOrNull;
     final pr = ref.watch(personalRecordProvider(entry.exerciseId)).valueOrNull;
@@ -52,7 +55,8 @@ class WorkoutExerciseCard extends ConsumerWidget {
                     style: text.titleLarge?.copyWith(fontSize: 17),
                   ),
                 ),
-                if (pr != null) _PrBadge(oneRepMax: pr.bestEstimatedOneRepMax),
+                if (pr != null)
+                  _PrBadge(oneRepMax: pr.bestEstimatedOneRepMax, unit: unit),
                 _Menu(entryId: entry.id, controller: controller),
               ],
             ),
@@ -60,7 +64,7 @@ class WorkoutExerciseCard extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 2, bottom: AppSpacing.xs),
                 child: Text(
-                  'Прошлый раз: ${_summary(last)}',
+                  'Прошлый раз: ${_summary(last, unit)}',
                   style: text.labelSmall?.copyWith(color: glass.textMid),
                 ),
               ),
@@ -140,20 +144,19 @@ class WorkoutExerciseCard extends ConsumerWidget {
     return '$w×${s.reps}';
   }
 
-  String _summary(WorkoutExerciseEntry last) {
+  String _summary(WorkoutExerciseEntry last, WeightUnit unit) {
     final working = last.sets.where((s) => s.isFilled).toList();
     if (working.isEmpty) return '—';
     final top = working.reduce((a, b) => a.weight! >= b.weight! ? a : b);
-    final w = top.weight! % 1 == 0
-        ? top.weight!.toStringAsFixed(0)
-        : top.weight.toString();
-    return '$w кг × ${top.reps} · ${working.length} подх.';
+    return '${formatWeight(top.weight!, unit)} × ${top.reps} · '
+        '${working.length} подх.';
   }
 }
 
 class _PrBadge extends StatelessWidget {
-  const _PrBadge({required this.oneRepMax});
+  const _PrBadge({required this.oneRepMax, required this.unit});
   final double oneRepMax;
+  final WeightUnit unit;
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +177,7 @@ class _PrBadge extends StatelessWidget {
           ),
           const SizedBox(width: 3),
           Text(
-            oneRepMax.toStringAsFixed(0),
+            formatValue(unit.fromKg(oneRepMax), unit),
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,

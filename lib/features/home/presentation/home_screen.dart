@@ -5,8 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router/app_routes.dart';
+import '../../../core/settings/app_settings.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/glass_theme.dart';
+import '../../../core/units/weight_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/primary_button.dart';
@@ -155,7 +157,10 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.sm),
 
             // ── Stats grid (live from workout history) ────────────
-            _StatsGrid(stats: ref.watch(workoutStatsProvider)),
+            _StatsGrid(
+              stats: ref.watch(workoutStatsProvider),
+              unit: ref.watch(appSettingsProvider.select((s) => s.unit)),
+            ),
           ],
         ),
       ),
@@ -164,8 +169,9 @@ class HomeScreen extends ConsumerWidget {
 }
 
 class _StatsGrid extends StatelessWidget {
-  const _StatsGrid({required this.stats});
+  const _StatsGrid({required this.stats, required this.unit});
   final AsyncValue<WorkoutStats> stats;
+  final WeightUnit unit;
 
   @override
   Widget build(BuildContext context) {
@@ -200,8 +206,8 @@ class _StatsGrid extends StatelessWidget {
         ),
         StatTile(
           label: 'Лучший e1RM',
-          value: n(s.bestE1rm),
-          unit: 'кг',
+          value: n(unit.fromKg(s.bestE1rm)),
+          unit: unit.label,
           icon: Icons.emoji_events_rounded,
           accent: s.bestE1rm > 0,
         ),

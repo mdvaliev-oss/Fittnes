@@ -4,10 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router/app_routes.dart';
+import '../../../core/settings/app_settings.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/glass_theme.dart';
+import '../../../core/units/weight_format.dart';
 import '../../../core/utils/duration_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/primary_button.dart';
@@ -65,12 +67,13 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
     }
     if (!mounted) return;
     final messenger = ScaffoldMessenger.of(context);
+    final unit = ref.read(appSettingsProvider).unit;
     context.go(AppRoutes.home);
     if (saved) {
       messenger.showSnackBar(
         SnackBar(
           content: Text(
-            'Тренировка сохранена · ${finished.totalVolume.toStringAsFixed(0)} кг',
+            'Тренировка сохранена · ${formatWeight(finished.totalVolume, unit)}',
           ),
         ),
       );
@@ -164,7 +167,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
   }
 }
 
-class _Header extends StatelessWidget {
+class _Header extends ConsumerWidget {
   const _Header({
     required this.session,
     required this.onFinish,
@@ -176,8 +179,9 @@ class _Header extends StatelessWidget {
   final VoidCallback onCancel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final text = Theme.of(context).textTheme;
+    final unit = ref.watch(appSettingsProvider.select((s) => s.unit));
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(
@@ -212,7 +216,7 @@ class _Header extends StatelessWidget {
               _Stat(label: 'Время', value: formatClock(session.elapsed())),
               _Stat(
                 label: 'Тоннаж',
-                value: '${session.totalVolume.toStringAsFixed(0)} кг',
+                value: formatWeight(session.totalVolume, unit),
               ),
               _Stat(
                 label: 'Подходы',

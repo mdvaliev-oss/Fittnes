@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/settings/app_settings.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/glass_theme.dart';
+import '../../../../core/units/weight_format.dart';
 import '../../domain/entities/set_type.dart';
 import '../../domain/entities/workout_set.dart';
 import '../providers/active_workout_controller.dart';
@@ -36,8 +38,13 @@ class SetRow extends ConsumerStatefulWidget {
 }
 
 class _SetRowState extends ConsumerState<SetRow> {
-  late final TextEditingController _weight =
-      TextEditingController(text: _fmt(widget.set.weight));
+  // Weight is stored in kg; the field shows/edits it in the user's unit.
+  late final WeightUnit _unit = ref.read(appSettingsProvider).unit;
+  late final TextEditingController _weight = TextEditingController(
+    text: widget.set.weight == null
+        ? ''
+        : formatValue(_unit.fromKg(widget.set.weight!), _unit),
+  );
   late final TextEditingController _reps =
       TextEditingController(text: widget.set.reps?.toString() ?? '');
 
@@ -57,7 +64,11 @@ class _SetRowState extends ConsumerState<SetRow> {
   void _commitWeight(String raw) {
     final v = double.tryParse(raw.replaceAll(',', '.'));
     if (v != null) {
-      _controller.updateSet(widget.entryId, widget.set.id, weight: v);
+      _controller.updateSet(
+        widget.entryId,
+        widget.set.id,
+        weight: _unit.toKg(v),
+      );
     }
   }
 
@@ -131,7 +142,7 @@ class _SetRowState extends ConsumerState<SetRow> {
               child: _NumField(
                 controller: _weight,
                 hint: _weightHint,
-                suffix: 'кг',
+                suffix: _unit.label,
                 decimal: true,
                 onChanged: _commitWeight,
               ),
@@ -175,7 +186,13 @@ class _SetRowState extends ConsumerState<SetRow> {
     );
   }
 
-  String? get _weightHint => widget.previousHint?.split('×').first;
+  String? get _weightHint {
+    final raw = widget.previousHint?.split('×').first;
+    if (raw == null) return null;
+    final kg = double.tryParse(raw);
+    return kg == null ? raw : formatValue(_unit.fromKg(kg), _unit);
+  }
+
   String? get _repsHint => widget.previousHint != null
       ? (widget.previousHint!.split('×').length > 1
           ? widget.previousHint!.split('×')[1]

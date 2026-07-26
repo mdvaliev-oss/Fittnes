@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/settings/app_settings.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/glass_theme.dart';
+import '../../../core/units/weight_format.dart';
 import '../../../core/utils/duration_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
@@ -83,14 +85,15 @@ class WorkoutHistoryScreen extends ConsumerWidget {
   }
 }
 
-class _SessionCard extends StatelessWidget {
+class _SessionCard extends ConsumerWidget {
   const _SessionCard({required this.session});
   final WorkoutSession session;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final glass = context.glass;
     final text = Theme.of(context).textTheme;
+    final unit = ref.watch(appSettingsProvider.select((s) => s.unit));
 
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
@@ -114,7 +117,7 @@ class _SessionCard extends StatelessWidget {
                 const SizedBox(width: AppSpacing.md),
                 _Metric(
                   icon: Icons.scale_rounded,
-                  value: '${session.totalVolume.toStringAsFixed(0)} кг',
+                  value: formatWeight(session.totalVolume, unit),
                 ),
                 const SizedBox(width: AppSpacing.md),
                 _Metric(

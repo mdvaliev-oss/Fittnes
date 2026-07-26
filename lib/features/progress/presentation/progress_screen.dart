@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
+import '../../../core/settings/app_settings.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/glass_theme.dart';
+import '../../../core/units/weight_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../workout/domain/entities/workout_session.dart';
@@ -44,6 +46,7 @@ class _ProgressBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final text = Theme.of(context).textTheme;
+    final unit = ref.watch(appSettingsProvider.select((s) => s.unit));
     final exercises = exercisesInHistory(sessions);
     final selectedId = ref.watch(selectedProgressExerciseProvider) ??
         (exercises.isNotEmpty ? exercises.first.id : null);
@@ -89,7 +92,8 @@ class _ProgressBody extends ConsumerWidget {
           const SizedBox(height: AppSpacing.md),
           Text('Личные рекорды', style: text.titleLarge),
           const SizedBox(height: AppSpacing.sm),
-          ...(_records(sessions, exercises).map((r) => _RecordTile(record: r))),
+          ...(_records(sessions, exercises)
+              .map((r) => _RecordTile(record: r, unit: unit))),
         ],
       ),
     );
@@ -212,8 +216,9 @@ class _ExercisePicker extends StatelessWidget {
 }
 
 class _RecordTile extends StatelessWidget {
-  const _RecordTile({required this.record});
+  const _RecordTile({required this.record, required this.unit});
   final _RecordRow record;
+  final WeightUnit unit;
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +248,7 @@ class _RecordTile extends StatelessWidget {
               ),
             ),
             Text(
-              '${record.e1rm.toStringAsFixed(0)} кг',
+              formatWeight(record.e1rm, unit),
               style: AppTypography.numeric(glass.accent, size: 17),
             ),
           ],
