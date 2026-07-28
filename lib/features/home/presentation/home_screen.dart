@@ -13,6 +13,8 @@ import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/primary_button.dart';
 import '../../../core/widgets/stat_tile.dart';
+import '../../nutrition/domain/nutrition_math.dart';
+import '../../nutrition/presentation/providers/nutrition_providers.dart';
 import '../../workout/domain/services/workout_stats.dart';
 import '../../workout/presentation/providers/active_workout_controller.dart';
 import '../../workout/presentation/providers/workout_providers.dart';
@@ -144,6 +146,9 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
 
+            const SizedBox(height: AppSpacing.sm),
+            const _NutritionCard(),
+
             const SizedBox(height: AppSpacing.lg),
             Row(
               children: [
@@ -163,6 +168,54 @@ class HomeScreen extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Today's nutrition summary — remaining kcal + macro line, taps into the tab.
+class _NutritionCard extends ConsumerWidget {
+  const _NutritionCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final glass = context.glass;
+    final text = Theme.of(context).textTheme;
+    final targets = ref.watch(nutritionTargetsProvider);
+    final today = ref.watch(todayNutritionProvider).valueOrNull;
+    final totals = today?.totals;
+    final consumed = totals?.kcal ?? 0;
+    final remaining = remainingKcal(consumed, targets.kcal);
+    final over = remaining < 0;
+
+    return GlassCard(
+      onTap: () => context.go(AppRoutes.nutrition),
+      child: Row(
+        children: [
+          Icon(Icons.restaurant_rounded, color: glass.accent),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Питание сегодня',
+                  style: text.titleLarge?.copyWith(fontSize: 16),
+                ),
+                Text(
+                  over
+                      ? 'превышено на ${remaining.abs().round()} ккал'
+                      : 'осталось ${remaining.round()} ккал'
+                          ' · Б ${(totals?.protein ?? 0).round()}'
+                          ' Ж ${(totals?.fat ?? 0).round()}'
+                          ' У ${(totals?.carb ?? 0).round()}',
+                  style: text.bodyMedium,
+                ),
+              ],
+            ),
+          ),
+          Icon(Icons.chevron_right_rounded, color: glass.textLow),
+        ],
       ),
     );
   }

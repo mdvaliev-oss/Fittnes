@@ -19,6 +19,9 @@ class NutritionRepositoryMemory implements NutritionRepository {
   }
 
   @override
+  Future<List<FoodEntry>> allEntries() async => List.unmodifiable(_entries);
+
+  @override
   Future<int> addEntry(FoodEntry entry) async {
     final id = ++_entryId;
     _entries.add(entry.copyWith(id: id));

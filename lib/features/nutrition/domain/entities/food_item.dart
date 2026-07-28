@@ -40,6 +40,26 @@ class FoodItem {
         isCustom: isCustom ?? this.isCustom,
       );
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'kcal': kcalPer100,
+        'protein': proteinPer100,
+        'fat': fatPer100,
+        'carb': carbPer100,
+        'isCustom': isCustom,
+      };
+
+  factory FoodItem.fromJson(Map<String, dynamic> j) => FoodItem(
+        id: (j['id'] as String?) ?? '',
+        name: (j['name'] as String?) ?? '',
+        kcalPer100: (j['kcal'] as num?)?.toDouble() ?? 0,
+        proteinPer100: (j['protein'] as num?)?.toDouble() ?? 0,
+        fatPer100: (j['fat'] as num?)?.toDouble() ?? 0,
+        carbPer100: (j['carb'] as num?)?.toDouble() ?? 0,
+        isCustom: j['isCustom'] as bool? ?? true,
+      );
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) || (other is FoodItem && other.id == id);

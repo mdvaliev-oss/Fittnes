@@ -34,6 +34,14 @@ class NutritionRepositoryDrift implements NutritionRepository {
   }
 
   @override
+  Future<List<FoodEntry>> allEntries() async {
+    final rows = await (_db.select(_db.foodEntries)
+          ..orderBy([(t) => OrderingTerm.asc(t.createdAt)]))
+        .get();
+    return rows.map(_toEntry).toList(growable: false);
+  }
+
+  @override
   Future<int> addEntry(FoodEntry entry) {
     return _db.into(_db.foodEntries).insert(
           FoodEntriesCompanion.insert(

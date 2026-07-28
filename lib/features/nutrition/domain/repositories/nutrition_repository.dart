@@ -6,6 +6,9 @@ abstract interface class NutritionRepository {
   /// Diary entries for a single day (any time on [day]).
   Future<List<FoodEntry>> entriesForDay(DateTime day);
 
+  /// All diary entries across every day (used by backup export).
+  Future<List<FoodEntry>> allEntries();
+
   /// Inserts an entry, returning its new id.
   Future<int> addEntry(FoodEntry entry);
 
