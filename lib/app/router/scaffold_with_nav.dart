@@ -19,6 +19,7 @@ class ScaffoldWithNav extends StatelessWidget {
     _NavDestination(Icons.home_rounded, 'Главная'),
     _NavDestination(Icons.fitness_center_rounded, 'Упражнения'),
     _NavDestination(Icons.insights_rounded, 'Прогресс'),
+    _NavDestination(Icons.restaurant_rounded, 'Питание'),
     _NavDestination(Icons.person_rounded, 'Профиль'),
   ];
 

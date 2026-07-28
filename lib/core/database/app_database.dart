@@ -48,8 +48,42 @@ class SetEntries extends Table {
   TextColumn get note => text().nullable()();
 }
 
+/// A user-created food product (macros per 100 g). Catalog foods ship as a
+/// bundled JSON asset; only user-authored ones live in the database.
+@DataClassName('CustomFoodRow')
+class CustomFoods extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get name => text()();
+  RealColumn get kcalPer100 => real()();
+  RealColumn get proteinPer100 => real()();
+  RealColumn get fatPer100 => real()();
+  RealColumn get carbPer100 => real()();
+}
+
+/// One logged food in the nutrition diary. Macros are snapshotted at add-time
+/// so history stays stable even if the source product is later edited/removed.
+@DataClassName('FoodEntryRow')
+class FoodEntries extends Table {
+  IntColumn get id => integer().autoIncrement()();
+
+  /// Date-only (midnight) the entry belongs to.
+  DateTimeColumn get day => dateTime()();
+
+  /// Index of [MealType].
+  IntColumn get meal => integer()();
+  TextColumn get name => text()();
+  RealColumn get grams => real()();
+  RealColumn get kcal => real()();
+  RealColumn get protein => real()();
+  RealColumn get fat => real()();
+  RealColumn get carb => real()();
+  DateTimeColumn get createdAt => dateTime()();
+}
+
 /// The app's local-first SQLite database.
-@DriftDatabase(tables: [Sessions, Entries, SetEntries])
+@DriftDatabase(
+  tables: [Sessions, Entries, SetEntries, CustomFoods, FoodEntries],
+)
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
@@ -57,10 +91,17 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.executor);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
+        onUpgrade: (m, from, to) async {
+          // v2 adds the nutrition tracker tables.
+          if (from < 2) {
+            await m.createTable(customFoods);
+            await m.createTable(foodEntries);
+          }
+        },
         beforeOpen: (details) async {
           await customStatement('PRAGMA foreign_keys = ON');
         },

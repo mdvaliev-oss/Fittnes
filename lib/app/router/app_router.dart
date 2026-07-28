@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/exercises/presentation/exercise_detail_screen.dart';
 import '../../features/exercises/presentation/exercises_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
+import '../../features/nutrition/presentation/nutrition_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/programs/presentation/program_builder_screen.dart';
 import '../../features/programs/presentation/program_detail_screen.dart';
@@ -177,6 +178,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 path: AppRoutes.progress,
                 pageBuilder: (context, state) =>
                     _fade(state, const ProgressScreen()),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.nutrition,
+                pageBuilder: (context, state) =>
+                    _fade(state, const NutritionScreen()),
               ),
             ],
           ),

@@ -1,0 +1,1162 @@
+[
+  {
+    "id": "kurinaya-grudka-otvarnaya",
+    "name": "Куриная грудка отварная",
+    "kcal": 137,
+    "protein": 29.8,
+    "fat": 1.8,
+    "carb": 0.5
+  },
+  {
+    "id": "kurinoe-bedro",
+    "name": "Куриное бедро",
+    "kcal": 211,
+    "protein": 16.8,
+    "fat": 15.5,
+    "carb": 0.0
+  },
+  {
+    "id": "kurinoe-file-zharenoe",
+    "name": "Куриное филе жареное",
+    "kcal": 197,
+    "protein": 30.0,
+    "fat": 8.0,
+    "carb": 0.0
+  },
+  {
+    "id": "indeyka-file",
+    "name": "Индейка филе",
+    "kcal": 114,
+    "protein": 23.7,
+    "fat": 2.0,
+    "carb": 0.0
+  },
+  {
+    "id": "govyadina-otvarnaya",
+    "name": "Говядина отварная",
+    "kcal": 254,
+    "protein": 25.8,
+    "fat": 16.8,
+    "carb": 0.0
+  },
+  {
+    "id": "govyazhiy-farsh",
+    "name": "Говяжий фарш",
+    "kcal": 254,
+    "protein": 17.2,
+    "fat": 20.0,
+    "carb": 0.0
+  },
+  {
+    "id": "svinina-nezhirnaya",
+    "name": "Свинина нежирная",
+    "kcal": 259,
+    "protein": 16.0,
+    "fat": 21.6,
+    "carb": 0.0
+  },
+  {
+    "id": "svinoy-farsh",
+    "name": "Свиной фарш",
+    "kcal": 263,
+    "protein": 17.0,
+    "fat": 21.0,
+    "carb": 0.0
+  },
+  {
+    "id": "baranina",
+    "name": "Баранина",
+    "kcal": 209,
+    "protein": 16.3,
+    "fat": 15.3,
+    "carb": 0.0
+  },
+  {
+    "id": "pechen-govyazhya",
+    "name": "Печень говяжья",
+    "kcal": 127,
+    "protein": 17.9,
+    "fat": 3.7,
+    "carb": 5.3
+  },
+  {
+    "id": "serdce-kurinoe",
+    "name": "Сердце куриное",
+    "kcal": 159,
+    "protein": 15.8,
+    "fat": 10.3,
+    "carb": 0.8
+  },
+  {
+    "id": "kolbasa-varenaya",
+    "name": "Колбаса варёная",
+    "kcal": 257,
+    "protein": 12.8,
+    "fat": 22.2,
+    "carb": 1.5
+  },
+  {
+    "id": "sosiski",
+    "name": "Сосиски",
+    "kcal": 266,
+    "protein": 10.4,
+    "fat": 24.0,
+    "carb": 1.6
+  },
+  {
+    "id": "bekon",
+    "name": "Бекон",
+    "kcal": 500,
+    "protein": 23.0,
+    "fat": 45.0,
+    "carb": 0.0
+  },
+  {
+    "id": "vetchina",
+    "name": "Ветчина",
+    "kcal": 279,
+    "protein": 22.6,
+    "fat": 20.9,
+    "carb": 0.0
+  },
+  {
+    "id": "losos",
+    "name": "Лосось",
+    "kcal": 208,
+    "protein": 20.0,
+    "fat": 13.4,
+    "carb": 0.0
+  },
+  {
+    "id": "semga-slabosolenaya",
+    "name": "Сёмга слабосолёная",
+    "kcal": 202,
+    "protein": 22.5,
+    "fat": 12.5,
+    "carb": 0.0
+  },
+  {
+    "id": "tunec-konservirovannyy",
+    "name": "Тунец консервированный",
+    "kcal": 96,
+    "protein": 21.5,
+    "fat": 1.0,
+    "carb": 0.0
+  },
+  {
+    "id": "treska",
+    "name": "Треска",
+    "kcal": 78,
+    "protein": 17.7,
+    "fat": 0.7,
+    "carb": 0.0
+  },
+  {
+    "id": "mintay",
+    "name": "Минтай",
+    "kcal": 72,
+    "protein": 15.9,
+    "fat": 0.9,
+    "carb": 0.0
+  },
+  {
+    "id": "skumbriya",
+    "name": "Скумбрия",
+    "kcal": 191,
+    "protein": 18.0,
+    "fat": 13.2,
+    "carb": 0.0
+  },
+  {
+    "id": "seld",
+    "name": "Сельдь",
+    "kcal": 246,
+    "protein": 17.7,
+    "fat": 19.5,
+    "carb": 0.0
+  },
+  {
+    "id": "krevetki",
+    "name": "Креветки",
+    "kcal": 95,
+    "protein": 18.9,
+    "fat": 2.2,
+    "carb": 0.0
+  },
+  {
+    "id": "kalmar",
+    "name": "Кальмар",
+    "kcal": 92,
+    "protein": 18.0,
+    "fat": 2.2,
+    "carb": 2.0
+  },
+  {
+    "id": "ikra-krasnaya",
+    "name": "Икра красная",
+    "kcal": 249,
+    "protein": 32.0,
+    "fat": 15.0,
+    "carb": 0.0
+  },
+  {
+    "id": "krabovye-palochki",
+    "name": "Крабовые палочки",
+    "kcal": 88,
+    "protein": 6.0,
+    "fat": 1.0,
+    "carb": 15.0
+  },
+  {
+    "id": "yayco-kurinoe",
+    "name": "Яйцо куриное",
+    "kcal": 157,
+    "protein": 12.7,
+    "fat": 11.5,
+    "carb": 0.7
+  },
+  {
+    "id": "yaichnyy-belok",
+    "name": "Яичный белок",
+    "kcal": 52,
+    "protein": 11.1,
+    "fat": 0.0,
+    "carb": 0.0
+  },
+  {
+    "id": "yaichnica",
+    "name": "Яичница",
+    "kcal": 196,
+    "protein": 14.0,
+    "fat": 15.0,
+    "carb": 1.0
+  },
+  {
+    "id": "moloko-25",
+    "name": "Молоко 2.5%",
+    "kcal": 52,
+    "protein": 2.8,
+    "fat": 2.5,
+    "carb": 4.7
+  },
+  {
+    "id": "moloko-32",
+    "name": "Молоко 3.2%",
+    "kcal": 59,
+    "protein": 2.9,
+    "fat": 3.2,
+    "carb": 4.7
+  },
+  {
+    "id": "kefir-1",
+    "name": "Кефир 1%",
+    "kcal": 40,
+    "protein": 3.0,
+    "fat": 1.0,
+    "carb": 4.0
+  },
+  {
+    "id": "tvorog-5",
+    "name": "Творог 5%",
+    "kcal": 121,
+    "protein": 17.2,
+    "fat": 5.0,
+    "carb": 1.8
+  },
+  {
+    "id": "tvorog-obezzhirennyy",
+    "name": "Творог обезжиренный",
+    "kcal": 71,
+    "protein": 16.5,
+    "fat": 0.5,
+    "carb": 1.3
+  },
+  {
+    "id": "tvorog-9",
+    "name": "Творог 9%",
+    "kcal": 159,
+    "protein": 16.7,
+    "fat": 9.0,
+    "carb": 2.0
+  },
+  {
+    "id": "syr-tverdyy",
+    "name": "Сыр твёрдый",
+    "kcal": 364,
+    "protein": 24.1,
+    "fat": 29.5,
+    "carb": 0.3
+  },
+  {
+    "id": "syr-plavlenyy",
+    "name": "Сыр плавленый",
+    "kcal": 257,
+    "protein": 16.8,
+    "fat": 20.0,
+    "carb": 2.5
+  },
+  {
+    "id": "mocarella",
+    "name": "Моцарелла",
+    "kcal": 280,
+    "protein": 22.0,
+    "fat": 21.0,
+    "carb": 2.2
+  },
+  {
+    "id": "smetana-20",
+    "name": "Сметана 20%",
+    "kcal": 206,
+    "protein": 2.8,
+    "fat": 20.0,
+    "carb": 3.2
+  },
+  {
+    "id": "yogurt-naturalnyy",
+    "name": "Йогурт натуральный",
+    "kcal": 60,
+    "protein": 4.3,
+    "fat": 2.0,
+    "carb": 6.2
+  },
+  {
+    "id": "yogurt-grecheskiy-2",
+    "name": "Йогурт греческий 2%",
+    "kcal": 66,
+    "protein": 9.0,
+    "fat": 2.0,
+    "carb": 3.6
+  },
+  {
+    "id": "slivochnoe-maslo",
+    "name": "Сливочное масло",
+    "kcal": 748,
+    "protein": 0.5,
+    "fat": 82.5,
+    "carb": 0.8
+  },
+  {
+    "id": "slivki-10",
+    "name": "Сливки 10%",
+    "kcal": 118,
+    "protein": 3.0,
+    "fat": 10.0,
+    "carb": 4.0
+  },
+  {
+    "id": "morozhenoe-plombir",
+    "name": "Мороженое пломбир",
+    "kcal": 227,
+    "protein": 3.7,
+    "fat": 15.0,
+    "carb": 20.4
+  },
+  {
+    "id": "grechka-varenaya",
+    "name": "Гречка варёная",
+    "kcal": 92,
+    "protein": 3.4,
+    "fat": 0.6,
+    "carb": 17.1
+  },
+  {
+    "id": "ris-belyy-varenyy",
+    "name": "Рис белый варёный",
+    "kcal": 116,
+    "protein": 2.2,
+    "fat": 0.5,
+    "carb": 24.9
+  },
+  {
+    "id": "ris-buryy-varenyy",
+    "name": "Рис бурый варёный",
+    "kcal": 111,
+    "protein": 2.6,
+    "fat": 0.9,
+    "carb": 22.8
+  },
+  {
+    "id": "ovsyanka-na-vode",
+    "name": "Овсянка на воде",
+    "kcal": 88,
+    "protein": 3.0,
+    "fat": 1.7,
+    "carb": 15.0
+  },
+  {
+    "id": "ovsyanye-hlopya-suhie",
+    "name": "Овсяные хлопья сухие",
+    "kcal": 366,
+    "protein": 11.9,
+    "fat": 7.2,
+    "carb": 62.0
+  },
+  {
+    "id": "psheno-varenoe",
+    "name": "Пшено варёное",
+    "kcal": 90,
+    "protein": 3.0,
+    "fat": 0.7,
+    "carb": 17.0
+  },
+  {
+    "id": "perlovka-varenaya",
+    "name": "Перловка варёная",
+    "kcal": 106,
+    "protein": 3.1,
+    "fat": 0.4,
+    "carb": 22.2
+  },
+  {
+    "id": "bulgur-varenyy",
+    "name": "Булгур варёный",
+    "kcal": 83,
+    "protein": 3.1,
+    "fat": 0.2,
+    "carb": 14.1
+  },
+  {
+    "id": "kinoa-varenaya",
+    "name": "Киноа варёная",
+    "kcal": 120,
+    "protein": 4.4,
+    "fat": 1.9,
+    "carb": 21.3
+  },
+  {
+    "id": "kuskus-varenyy",
+    "name": "Кускус варёный",
+    "kcal": 112,
+    "protein": 3.8,
+    "fat": 0.2,
+    "carb": 23.2
+  },
+  {
+    "id": "makarony-varenye",
+    "name": "Макароны варёные",
+    "kcal": 112,
+    "protein": 3.5,
+    "fat": 0.4,
+    "carb": 23.2
+  },
+  {
+    "id": "pasta-celnozernovaya-varenaya",
+    "name": "Паста цельнозерновая варёная",
+    "kcal": 124,
+    "protein": 5.0,
+    "fat": 0.9,
+    "carb": 25.0
+  },
+  {
+    "id": "kartofel-otvarnoy",
+    "name": "Картофель отварной",
+    "kcal": 82,
+    "protein": 2.0,
+    "fat": 0.4,
+    "carb": 16.7
+  },
+  {
+    "id": "kartofelnoe-pyure",
+    "name": "Картофельное пюре",
+    "kcal": 106,
+    "protein": 2.1,
+    "fat": 3.3,
+    "carb": 15.0
+  },
+  {
+    "id": "kartofel-fri",
+    "name": "Картофель фри",
+    "kcal": 312,
+    "protein": 3.4,
+    "fat": 15.0,
+    "carb": 41.0
+  },
+  {
+    "id": "hleb-belyy",
+    "name": "Хлеб белый",
+    "kcal": 265,
+    "protein": 8.1,
+    "fat": 3.2,
+    "carb": 48.8
+  },
+  {
+    "id": "hleb-rzhanoy",
+    "name": "Хлеб ржаной",
+    "kcal": 210,
+    "protein": 6.6,
+    "fat": 1.2,
+    "carb": 34.2
+  },
+  {
+    "id": "hleb-celnozernovoy",
+    "name": "Хлеб цельнозерновой",
+    "kcal": 229,
+    "protein": 9.0,
+    "fat": 3.0,
+    "carb": 40.0
+  },
+  {
+    "id": "baton-nareznoy",
+    "name": "Батон нарезной",
+    "kcal": 264,
+    "protein": 7.5,
+    "fat": 2.9,
+    "carb": 50.9
+  },
+  {
+    "id": "lavash-tonkiy",
+    "name": "Лаваш тонкий",
+    "kcal": 236,
+    "protein": 7.9,
+    "fat": 1.0,
+    "carb": 47.6
+  },
+  {
+    "id": "hlebcy",
+    "name": "Хлебцы",
+    "kcal": 300,
+    "protein": 11.0,
+    "fat": 2.0,
+    "carb": 57.0
+  },
+  {
+    "id": "bliny",
+    "name": "Блины",
+    "kcal": 189,
+    "protein": 5.5,
+    "fat": 6.0,
+    "carb": 27.0
+  },
+  {
+    "id": "oladi",
+    "name": "Оладьи",
+    "kcal": 210,
+    "protein": 5.0,
+    "fat": 8.0,
+    "carb": 30.0
+  },
+  {
+    "id": "kruassan",
+    "name": "Круассан",
+    "kcal": 406,
+    "protein": 8.0,
+    "fat": 21.0,
+    "carb": 46.0
+  },
+  {
+    "id": "pechene-ovsyanoe",
+    "name": "Печенье овсяное",
+    "kcal": 437,
+    "protein": 6.5,
+    "fat": 14.4,
+    "carb": 71.0
+  },
+  {
+    "id": "pryanik",
+    "name": "Пряник",
+    "kcal": 350,
+    "protein": 4.8,
+    "fat": 2.8,
+    "carb": 77.0
+  },
+  {
+    "id": "chechevica-varenaya",
+    "name": "Чечевица варёная",
+    "kcal": 111,
+    "protein": 7.8,
+    "fat": 0.4,
+    "carb": 20.0
+  },
+  {
+    "id": "fasol-varenaya",
+    "name": "Фасоль варёная",
+    "kcal": 123,
+    "protein": 7.8,
+    "fat": 0.5,
+    "carb": 21.5
+  },
+  {
+    "id": "nut-varenyy",
+    "name": "Нут варёный",
+    "kcal": 164,
+    "protein": 8.9,
+    "fat": 2.6,
+    "carb": 27.4
+  },
+  {
+    "id": "goroh-varenyy",
+    "name": "Горох варёный",
+    "kcal": 60,
+    "protein": 6.0,
+    "fat": 0.0,
+    "carb": 9.0
+  },
+  {
+    "id": "tofu",
+    "name": "Тофу",
+    "kcal": 76,
+    "protein": 8.1,
+    "fat": 4.8,
+    "carb": 1.9
+  },
+  {
+    "id": "greckiy-oreh",
+    "name": "Грецкий орех",
+    "kcal": 654,
+    "protein": 15.2,
+    "fat": 65.2,
+    "carb": 13.7
+  },
+  {
+    "id": "mindal",
+    "name": "Миндаль",
+    "kcal": 579,
+    "protein": 21.2,
+    "fat": 49.9,
+    "carb": 21.6
+  },
+  {
+    "id": "arahis",
+    "name": "Арахис",
+    "kcal": 567,
+    "protein": 26.0,
+    "fat": 49.2,
+    "carb": 16.1
+  },
+  {
+    "id": "keshyu",
+    "name": "Кешью",
+    "kcal": 553,
+    "protein": 18.2,
+    "fat": 43.9,
+    "carb": 30.2
+  },
+  {
+    "id": "funduk",
+    "name": "Фундук",
+    "kcal": 628,
+    "protein": 15.0,
+    "fat": 61.0,
+    "carb": 17.0
+  },
+  {
+    "id": "semena-podsolnechnika",
+    "name": "Семена подсолнечника",
+    "kcal": 601,
+    "protein": 20.7,
+    "fat": 52.9,
+    "carb": 20.0
+  },
+  {
+    "id": "arahisovaya-pasta",
+    "name": "Арахисовая паста",
+    "kcal": 588,
+    "protein": 25.0,
+    "fat": 50.0,
+    "carb": 20.0
+  },
+  {
+    "id": "maslo-podsolnechnoe",
+    "name": "Масло подсолнечное",
+    "kcal": 899,
+    "protein": 0.0,
+    "fat": 99.9,
+    "carb": 0.0
+  },
+  {
+    "id": "maslo-olivkovoe",
+    "name": "Масло оливковое",
+    "kcal": 898,
+    "protein": 0.0,
+    "fat": 99.8,
+    "carb": 0.0
+  },
+  {
+    "id": "ogurec",
+    "name": "Огурец",
+    "kcal": 15,
+    "protein": 0.8,
+    "fat": 0.1,
+    "carb": 2.8
+  },
+  {
+    "id": "pomidor",
+    "name": "Помидор",
+    "kcal": 20,
+    "protein": 1.1,
+    "fat": 0.2,
+    "carb": 3.7
+  },
+  {
+    "id": "kapusta-belokochannaya",
+    "name": "Капуста белокочанная",
+    "kcal": 28,
+    "protein": 1.8,
+    "fat": 0.1,
+    "carb": 4.7
+  },
+  {
+    "id": "brokkoli",
+    "name": "Брокколи",
+    "kcal": 34,
+    "protein": 2.8,
+    "fat": 0.4,
+    "carb": 6.6
+  },
+  {
+    "id": "cvetnaya-kapusta",
+    "name": "Цветная капуста",
+    "kcal": 25,
+    "protein": 1.9,
+    "fat": 0.3,
+    "carb": 4.2
+  },
+  {
+    "id": "morkov",
+    "name": "Морковь",
+    "kcal": 41,
+    "protein": 0.9,
+    "fat": 0.2,
+    "carb": 9.6
+  },
+  {
+    "id": "svekla",
+    "name": "Свёкла",
+    "kcal": 43,
+    "protein": 1.6,
+    "fat": 0.2,
+    "carb": 9.6
+  },
+  {
+    "id": "luk-repchatyy",
+    "name": "Лук репчатый",
+    "kcal": 40,
+    "protein": 1.1,
+    "fat": 0.1,
+    "carb": 9.3
+  },
+  {
+    "id": "perec-bolgarskiy",
+    "name": "Перец болгарский",
+    "kcal": 27,
+    "protein": 1.3,
+    "fat": 0.1,
+    "carb": 5.3
+  },
+  {
+    "id": "kabachok",
+    "name": "Кабачок",
+    "kcal": 24,
+    "protein": 0.6,
+    "fat": 0.3,
+    "carb": 4.6
+  },
+  {
+    "id": "baklazhan",
+    "name": "Баклажан",
+    "kcal": 24,
+    "protein": 1.0,
+    "fat": 0.2,
+    "carb": 4.5
+  },
+  {
+    "id": "shpinat",
+    "name": "Шпинат",
+    "kcal": 23,
+    "protein": 2.9,
+    "fat": 0.4,
+    "carb": 3.6
+  },
+  {
+    "id": "salat-listovoy",
+    "name": "Салат листовой",
+    "kcal": 15,
+    "protein": 1.4,
+    "fat": 0.2,
+    "carb": 2.9
+  },
+  {
+    "id": "griby-shampinony",
+    "name": "Грибы шампиньоны",
+    "kcal": 27,
+    "protein": 4.3,
+    "fat": 1.0,
+    "carb": 1.0
+  },
+  {
+    "id": "kukuruza-konservirovannaya",
+    "name": "Кукуруза консервированная",
+    "kcal": 119,
+    "protein": 3.3,
+    "fat": 1.4,
+    "carb": 22.5
+  },
+  {
+    "id": "goroshek-zelenyy",
+    "name": "Горошек зелёный",
+    "kcal": 73,
+    "protein": 5.0,
+    "fat": 0.2,
+    "carb": 13.3
+  },
+  {
+    "id": "avokado",
+    "name": "Авокадо",
+    "kcal": 160,
+    "protein": 2.0,
+    "fat": 14.7,
+    "carb": 8.5
+  },
+  {
+    "id": "yabloko",
+    "name": "Яблоко",
+    "kcal": 47,
+    "protein": 0.4,
+    "fat": 0.4,
+    "carb": 9.8
+  },
+  {
+    "id": "banan",
+    "name": "Банан",
+    "kcal": 96,
+    "protein": 1.5,
+    "fat": 0.2,
+    "carb": 21.8
+  },
+  {
+    "id": "apelsin",
+    "name": "Апельсин",
+    "kcal": 43,
+    "protein": 0.9,
+    "fat": 0.2,
+    "carb": 8.1
+  },
+  {
+    "id": "mandarin",
+    "name": "Мандарин",
+    "kcal": 38,
+    "protein": 0.8,
+    "fat": 0.2,
+    "carb": 7.5
+  },
+  {
+    "id": "grusha",
+    "name": "Груша",
+    "kcal": 47,
+    "protein": 0.4,
+    "fat": 0.3,
+    "carb": 10.3
+  },
+  {
+    "id": "vinograd",
+    "name": "Виноград",
+    "kcal": 65,
+    "protein": 0.6,
+    "fat": 0.2,
+    "carb": 16.8
+  },
+  {
+    "id": "kivi",
+    "name": "Киви",
+    "kcal": 47,
+    "protein": 1.0,
+    "fat": 0.6,
+    "carb": 10.3
+  },
+  {
+    "id": "klubnika",
+    "name": "Клубника",
+    "kcal": 32,
+    "protein": 0.8,
+    "fat": 0.4,
+    "carb": 7.5
+  },
+  {
+    "id": "chernika",
+    "name": "Черника",
+    "kcal": 44,
+    "protein": 1.1,
+    "fat": 0.4,
+    "carb": 8.4
+  },
+  {
+    "id": "malina",
+    "name": "Малина",
+    "kcal": 46,
+    "protein": 0.8,
+    "fat": 0.5,
+    "carb": 8.3
+  },
+  {
+    "id": "ananas",
+    "name": "Ананас",
+    "kcal": 49,
+    "protein": 0.4,
+    "fat": 0.2,
+    "carb": 11.5
+  },
+  {
+    "id": "mango",
+    "name": "Манго",
+    "kcal": 60,
+    "protein": 0.8,
+    "fat": 0.4,
+    "carb": 15.0
+  },
+  {
+    "id": "arbuz",
+    "name": "Арбуз",
+    "kcal": 27,
+    "protein": 0.6,
+    "fat": 0.1,
+    "carb": 5.8
+  },
+  {
+    "id": "finiki",
+    "name": "Финики",
+    "kcal": 292,
+    "protein": 2.5,
+    "fat": 0.5,
+    "carb": 69.2
+  },
+  {
+    "id": "izyum",
+    "name": "Изюм",
+    "kcal": 264,
+    "protein": 2.9,
+    "fat": 0.6,
+    "carb": 66.0
+  },
+  {
+    "id": "kuraga",
+    "name": "Курага",
+    "kcal": 215,
+    "protein": 5.2,
+    "fat": 0.3,
+    "carb": 51.0
+  },
+  {
+    "id": "shokolad-molochnyy",
+    "name": "Шоколад молочный",
+    "kcal": 534,
+    "protein": 7.7,
+    "fat": 30.0,
+    "carb": 60.0
+  },
+  {
+    "id": "shokolad-temnyy-70",
+    "name": "Шоколад тёмный 70%",
+    "kcal": 546,
+    "protein": 6.2,
+    "fat": 35.4,
+    "carb": 48.2
+  },
+  {
+    "id": "med",
+    "name": "Мёд",
+    "kcal": 329,
+    "protein": 0.8,
+    "fat": 0.0,
+    "carb": 81.5
+  },
+  {
+    "id": "sahar",
+    "name": "Сахар",
+    "kcal": 399,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carb": 99.7
+  },
+  {
+    "id": "dzhem",
+    "name": "Джем",
+    "kcal": 250,
+    "protein": 0.5,
+    "fat": 0.1,
+    "carb": 62.0
+  },
+  {
+    "id": "chipsy-kartofelnye",
+    "name": "Чипсы картофельные",
+    "kcal": 526,
+    "protein": 5.5,
+    "fat": 30.0,
+    "carb": 53.0
+  },
+  {
+    "id": "popkorn",
+    "name": "Попкорн",
+    "kcal": 375,
+    "protein": 11.0,
+    "fat": 4.0,
+    "carb": 78.0
+  },
+  {
+    "id": "proteinovyy-batonchik",
+    "name": "Протеиновый батончик",
+    "kcal": 350,
+    "protein": 30.0,
+    "fat": 10.0,
+    "carb": 35.0
+  },
+  {
+    "id": "halva",
+    "name": "Халва",
+    "kcal": 522,
+    "protein": 11.6,
+    "fat": 29.7,
+    "carb": 54.0
+  },
+  {
+    "id": "zefir",
+    "name": "Зефир",
+    "kcal": 304,
+    "protein": 0.8,
+    "fat": 0.1,
+    "carb": 78.3
+  },
+  {
+    "id": "borsch",
+    "name": "Борщ",
+    "kcal": 49,
+    "protein": 1.1,
+    "fat": 2.2,
+    "carb": 6.7
+  },
+  {
+    "id": "grechka-s-kuricey",
+    "name": "Гречка с курицей",
+    "kcal": 140,
+    "protein": 9.0,
+    "fat": 4.0,
+    "carb": 17.0
+  },
+  {
+    "id": "plov",
+    "name": "Плов",
+    "kcal": 190,
+    "protein": 4.2,
+    "fat": 6.0,
+    "carb": 29.0
+  },
+  {
+    "id": "pelmeni-varenye",
+    "name": "Пельмени варёные",
+    "kcal": 275,
+    "protein": 11.9,
+    "fat": 12.4,
+    "carb": 29.0
+  },
+  {
+    "id": "picca",
+    "name": "Пицца",
+    "kcal": 266,
+    "protein": 11.0,
+    "fat": 10.0,
+    "carb": 33.0
+  },
+  {
+    "id": "burger",
+    "name": "Бургер",
+    "kcal": 295,
+    "protein": 17.0,
+    "fat": 14.0,
+    "carb": 24.0
+  },
+  {
+    "id": "sushi-roll",
+    "name": "Суши ролл",
+    "kcal": 145,
+    "protein": 5.0,
+    "fat": 4.0,
+    "carb": 22.0
+  },
+  {
+    "id": "salat-cezar",
+    "name": "Салат Цезарь",
+    "kcal": 190,
+    "protein": 9.0,
+    "fat": 14.0,
+    "carb": 6.0
+  },
+  {
+    "id": "omlet-s-syrom",
+    "name": "Омлет с сыром",
+    "kcal": 210,
+    "protein": 13.0,
+    "fat": 16.0,
+    "carb": 2.0
+  },
+  {
+    "id": "syrniki",
+    "name": "Сырники",
+    "kcal": 220,
+    "protein": 15.0,
+    "fat": 8.0,
+    "carb": 22.0
+  },
+  {
+    "id": "sok-apelsinovyy",
+    "name": "Сок апельсиновый",
+    "kcal": 45,
+    "protein": 0.7,
+    "fat": 0.2,
+    "carb": 10.4
+  },
+  {
+    "id": "kola",
+    "name": "Кола",
+    "kcal": 42,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carb": 10.6
+  },
+  {
+    "id": "kofe-s-molokom",
+    "name": "Кофе с молоком",
+    "kcal": 58,
+    "protein": 3.0,
+    "fat": 3.0,
+    "carb": 4.0
+  },
+  {
+    "id": "latte",
+    "name": "Латте",
+    "kcal": 44,
+    "protein": 2.4,
+    "fat": 1.5,
+    "carb": 5.3
+  },
+  {
+    "id": "pivo-svetloe",
+    "name": "Пиво светлое",
+    "kcal": 43,
+    "protein": 0.5,
+    "fat": 0.0,
+    "carb": 3.6
+  },
+  {
+    "id": "vino-krasnoe-suhoe",
+    "name": "Вино красное сухое",
+    "kcal": 68,
+    "protein": 0.2,
+    "fat": 0.0,
+    "carb": 0.3
+  },
+  {
+    "id": "proteinovyy-kokteyl-voda",
+    "name": "Протеиновый коктейль (вода)",
+    "kcal": 103,
+    "protein": 24.0,
+    "fat": 1.0,
+    "carb": 2.0
+  },
+  {
+    "id": "kompot",
+    "name": "Компот",
+    "kcal": 60,
+    "protein": 0.1,
+    "fat": 0.0,
+    "carb": 15.0
+  }
+]

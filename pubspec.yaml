@@ -62,6 +62,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/exercises/       # exercise seed data (+ media from full import)
+    - assets/nutrition/       # food catalog seed data
     - assets/branding/        # app icon / splash source art
 
 # App launcher icon — regenerate with: dart run flutter_launcher_icons

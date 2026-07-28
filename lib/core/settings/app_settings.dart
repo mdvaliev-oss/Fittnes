@@ -22,6 +22,10 @@ class AppSettings {
     this.remindersEnabled = false,
     this.reminderHour = 18,
     this.reminderMinute = 0,
+    this.nutritionKcal = 2000,
+    this.nutritionProtein = 150,
+    this.nutritionFat = 65,
+    this.nutritionCarb = 200,
   });
 
   final ThemeMode themeMode;
@@ -29,6 +33,13 @@ class AppSettings {
   final bool remindersEnabled;
   final int reminderHour;
   final int reminderMinute;
+
+  // Manual daily nutrition goal (kept as raw values so `core` stays free of
+  // feature imports; the nutrition layer maps these to its NutritionTargets).
+  final double nutritionKcal;
+  final double nutritionProtein;
+  final double nutritionFat;
+  final double nutritionCarb;
 
   TimeOfDay get reminderTime =>
       TimeOfDay(hour: reminderHour, minute: reminderMinute);
@@ -39,6 +50,10 @@ class AppSettings {
     bool? remindersEnabled,
     int? reminderHour,
     int? reminderMinute,
+    double? nutritionKcal,
+    double? nutritionProtein,
+    double? nutritionFat,
+    double? nutritionCarb,
   }) =>
       AppSettings(
         themeMode: themeMode ?? this.themeMode,
@@ -46,6 +61,10 @@ class AppSettings {
         remindersEnabled: remindersEnabled ?? this.remindersEnabled,
         reminderHour: reminderHour ?? this.reminderHour,
         reminderMinute: reminderMinute ?? this.reminderMinute,
+        nutritionKcal: nutritionKcal ?? this.nutritionKcal,
+        nutritionProtein: nutritionProtein ?? this.nutritionProtein,
+        nutritionFat: nutritionFat ?? this.nutritionFat,
+        nutritionCarb: nutritionCarb ?? this.nutritionCarb,
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,6 +73,10 @@ class AppSettings {
         'remindersEnabled': remindersEnabled,
         'reminderHour': reminderHour,
         'reminderMinute': reminderMinute,
+        'nutritionKcal': nutritionKcal,
+        'nutritionProtein': nutritionProtein,
+        'nutritionFat': nutritionFat,
+        'nutritionCarb': nutritionCarb,
       };
 
   factory AppSettings.fromJson(Map<String, dynamic> j) => AppSettings(
@@ -63,6 +86,10 @@ class AppSettings {
         remindersEnabled: j['remindersEnabled'] as bool? ?? false,
         reminderHour: (j['reminderHour'] as num?)?.toInt() ?? 18,
         reminderMinute: (j['reminderMinute'] as num?)?.toInt() ?? 0,
+        nutritionKcal: (j['nutritionKcal'] as num?)?.toDouble() ?? 2000,
+        nutritionProtein: (j['nutritionProtein'] as num?)?.toDouble() ?? 150,
+        nutritionFat: (j['nutritionFat'] as num?)?.toDouble() ?? 65,
+        nutritionCarb: (j['nutritionCarb'] as num?)?.toDouble() ?? 200,
       );
 }
 
@@ -97,6 +124,21 @@ class AppSettingsController extends Notifier<AppSettings> {
       _save(state.copyWith(themeMode: mode));
 
   Future<void> setUnit(WeightUnit unit) => _save(state.copyWith(unit: unit));
+
+  Future<void> setNutritionTargets({
+    double? kcal,
+    double? protein,
+    double? fat,
+    double? carb,
+  }) =>
+      _save(
+        state.copyWith(
+          nutritionKcal: kcal,
+          nutritionProtein: protein,
+          nutritionFat: fat,
+          nutritionCarb: carb,
+        ),
+      );
 
   Future<void> setReminders({bool? enabled, int? hour, int? minute}) => _save(
         state.copyWith(
