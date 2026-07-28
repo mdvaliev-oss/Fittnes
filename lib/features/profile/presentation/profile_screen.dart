@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/app_info.dart';
 import '../../../core/backup/backup_service.dart';
 import '../../../core/reminders/reminder_service.dart';
 import '../../../core/settings/app_settings.dart';
@@ -362,6 +363,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
               ],
             ),
+            const SizedBox(height: AppSpacing.sm),
+            Center(
+              child: Text(
+                'Fittnes · версия $kAppVersion',
+                style: text.labelSmall?.copyWith(color: context.glass.textLow),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.md),
           ],
         ),
       ),
