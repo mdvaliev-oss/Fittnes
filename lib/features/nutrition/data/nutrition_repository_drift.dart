@@ -64,6 +64,19 @@ class NutritionRepositoryDrift implements NutritionRepository {
   }
 
   @override
+  Future<void> clearDay(DateTime day) async {
+    final start = _dayKey(day);
+    final end = start.add(const Duration(days: 1));
+    await (_db.delete(_db.foodEntries)
+          ..where(
+            (t) =>
+                t.day.isBiggerOrEqualValue(start) &
+                t.day.isSmallerThanValue(end),
+          ))
+        .go();
+  }
+
+  @override
   Future<List<FoodItem>> customFoods() async {
     final rows = await (_db.select(_db.customFoods)
           ..orderBy([(t) => OrderingTerm.desc(t.id)]))

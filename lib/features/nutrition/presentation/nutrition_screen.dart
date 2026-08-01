@@ -45,6 +45,11 @@ class NutritionScreen extends ConsumerWidget {
                 children: [
                   Text('Питание', style: text.headlineLarge),
                   const Spacer(),
+                  IconButton(
+                    onPressed: () => context.push(AppRoutes.mealPlans),
+                    tooltip: 'Готовые меню',
+                    icon: const Icon(Icons.restaurant_menu_rounded),
+                  ),
                   TextButton.icon(
                     onPressed: () => context.push(AppRoutes.nutritionTargets),
                     icon: const Icon(Icons.flag_rounded, size: 18),

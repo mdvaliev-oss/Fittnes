@@ -34,6 +34,12 @@ class NutritionRepositoryMemory implements NutritionRepository {
   }
 
   @override
+  Future<void> clearDay(DateTime day) async {
+    final key = _dayKey(day);
+    _entries.removeWhere((e) => _dayKey(e.day) == key);
+  }
+
+  @override
   Future<List<FoodItem>> customFoods() async =>
       _customFoods.reversed.toList(growable: false);
 

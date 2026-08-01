@@ -8,6 +8,8 @@ import '../../features/home/presentation/home_screen.dart';
 import '../../features/nutrition/domain/entities/meal_type.dart';
 import '../../features/nutrition/presentation/add_food_screen.dart';
 import '../../features/nutrition/presentation/custom_food_editor.dart';
+import '../../features/nutrition/presentation/meal_plan_detail_screen.dart';
+import '../../features/nutrition/presentation/meal_plans_screen.dart';
 import '../../features/nutrition/presentation/nutrition_screen.dart';
 import '../../features/nutrition/presentation/nutrition_targets_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
@@ -187,6 +189,28 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => CustomTransitionPage<void>(
           key: state.pageKey,
           child: const CustomFoodEditor(),
+          transitionDuration: const Duration(milliseconds: 300),
+          transitionsBuilder: (context, animation, secondary, child) =>
+              FadeTransition(opacity: animation, child: child),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootKey,
+        path: AppRoutes.mealPlans,
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: const MealPlansScreen(),
+          transitionDuration: const Duration(milliseconds: 300),
+          transitionsBuilder: (context, animation, secondary, child) =>
+              FadeTransition(opacity: animation, child: child),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootKey,
+        path: '/nutrition/plans/:id',
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: MealPlanDetailScreen(planId: state.pathParameters['id']!),
           transitionDuration: const Duration(milliseconds: 300),
           transitionsBuilder: (context, animation, secondary, child) =>
               FadeTransition(opacity: animation, child: child),

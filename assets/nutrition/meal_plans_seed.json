@@ -1,0 +1,486 @@
+[
+  {
+    "id": "day-1",
+    "title": "День 1 · Курица и гречка",
+    "subtitle": "Классика: овсянка, курица, творог",
+    "items": [
+      {
+        "meal": "breakfast",
+        "foodId": "ovsyanye-hlopya-suhie",
+        "grams": 70
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "moloko-25",
+        "grams": 200
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "banan",
+        "grams": 110
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "med",
+        "grams": 15
+      },
+      {
+        "meal": "lunch",
+        "foodId": "kurinaya-grudka-otvarnaya",
+        "grams": 180
+      },
+      {
+        "meal": "lunch",
+        "foodId": "grechka-varenaya",
+        "grams": 300
+      },
+      {
+        "meal": "lunch",
+        "foodId": "salat-ovoshchnoy",
+        "grams": 180
+      },
+      {
+        "meal": "dinner",
+        "foodId": "kurinaya-grudka-otvarnaya",
+        "grams": 160
+      },
+      {
+        "meal": "dinner",
+        "foodId": "otvarnye-ovoshchi",
+        "grams": 200
+      },
+      {
+        "meal": "dinner",
+        "foodId": "hleb-rzhanoy",
+        "grams": 60
+      },
+      {
+        "meal": "snack",
+        "foodId": "tvorog-5",
+        "grams": 200
+      },
+      {
+        "meal": "snack",
+        "foodId": "yabloko",
+        "grams": 150
+      },
+      {
+        "meal": "snack",
+        "foodId": "greckiy-oreh",
+        "grams": 25
+      }
+    ]
+  },
+  {
+    "id": "day-2",
+    "title": "День 2 · Чечевица и говядина",
+    "subtitle": "Растительный белок + красное мясо",
+    "items": [
+      {
+        "meal": "breakfast",
+        "foodId": "yayco-kurinoe",
+        "grams": 150
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "hleb-celnozernovoy",
+        "grams": 60
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "syr-tverdyy",
+        "grams": 30
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "pomidor",
+        "grams": 100
+      },
+      {
+        "meal": "lunch",
+        "foodId": "govyadina-otvarnaya",
+        "grams": 130
+      },
+      {
+        "meal": "lunch",
+        "foodId": "chechevica-varenaya",
+        "grams": 250
+      },
+      {
+        "meal": "lunch",
+        "foodId": "salat-kapusta-morkov",
+        "grams": 150
+      },
+      {
+        "meal": "dinner",
+        "foodId": "indeyka-file",
+        "grams": 160
+      },
+      {
+        "meal": "dinner",
+        "foodId": "ris-buryy-varenyy",
+        "grams": 200
+      },
+      {
+        "meal": "dinner",
+        "foodId": "otvarnye-ovoshchi",
+        "grams": 150
+      },
+      {
+        "meal": "snack",
+        "foodId": "yogurt-naturalnyy",
+        "grams": 200
+      },
+      {
+        "meal": "snack",
+        "foodId": "grusha",
+        "grams": 150
+      }
+    ]
+  },
+  {
+    "id": "day-3",
+    "title": "День 3 · Нут и индейка",
+    "subtitle": "Лёгкий день с бобовыми",
+    "items": [
+      {
+        "meal": "breakfast",
+        "foodId": "ovsyanka-na-vode",
+        "grams": 300
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "yabloko",
+        "grams": 150
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "mindal",
+        "grams": 20
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "med",
+        "grams": 15
+      },
+      {
+        "meal": "lunch",
+        "foodId": "indeyka-file",
+        "grams": 170
+      },
+      {
+        "meal": "lunch",
+        "foodId": "nut-varenyy",
+        "grams": 200
+      },
+      {
+        "meal": "lunch",
+        "foodId": "salat-ovoshchnoy",
+        "grams": 200
+      },
+      {
+        "meal": "lunch",
+        "foodId": "hleb-rzhanoy",
+        "grams": 50
+      },
+      {
+        "meal": "dinner",
+        "foodId": "kurinaya-grudka-otvarnaya",
+        "grams": 190
+      },
+      {
+        "meal": "dinner",
+        "foodId": "kartofel-otvarnoy",
+        "grams": 250
+      },
+      {
+        "meal": "dinner",
+        "foodId": "otvarnye-ovoshchi",
+        "grams": 150
+      },
+      {
+        "meal": "snack",
+        "foodId": "tvorog-obezzhirennyy",
+        "grams": 220
+      },
+      {
+        "meal": "snack",
+        "foodId": "banan",
+        "grams": 130
+      }
+    ]
+  },
+  {
+    "id": "day-4",
+    "title": "День 4 · Фасоль и курица",
+    "subtitle": "Сытный день, много клетчатки",
+    "items": [
+      {
+        "meal": "breakfast",
+        "foodId": "tvorog-5",
+        "grams": 200
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "hleb-celnozernovoy",
+        "grams": 60
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "med",
+        "grams": 20
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "greckiy-oreh",
+        "grams": 15
+      },
+      {
+        "meal": "lunch",
+        "foodId": "kurinoe-file-zharenoe",
+        "grams": 160
+      },
+      {
+        "meal": "lunch",
+        "foodId": "fasol-varenaya",
+        "grams": 200
+      },
+      {
+        "meal": "lunch",
+        "foodId": "salat-kapusta-morkov",
+        "grams": 180
+      },
+      {
+        "meal": "dinner",
+        "foodId": "kurinaya-grudka-otvarnaya",
+        "grams": 160
+      },
+      {
+        "meal": "dinner",
+        "foodId": "grechka-varenaya",
+        "grams": 200
+      },
+      {
+        "meal": "dinner",
+        "foodId": "ovoshchnoe-ragu",
+        "grams": 150
+      },
+      {
+        "meal": "snack",
+        "foodId": "kefir-1",
+        "grams": 250
+      },
+      {
+        "meal": "snack",
+        "foodId": "yabloko",
+        "grams": 150
+      }
+    ]
+  },
+  {
+    "id": "day-5",
+    "title": "День 5 · Рис и рыба",
+    "subtitle": "Треска и бурый рис",
+    "items": [
+      {
+        "meal": "breakfast",
+        "foodId": "ovsyanye-hlopya-suhie",
+        "grams": 70
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "kefir-1",
+        "grams": 200
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "grusha",
+        "grams": 150
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "med",
+        "grams": 15
+      },
+      {
+        "meal": "lunch",
+        "foodId": "treska",
+        "grams": 250
+      },
+      {
+        "meal": "lunch",
+        "foodId": "ris-buryy-varenyy",
+        "grams": 300
+      },
+      {
+        "meal": "lunch",
+        "foodId": "salat-ovoshchnoy",
+        "grams": 200
+      },
+      {
+        "meal": "dinner",
+        "foodId": "kurinaya-grudka-otvarnaya",
+        "grams": 180
+      },
+      {
+        "meal": "dinner",
+        "foodId": "otvarnye-ovoshchi",
+        "grams": 200
+      },
+      {
+        "meal": "dinner",
+        "foodId": "hleb-rzhanoy",
+        "grams": 60
+      },
+      {
+        "meal": "snack",
+        "foodId": "tvorog-9",
+        "grams": 180
+      },
+      {
+        "meal": "snack",
+        "foodId": "vinograd",
+        "grams": 150
+      },
+      {
+        "meal": "snack",
+        "foodId": "mindal",
+        "grams": 20
+      }
+    ]
+  },
+  {
+    "id": "day-6",
+    "title": "День 6 · Плов и овощи",
+    "subtitle": "Национальное блюдо в меру",
+    "items": [
+      {
+        "meal": "breakfast",
+        "foodId": "yayco-kurinoe",
+        "grams": 100
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "yaichnyy-belok",
+        "grams": 100
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "hleb-celnozernovoy",
+        "grams": 60
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "syr-tverdyy",
+        "grams": 25
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "ogurec",
+        "grams": 100
+      },
+      {
+        "meal": "lunch",
+        "foodId": "plov",
+        "grams": 350
+      },
+      {
+        "meal": "lunch",
+        "foodId": "salat-kapusta-morkov",
+        "grams": 200
+      },
+      {
+        "meal": "dinner",
+        "foodId": "kurinaya-grudka-otvarnaya",
+        "grams": 170
+      },
+      {
+        "meal": "dinner",
+        "foodId": "chechevica-varenaya",
+        "grams": 200
+      },
+      {
+        "meal": "dinner",
+        "foodId": "otvarnye-ovoshchi",
+        "grams": 150
+      },
+      {
+        "meal": "snack",
+        "foodId": "yogurt-naturalnyy",
+        "grams": 200
+      },
+      {
+        "meal": "snack",
+        "foodId": "yabloko",
+        "grams": 150
+      }
+    ]
+  },
+  {
+    "id": "day-7",
+    "title": "День 7 · Курица и макароны",
+    "subtitle": "Восстановительный день",
+    "items": [
+      {
+        "meal": "breakfast",
+        "foodId": "ovsyanka-na-vode",
+        "grams": 250
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "banan",
+        "grams": 110
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "greckiy-oreh",
+        "grams": 20
+      },
+      {
+        "meal": "breakfast",
+        "foodId": "med",
+        "grams": 15
+      },
+      {
+        "meal": "lunch",
+        "foodId": "kurinoe-file-zharenoe",
+        "grams": 160
+      },
+      {
+        "meal": "lunch",
+        "foodId": "makarony-varenye",
+        "grams": 250
+      },
+      {
+        "meal": "lunch",
+        "foodId": "salat-ovoshchnoy",
+        "grams": 200
+      },
+      {
+        "meal": "dinner",
+        "foodId": "indeyka-file",
+        "grams": 170
+      },
+      {
+        "meal": "dinner",
+        "foodId": "kartofel-otvarnoy",
+        "grams": 200
+      },
+      {
+        "meal": "dinner",
+        "foodId": "ovoshchnoe-ragu",
+        "grams": 150
+      },
+      {
+        "meal": "snack",
+        "foodId": "tvorog-5",
+        "grams": 170
+      },
+      {
+        "meal": "snack",
+        "foodId": "grusha",
+        "grams": 150
+      }
+    ]
+  }
+]

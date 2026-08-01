@@ -20,6 +20,8 @@ abstract final class AppRoutes {
   static const String nutritionTargets = '/nutrition/targets';
   static const String addFood = '/nutrition/add';
   static const String customFood = '/nutrition/custom-food';
+  static const String mealPlans = '/nutrition/plans';
+  static String mealPlanDetail(String id) => '/nutrition/plans/$id';
 
   static String exerciseDetail(String id) => '/exercises/$id';
   static String programDetail(String id) => '/programs/$id';

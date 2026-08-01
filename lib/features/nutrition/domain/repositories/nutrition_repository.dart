@@ -14,6 +14,9 @@ abstract interface class NutritionRepository {
 
   Future<void> removeEntry(int id);
 
+  /// Deletes every diary entry on [day] (used by "replace day" meal plans).
+  Future<void> clearDay(DateTime day);
+
   /// User-authored foods (most-recent first).
   Future<List<FoodItem>> customFoods();
 

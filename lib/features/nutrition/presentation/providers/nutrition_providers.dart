@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/settings/app_settings.dart';
 import '../../../workout/presentation/providers/workout_providers.dart';
 import '../../data/food_local_data_source.dart';
+import '../../data/meal_plan_local_data_source.dart';
 import '../../data/nutrition_repository_drift.dart';
 import '../../domain/entities/food_item.dart';
+import '../../domain/entities/meal_plan.dart';
 import '../../domain/entities/nutrition_targets.dart';
 import '../../domain/nutrition_math.dart';
 import '../../domain/repositories/nutrition_repository.dart';
@@ -21,6 +23,21 @@ final nutritionRepositoryProvider = Provider<NutritionRepository>((ref) {
 /// The read-only bundled food catalog (macros per 100 g).
 final foodCatalogProvider = FutureProvider<List<FoodItem>>((ref) {
   return ref.watch(foodLocalDataSourceProvider).loadAll();
+});
+
+/// Food catalog indexed by id (for resolving meal plans).
+final foodCatalogByIdProvider =
+    FutureProvider<Map<String, FoodItem>>((ref) async {
+  final all = await ref.watch(foodCatalogProvider.future);
+  return {for (final f in all) f.id: f};
+});
+
+/// Ready-made meal plans data source + list.
+final mealPlanLocalDataSourceProvider =
+    Provider<MealPlanLocalDataSource>((ref) => MealPlanLocalDataSource());
+
+final mealPlansProvider = FutureProvider<List<MealPlan>>((ref) {
+  return ref.watch(mealPlanLocalDataSourceProvider).loadAll();
 });
 
 /// The user's custom foods.

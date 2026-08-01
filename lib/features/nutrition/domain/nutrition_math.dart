@@ -1,5 +1,6 @@
 import 'entities/food_entry.dart';
 import 'entities/food_item.dart';
+import 'entities/meal_plan.dart';
 import 'entities/meal_type.dart';
 
 /// A macro total (kcal + grams of each macronutrient). Used for a meal, a day,
@@ -34,6 +35,49 @@ MacroTotals macrosFor(FoodItem food, double grams) {
     fat: food.fatPer100 * k,
     carb: food.carbPer100 * k,
   );
+}
+
+/// Resolves a ready-made [plan] into diary entries for [day], looking up each
+/// item's food in [catalog] (id → FoodItem) and snapshotting its macros. Items
+/// whose food is missing from the catalog are skipped.
+List<FoodEntry> resolveMealPlan(
+  MealPlan plan,
+  Map<String, FoodItem> catalog,
+  DateTime day, {
+  DateTime? now,
+}) {
+  final createdAt = now ?? DateTime.now();
+  final entries = <FoodEntry>[];
+  for (final item in plan.items) {
+    final food = catalog[item.foodId];
+    if (food == null) continue;
+    final m = macrosFor(food, item.grams);
+    entries.add(
+      FoodEntry(
+        day: DateTime(day.year, day.month, day.day),
+        meal: item.meal,
+        name: food.name,
+        grams: item.grams,
+        kcal: m.kcal,
+        protein: m.protein,
+        fat: m.fat,
+        carb: m.carb,
+        createdAt: createdAt,
+      ),
+    );
+  }
+  return entries;
+}
+
+/// Total macros of a [plan] given the [catalog] (id → FoodItem).
+MacroTotals mealPlanTotals(MealPlan plan, Map<String, FoodItem> catalog) {
+  var total = const MacroTotals();
+  for (final item in plan.items) {
+    final food = catalog[item.foodId];
+    if (food == null) continue;
+    total += macrosFor(food, item.grams);
+  }
+  return total;
 }
 
 /// Sum of a list of diary entries.
