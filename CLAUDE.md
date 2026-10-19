@@ -25,7 +25,7 @@
 | Каталог упражнений | bundled JSON → in-memory репозиторий (read-only, без БД) |
 | Графики | fl_chart |
 | Напоминания | flutter_local_notifications + timezone |
-| Прочее | flutter_animate, flutter_svg, google_fonts (Inter) |
+| Прочее | flutter_svg, google_fonts (Inter); анимации — свои виджеты в `core/widgets` |
 
 ## Архитектура и конвенции
 
@@ -61,7 +61,8 @@ lib/
    ├─ progress/    # графики силы/тоннажа + личные рекорды (fl_chart)
    ├─ recovery/    # модель усталости мышц → heat-карта (MuscleBodyMap)
    ├─ recommendations/  # ProgressionEngine (двойная прогрессия × RPE/RIR)
-   └─ profile/     # профиль, настройки, напоминания, экспорт/импорт
+   ├─ bodyweight/  # вес тела: ввод кг/lb, история, график (Drift body_weights)
+   └─ profile/     # профиль, настройки (единицы, таймер отдыха), экспорт/импорт
 ```
 
 ## Дизайн-система
@@ -79,8 +80,10 @@ lib/
    медиа — подставляется через `Exercise.mediaUrl`) и `MuscleMap`/`MuscleBodyMap`
    (CustomPainter, спереди/сзади). 3D — отложено.
 2. **Каталог упражнений**: открытый датасет (схема совместима с
-   `free-exercise-db`, MIT). Сейчас `assets/exercises/exercises_seed.json` — ~20
-   курируемых упражнений; полный импорт = замена JSON (DTO уже понимает схему).
+   `free-exercise-db`, MIT) + своё поле `pattern`. Сейчас
+   `assets/exercises/exercises_seed.json` — 131 курируемое упражнение на русском;
+   тест `seed_integrity_test` требует ≥120 записей, описание ≥80 символов,
+   явный `pattern`, уровень/оборудование без фолбэков.
 3. **Бэкенд**: local-only. Drift для тренировок, SharedPreferences для остального.
 4. **БД-соединение**: `lib/core/database/app_database.dart` использует
    `NativeDatabase` (dart:io) — это для мобильных. **Web не является целью**;
@@ -104,6 +107,25 @@ lib/
   **schema v3**: `onUpgrade` дропает `custom_foods`/`food_entries` и создаёт
   `body_weights`. Бэкап schemaVersion 3; старые бэкапы v1/v2 импортируются,
   ключи `customFoods`/`foodEntries` игнорируются. Питание больше не добавлять.
+- [x] 8 — Переработка v0.4.0 (пользователь: «убрать питание, вес в LB/кг,
+  обновить упражнения, добавить анимации»):
+  - `features/bodyweight` — вес тела: ввод в кг/lb (хранение в кг через
+    `WeightUnitX.toKg`), история + дельты, график, карточка на Главной и в
+    «Прогрессе», бэкап `bodyWeights`, синк с `UserProfile.weightKg`.
+    Переключатель `WeightUnitToggle` (кг|lb) в шапке тренировки + тапабельный
+    суффикс в `SetRow` (переформатирует поля вживую).
+  - Упражнения: сид 131 запись с полем `pattern` (генератор в scratchpad
+    `seed/build_seed.py`), `MovementPattern` в domain (31 паттерн + fallback
+    классификатор). Анимация техники — `widgets/technique/` (rig.dart: IK,
+    keyframes.dart: позы/фикстуры/акценты, side/front painters, figure_style).
+    Каталог: `MuscleGroup` чипы, лист фильтров, избранное
+    (`favoriteExercisesProvider`, prefs `exercises.favorites`), список/сетка.
+  - `AppSettings.defaultRestSeconds` (15–600) → `RestDurationPicker` в Профиле
+    и по шестерёнке в `RestTimerBar`; `addExerciseRef` берёт отдых из настроек.
+  - Микро-анимации: `core/widgets/pressable_scale.dart`, `staggered_fade_in.dart`,
+    пружинящая галочка подхода, пульс таймера, `pr_celebration.dart`
+    (`beatsPersonalRecord` в domain/services). Reduce-motion уважается.
+  - `flutter_animate` больше не используется (убран из pubspec).
 
 **Версия приложения:** держи `pubspec.yaml` `version:` и
 `lib/core/app_info.dart` `kAppVersion` в синхроне; версия видна в Профиле.
