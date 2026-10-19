@@ -12,6 +12,7 @@ import '../../../core/units/weight_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../exercises/domain/entities/exercise_enums.dart';
+import '../../workout/presentation/widgets/rest_duration_picker.dart';
 import '../domain/user_profile.dart';
 import 'profile_providers.dart';
 
@@ -263,6 +264,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ],
                   ),
                 ),
+                const SizedBox(height: AppSpacing.sm),
+                const RestDurationPicker(),
               ],
             ),
             _Section(

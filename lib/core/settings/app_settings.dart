@@ -22,13 +22,24 @@ class AppSettings {
     this.remindersEnabled = false,
     this.reminderHour = 18,
     this.reminderMinute = 0,
+    this.defaultRestSeconds = kDefaultRestSeconds,
   });
+
+  /// Rest-timer default for a freshly added exercise, in seconds.
+  static const int kDefaultRestSeconds = 120;
+  static const int minRestSeconds = 15;
+  static const int maxRestSeconds = 600;
+  static const int restStep = 15;
 
   final ThemeMode themeMode;
   final WeightUnit unit;
   final bool remindersEnabled;
   final int reminderHour;
   final int reminderMinute;
+
+  /// Seconds of rest started automatically after a completed set, for
+  /// exercises added from now on (each entry can still override it).
+  final int defaultRestSeconds;
 
   TimeOfDay get reminderTime =>
       TimeOfDay(hour: reminderHour, minute: reminderMinute);
@@ -39,6 +50,7 @@ class AppSettings {
     bool? remindersEnabled,
     int? reminderHour,
     int? reminderMinute,
+    int? defaultRestSeconds,
   }) =>
       AppSettings(
         themeMode: themeMode ?? this.themeMode,
@@ -46,6 +58,7 @@ class AppSettings {
         remindersEnabled: remindersEnabled ?? this.remindersEnabled,
         reminderHour: reminderHour ?? this.reminderHour,
         reminderMinute: reminderMinute ?? this.reminderMinute,
+        defaultRestSeconds: defaultRestSeconds ?? this.defaultRestSeconds,
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,6 +67,7 @@ class AppSettings {
         'remindersEnabled': remindersEnabled,
         'reminderHour': reminderHour,
         'reminderMinute': reminderMinute,
+        'defaultRestSeconds': defaultRestSeconds,
       };
 
   /// Unknown keys (e.g. the removed nutrition goal from older builds) are
@@ -65,7 +79,14 @@ class AppSettings {
         remindersEnabled: j['remindersEnabled'] as bool? ?? false,
         reminderHour: (j['reminderHour'] as num?)?.toInt() ?? 18,
         reminderMinute: (j['reminderMinute'] as num?)?.toInt() ?? 0,
+        defaultRestSeconds: clampRest(
+          (j['defaultRestSeconds'] as num?)?.toInt() ?? kDefaultRestSeconds,
+        ),
       );
+
+  /// Keeps a rest duration inside the supported range.
+  static int clampRest(int seconds) =>
+      seconds.clamp(minRestSeconds, maxRestSeconds);
 }
 
 /// Injected in `main()` after `SharedPreferences.getInstance()`.
@@ -99,6 +120,10 @@ class AppSettingsController extends Notifier<AppSettings> {
       _save(state.copyWith(themeMode: mode));
 
   Future<void> setUnit(WeightUnit unit) => _save(state.copyWith(unit: unit));
+
+  Future<void> setDefaultRestSeconds(int seconds) => _save(
+        state.copyWith(defaultRestSeconds: AppSettings.clampRest(seconds)),
+      );
 
   Future<void> setReminders({bool? enabled, int? hour, int? minute}) => _save(
         state.copyWith(

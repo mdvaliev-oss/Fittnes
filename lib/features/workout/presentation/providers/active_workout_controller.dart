@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/settings/app_settings.dart';
 import '../../../exercises/domain/entities/exercise.dart';
 import '../../domain/entities/set_type.dart';
 import '../../domain/entities/workout_exercise_entry.dart';
@@ -42,13 +43,15 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
   }
 
   /// Adds an exercise by id/name (used when seeding from a program), creating
-  /// [sets] empty sets prefilled with the recommended weight/reps.
+  /// [sets] empty sets prefilled with the recommended weight/reps. Rest
+  /// defaults to the user's setting unless [restSeconds] is given.
   void addExerciseRef(
     String exerciseId,
     String exerciseName, {
     double? recommendedWeight,
     int? recommendedReps,
     int sets = 1,
+    int? restSeconds,
   }) {
     final session = state;
     if (session == null) return;
@@ -56,6 +59,8 @@ class ActiveWorkoutController extends Notifier<WorkoutSession?> {
       id: _id(),
       exerciseId: exerciseId,
       exerciseName: exerciseName,
+      restSeconds:
+          restSeconds ?? ref.read(appSettingsProvider).defaultRestSeconds,
       sets: [
         for (var i = 0; i < (sets < 1 ? 1 : sets); i++)
           WorkoutSet(

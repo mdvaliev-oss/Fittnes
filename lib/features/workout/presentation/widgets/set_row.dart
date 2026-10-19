@@ -9,9 +9,12 @@ import '../../../../core/theme/glass_theme.dart';
 import '../../../../core/units/weight_format.dart';
 import '../../domain/entities/set_type.dart';
 import '../../domain/entities/workout_set.dart';
+import '../../domain/services/pr_detector.dart';
 import '../providers/active_workout_controller.dart';
 import '../providers/rest_timer_controller.dart';
+import '../providers/workout_providers.dart';
 import 'effort_picker_sheet.dart';
+import 'pr_celebration.dart';
 
 /// One editable set row: type badge · previous hint · weight · reps · effort ·
 /// complete. Completing a set kicks off the rest timer.
@@ -22,10 +25,17 @@ class SetRow extends ConsumerStatefulWidget {
     required this.set,
     required this.index,
     required this.restSeconds,
+    this.exerciseId,
+    this.exerciseName,
     this.previousHint,
   });
 
   final int entryId;
+
+  /// When known, completing a set checks it against the exercise's personal
+  /// record and celebrates a new one.
+  final String? exerciseId;
+  final String? exerciseName;
   final WorkoutSet set;
   final int index;
   final int restSeconds;
@@ -83,10 +93,23 @@ class _SetRowState extends ConsumerState<SetRow> {
   void _toggleComplete() {
     _controller.toggleSetComplete(widget.entryId, widget.set.id);
     final nowComplete = !widget.set.isCompleted;
-    if (nowComplete) {
-      HapticFeedback.selectionClick();
-      ref.read(restTimerProvider.notifier).start(widget.restSeconds);
-    }
+    if (!nowComplete) return;
+    HapticFeedback.selectionClick();
+    ref.read(restTimerProvider.notifier).start(widget.restSeconds);
+    _checkRecord();
+  }
+
+  void _checkRecord() {
+    final id = widget.exerciseId;
+    if (id == null) return;
+    final record = ref.read(personalRecordProvider(id)).valueOrNull;
+    if (!beatsPersonalRecord(widget.set, record)) return;
+    showPrCelebration(
+      context,
+      exerciseName: widget.exerciseName ?? '',
+      e1rmKg: widget.set.estimatedOneRepMax,
+      unit: _unit,
+    );
   }
 
   Future<void> _pickEffort() async {
@@ -190,11 +213,19 @@ class _SetRowState extends ConsumerState<SetRow> {
             IconButton(
               onPressed: _toggleComplete,
               tooltip: done ? 'Отменить подход' : 'Завершить подход',
-              icon: Icon(
-                done
-                    ? Icons.check_circle_rounded
-                    : Icons.radio_button_unchecked_rounded,
-                color: done ? AppColors.accent : glass.textLow,
+              icon: AnimatedSwitcher(
+                duration: AppMotion.base,
+                switchInCurve: Curves.elasticOut,
+                switchOutCurve: Curves.easeIn,
+                transitionBuilder: (child, anim) =>
+                    ScaleTransition(scale: anim, child: child),
+                child: Icon(
+                  done
+                      ? Icons.check_circle_rounded
+                      : Icons.radio_button_unchecked_rounded,
+                  key: ValueKey(done),
+                  color: done ? AppColors.accent : glass.textLow,
+                ),
               ),
             ),
           ],

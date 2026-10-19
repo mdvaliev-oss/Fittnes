@@ -1,14 +1,20 @@
 import 'package:fittnes/features/workout/domain/entities/set_type.dart';
 import 'package:fittnes/features/workout/presentation/providers/active_workout_controller.dart';
+import 'package:fittnes/core/settings/app_settings.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   late ProviderContainer container;
   late ActiveWorkoutController c;
 
-  setUp(() {
-    container = ProviderContainer();
+  setUp(() async {
+    SharedPreferences.setMockInitialValues(const {});
+    final prefs = await SharedPreferences.getInstance();
+    container = ProviderContainer(
+      overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+    );
     c = container.read(activeWorkoutControllerProvider.notifier);
   });
   tearDown(() => container.dispose());
@@ -119,5 +125,17 @@ void main() {
     expect(finished!.isFinished, isTrue);
     expect(c.isActive, isFalse);
     expect(container.read(activeWorkoutControllerProvider), isNull);
+  });
+
+  test('new entries take their rest from the settings default', () async {
+    await container
+        .read(appSettingsProvider.notifier)
+        .setDefaultRestSeconds(90);
+    c.start();
+    c.addExerciseRef('bench', 'Жим');
+    c.addExerciseRef('squat', 'Присед', restSeconds: 180);
+    final entries = container.read(activeWorkoutControllerProvider)!.entries;
+    expect(entries.first.restSeconds, 90);
+    expect(entries.last.restSeconds, 180);
   });
 }

@@ -113,6 +113,8 @@ class WorkoutExerciseCard extends ConsumerWidget {
               SetRow(
                 key: ValueKey(entry.sets[i].id),
                 entryId: entry.id,
+                exerciseId: entry.exerciseId,
+                exerciseName: entry.exerciseName,
                 set: entry.sets[i],
                 index: _workingIndex(i),
                 restSeconds: entry.restSeconds,

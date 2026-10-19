@@ -5,7 +5,9 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/utils/duration_format.dart';
 import '../../../../core/widgets/glass_card.dart';
+import '../../../../core/widgets/pressable_scale.dart';
 import '../providers/rest_timer_controller.dart';
+import 'rest_duration_picker.dart';
 
 /// Floating rest-countdown bar shown while the timer is active.
 ///
@@ -17,6 +19,7 @@ class RestTimerBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(restTimerProvider);
     final controller = ref.read(restTimerProvider.notifier);
+    final ending = state.running && state.remaining <= 5;
 
     return AnimatedSwitcher(
       duration: AppMotion.base,
@@ -54,8 +57,8 @@ class RestTimerBar extends ConsumerWidget {
                               strokeWidth: 3,
                               backgroundColor:
                                   Colors.white.withValues(alpha: 0.08),
-                              valueColor: const AlwaysStoppedAnimation(
-                                AppColors.accent,
+                              valueColor: AlwaysStoppedAnimation(
+                                ending ? AppColors.warning : AppColors.accent,
                               ),
                             ),
                           ),
@@ -64,13 +67,42 @@ class RestTimerBar extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: AppSpacing.sm),
-                    Text(
-                      'Отдых  ${formatSeconds(state.remaining)}',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontFeatures: const [],
+                    // The last seconds tick visibly: each second the digits
+                    // pop and the colour warms, so the end is felt, not read.
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Отдых',
+                            style: Theme.of(context).textTheme.labelSmall,
+                          ),
+                          AnimatedScale(
+                            alignment: Alignment.centerLeft,
+                            scale: ending && state.remaining.isOdd ? 1.12 : 1,
+                            duration: AppMotion.fast,
+                            curve: Curves.easeOut,
+                            child: AnimatedDefaultTextStyle(
+                              duration: AppMotion.fast,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                fontFeatures: const [],
+                                color: ending ? AppColors.warning : null,
+                              ),
+                              child: Text(formatSeconds(state.remaining)),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const Spacer(),
+                    _MiniAction(
+                      icon: Icons.tune_rounded,
+                      onTap: () => showRestDurationSheet(context),
+                    ),
+                    const SizedBox(width: AppSpacing.xs),
                     _MiniAction(
                       label: '-15',
                       onTap: () => controller.addSeconds(-15),
@@ -82,7 +114,7 @@ class RestTimerBar extends ConsumerWidget {
                     ),
                     const SizedBox(width: AppSpacing.xs),
                     _MiniAction(
-                      label: 'Пропустить',
+                      icon: Icons.skip_next_rounded,
                       onTap: controller.skip,
                       accent: true,
                     ),
@@ -96,18 +128,21 @@ class RestTimerBar extends ConsumerWidget {
 
 class _MiniAction extends StatelessWidget {
   const _MiniAction({
-    required this.label,
+    this.label,
+    this.icon,
     required this.onTap,
     this.accent = false,
   });
-  final String label;
+  final String? label;
+  final IconData? icon;
   final VoidCallback onTap;
   final bool accent;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return PressableScale(
       onTap: onTap,
+      scale: 0.9,
       child: Container(
         padding:
             const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
@@ -117,14 +152,20 @@ class _MiniAction extends StatelessWidget {
               : Colors.white.withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(AppRadius.pill),
         ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 12.5,
-            fontWeight: FontWeight.w600,
-            color: accent ? AppColors.accent : Colors.white,
-          ),
-        ),
+        child: icon != null
+            ? Icon(
+                icon,
+                size: 16,
+                color: accent ? AppColors.accent : Colors.white,
+              )
+            : Text(
+                label!,
+                style: TextStyle(
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w600,
+                  color: accent ? AppColors.accent : Colors.white,
+                ),
+              ),
       ),
     );
   }

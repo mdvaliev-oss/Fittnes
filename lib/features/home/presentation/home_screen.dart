@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,6 +11,7 @@ import '../../../core/units/weight_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/primary_button.dart';
+import '../../../core/widgets/staggered_fade_in.dart';
 import '../../../core/widgets/stat_tile.dart';
 import '../../bodyweight/presentation/providers/body_weight_providers.dart';
 import '../../bodyweight/presentation/widgets/body_weight_sheet.dart';
@@ -56,98 +56,110 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.lg),
 
             // ── Today's workout hero card ─────────────────────────
-            GlassCard(
-              gradientBorder: true,
-              padding: const EdgeInsets.all(AppSpacing.lg),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.bolt_rounded, color: glass.accent, size: 20),
-                      const SizedBox(width: AppSpacing.xs),
-                      Text(
-                        'СЕГОДНЯ',
-                        style: text.labelSmall?.copyWith(
-                          color: glass.accent,
-                          letterSpacing: 1.2,
+            StaggeredFadeIn(
+              index: 0,
+              child: GlassCard(
+                gradientBorder: true,
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.bolt_rounded, color: glass.accent, size: 20),
+                        const SizedBox(width: AppSpacing.xs),
+                        Text(
+                          'СЕГОДНЯ',
+                          style: text.labelSmall?.copyWith(
+                            color: glass.accent,
+                            letterSpacing: 1.2,
+                          ),
                         ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      'Push Day · Грудь и Трицепс',
+                      style: text.headlineMedium,
+                    ),
+                    const SizedBox(height: AppSpacing.xxs),
+                    Text('6 упражнений · ~55 мин', style: text.bodyMedium),
+                    const SizedBox(height: AppSpacing.lg),
+                    PrimaryButton(
+                      label: 'Начать тренировку',
+                      icon: Icons.play_arrow_rounded,
+                      onPressed: () => _startWorkout(context, ref),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: AppSpacing.sm),
+            StaggeredFadeIn(
+              index: 1,
+              child: GlassCard(
+                onTap: () => context.push(AppRoutes.programs),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.dashboard_customize_rounded,
+                      color: glass.accent,
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Программы тренировок',
+                            style: text.titleLarge?.copyWith(fontSize: 16),
+                          ),
+                          Text(
+                            'Full Body · Upper/Lower · PPL',
+                            style: text.bodyMedium,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  Text(
-                    'Push Day · Грудь и Трицепс',
-                    style: text.headlineMedium,
-                  ),
-                  const SizedBox(height: AppSpacing.xxs),
-                  Text('6 упражнений · ~55 мин', style: text.bodyMedium),
-                  const SizedBox(height: AppSpacing.lg),
-                  PrimaryButton(
-                    label: 'Начать тренировку',
-                    icon: Icons.play_arrow_rounded,
-                    onPressed: () => _startWorkout(context, ref),
-                  ),
-                ],
-              ),
-            ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.08, end: 0),
-
-            const SizedBox(height: AppSpacing.sm),
-            GlassCard(
-              onTap: () => context.push(AppRoutes.programs),
-              child: Row(
-                children: [
-                  Icon(Icons.dashboard_customize_rounded, color: glass.accent),
-                  const SizedBox(width: AppSpacing.sm),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Программы тренировок',
-                          style: text.titleLarge?.copyWith(fontSize: 16),
-                        ),
-                        Text(
-                          'Full Body · Upper/Lower · PPL',
-                          style: text.bodyMedium,
-                        ),
-                      ],
                     ),
-                  ),
-                  Icon(Icons.chevron_right_rounded, color: glass.textLow),
-                ],
+                    Icon(Icons.chevron_right_rounded, color: glass.textLow),
+                  ],
+                ),
               ),
             ),
 
             const SizedBox(height: AppSpacing.sm),
-            GlassCard(
-              onTap: () => context.push(AppRoutes.recovery),
-              child: Row(
-                children: [
-                  Icon(Icons.spa_rounded, color: glass.accent),
-                  const SizedBox(width: AppSpacing.sm),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Восстановление мышц',
-                          style: text.titleLarge?.copyWith(fontSize: 16),
-                        ),
-                        Text(
-                          'Готовность по группам за 7 дней',
-                          style: text.bodyMedium,
-                        ),
-                      ],
+            StaggeredFadeIn(
+              index: 2,
+              child: GlassCard(
+                onTap: () => context.push(AppRoutes.recovery),
+                child: Row(
+                  children: [
+                    Icon(Icons.spa_rounded, color: glass.accent),
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Восстановление мышц',
+                            style: text.titleLarge?.copyWith(fontSize: 16),
+                          ),
+                          Text(
+                            'Готовность по группам за 7 дней',
+                            style: text.bodyMedium,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Icon(Icons.chevron_right_rounded, color: glass.textLow),
-                ],
+                    Icon(Icons.chevron_right_rounded, color: glass.textLow),
+                  ],
+                ),
               ),
             ),
 
             const SizedBox(height: AppSpacing.sm),
-            const _BodyWeightCard(),
+            const StaggeredFadeIn(index: 3, child: _BodyWeightCard()),
 
             const SizedBox(height: AppSpacing.lg),
             Row(

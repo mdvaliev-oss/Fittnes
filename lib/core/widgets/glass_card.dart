@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_spacing.dart';
 import '../theme/glass_theme.dart';
+import 'pressable_scale.dart';
 
 /// The signature glassmorphism surface used across the whole app.
 ///
 /// Reads blur / fill / border from [AppGlassTheme] so it adapts to the active
 /// theme automatically. Optionally tappable with a subtle press-scale.
-class GlassCard extends StatefulWidget {
+class GlassCard extends StatelessWidget {
   const GlassCard({
     super.key,
     required this.child,
@@ -28,52 +29,33 @@ class GlassCard extends StatefulWidget {
   final bool gradientBorder;
 
   @override
-  State<GlassCard> createState() => _GlassCardState();
-}
-
-class _GlassCardState extends State<GlassCard> {
-  bool _pressed = false;
-
-  @override
   Widget build(BuildContext context) {
     final glass = context.glass;
-    final radius = widget.borderRadius ?? BorderRadius.circular(AppRadius.card);
+    final radius = borderRadius ?? BorderRadius.circular(AppRadius.card);
 
-    final card = AnimatedScale(
-      scale: _pressed ? 0.97 : 1,
-      duration: AppMotion.fast,
-      curve: Curves.easeOut,
-      child: ClipRRect(
-        borderRadius: radius,
-        child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: glass.blurSigma,
-            sigmaY: glass.blurSigma,
-          ),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: glass.fill,
-              borderRadius: radius,
-              border: Border.all(
-                color: widget.gradientBorder
-                    ? glass.accent.withValues(alpha: 0.35)
-                    : glass.border,
-              ),
+    final card = ClipRRect(
+      borderRadius: radius,
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: glass.blurSigma,
+          sigmaY: glass.blurSigma,
+        ),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: glass.fill,
+            borderRadius: radius,
+            border: Border.all(
+              color: gradientBorder
+                  ? glass.accent.withValues(alpha: 0.35)
+                  : glass.border,
             ),
-            child: Padding(padding: widget.padding, child: widget.child),
           ),
+          child: Padding(padding: padding, child: child),
         ),
       ),
     );
 
-    if (widget.onTap == null) return card;
-
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _pressed = true),
-      onTapUp: (_) => setState(() => _pressed = false),
-      onTapCancel: () => setState(() => _pressed = false),
-      onTap: widget.onTap,
-      child: card,
-    );
+    if (onTap == null) return card;
+    return PressableScale(onTap: onTap, scale: 0.97, child: card);
   }
 }
