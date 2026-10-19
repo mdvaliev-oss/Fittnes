@@ -1,4 +1,5 @@
 import 'exercise_enums.dart';
+import 'movement_pattern.dart';
 import 'muscle.dart';
 
 /// Core domain entity describing a single exercise.
@@ -19,6 +20,7 @@ class Exercise {
     required this.equipment,
     this.mechanic,
     this.force,
+    this.patternOverride,
     this.rangeOfMotion,
     this.instructions = const [],
     this.tips = const [],
@@ -45,6 +47,14 @@ class Exercise {
   final Equipment equipment;
   final Mechanic? mechanic;
   final ForceType? force;
+
+  /// Curated movement pattern from the dataset, when it states one.
+  final MovementPattern? patternOverride;
+
+  /// What the technique figure acts out: the curated pattern, else a
+  /// keyword / anatomy classification.
+  MovementPattern get pattern =>
+      patternOverride ?? MovementPattern.forExercise(this);
 
   /// Description of the movement's range of motion.
   final String? rangeOfMotion;

@@ -1,7 +1,7 @@
 import 'package:fittnes/features/exercises/domain/entities/exercise.dart';
 import 'package:fittnes/features/exercises/domain/entities/exercise_enums.dart';
 import 'package:fittnes/features/exercises/domain/entities/muscle.dart';
-import 'package:fittnes/features/exercises/presentation/widgets/technique_animation.dart';
+import 'package:fittnes/features/exercises/domain/entities/movement_pattern.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Exercise _ex({
@@ -80,6 +80,43 @@ void main() {
           ),
         ),
         MovementPattern.squat,
+      );
+    });
+
+    test('explicit dataset pattern wins over classification', () {
+      const e = Exercise(
+        id: 'x',
+        name: 'Присед',
+        description: '',
+        primaryMuscles: [Muscle.quads],
+        category: ExerciseCategory.strength,
+        level: ExperienceLevel.beginner,
+        equipment: Equipment.barbell,
+        patternOverride: MovementPattern.legPress,
+      );
+      expect(e.pattern, MovementPattern.legPress);
+      expect(
+          MovementPattern.fromDataset('hipThrust'), MovementPattern.hipThrust,);
+      expect(MovementPattern.fromDataset('nope'), isNull);
+      expect(MovementPattern.fromDataset(null), isNull);
+    });
+
+    test('new patterns are recognised by keyword', () {
+      expect(
+        MovementPattern.forExercise(_ex(name: 'Выпады назад')),
+        MovementPattern.lunge,
+      );
+      expect(
+        MovementPattern.forExercise(_ex(name: 'Ягодичный мост')),
+        MovementPattern.hipThrust,
+      );
+      expect(
+        MovementPattern.forExercise(_ex(name: 'Шраги со штангой')),
+        MovementPattern.shrug,
+      );
+      expect(
+        MovementPattern.forExercise(_ex(name: 'Планка')),
+        MovementPattern.plank,
       );
     });
 

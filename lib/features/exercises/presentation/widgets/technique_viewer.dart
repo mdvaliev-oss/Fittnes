@@ -72,7 +72,7 @@ class _AnimatedPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pattern = MovementPattern.forExercise(exercise);
+    final pattern = exercise.pattern;
     return Stack(
       children: [
         Positioned.fill(

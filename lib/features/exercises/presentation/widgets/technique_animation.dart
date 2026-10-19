@@ -3,189 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../domain/entities/exercise.dart';
 import '../../domain/entities/exercise_enums.dart';
-import '../../domain/entities/muscle.dart';
-
-/// A recognizable movement pattern the [AnimatedTechniqueFigure] can act out.
-///
-/// Picked from an exercise's name, force vector and target muscles so the
-/// placeholder shows the *actual* motion (a squat looks like a squat) instead
-/// of an abstract marker travelling a line.
-enum MovementPattern {
-  squat,
-  hinge,
-  horizontalPress,
-  verticalPress,
-  horizontalPull,
-  verticalPull,
-  curl,
-  tricepsExtension,
-  lateralRaise,
-  calfRaise,
-  crunch,
-  generic;
-
-  /// Best-effort classification. Keyword match (RU + EN) first, then a
-  /// fallback by [ForceType] + primary [Muscle]s.
-  static MovementPattern forExercise(Exercise e) {
-    final hay = '${e.name} ${e.altName ?? ''} ${e.id}'.toLowerCase();
-
-    bool has(List<String> keys) => keys.any(hay.contains);
-
-    if (has([
-      'присед',
-      'squat',
-      'goblet',
-      'выпад',
-      'lunge',
-      'жим ног',
-      'leg press',
-      'hack',
-      'гакк',
-    ])) {
-      return MovementPattern.squat;
-    }
-    if (has([
-      'становая',
-      'deadlift',
-      'румын',
-      'rdl',
-      'hinge',
-      'good morning',
-      'наклон',
-      'гиперэкстен',
-      'hyperextension',
-      'back extension',
-    ])) {
-      return MovementPattern.hinge;
-    }
-    if (has(['подъём на носк', 'подъем на носк', 'носки', 'calf', 'икр'])) {
-      return MovementPattern.calfRaise;
-    }
-    if (has([
-      'подтяг',
-      'pull-up',
-      'pullup',
-      'pull up',
-      'верхнего блока',
-      'pulldown',
-      'lat pulldown',
-      'широчайш',
-    ])) {
-      return MovementPattern.verticalPull;
-    }
-    if (has(['тяга', 'row', 'face pull', 'к поясу', 'к животу'])) {
-      return MovementPattern.horizontalPull;
-    }
-    if (has([
-      'french',
-      'французс',
-      'pushdown',
-      'на трицепс',
-      'разгибание рук',
-      'triceps extension',
-      'разгибания на трицепс',
-    ])) {
-      return MovementPattern.tricepsExtension;
-    }
-    if (has(['curl', 'сгибан', 'на бицепс', 'бицепс'])) {
-      return MovementPattern.curl;
-    }
-    // Chest flyes read as a press, not a lateral raise — catch them before the
-    // ambiguous "разведение" keyword below.
-    if (has(['сведение', 'кроссовер', 'crossover', 'pec deck', 'бабочка']) ||
-        (hay.contains('разведен') && hay.contains('лёж'))) {
-      return MovementPattern.horizontalPress;
-    }
-    if (has([
-      'махи',
-      'lateral',
-      'разведен',
-      'raise',
-      'в стороны',
-      'подъёмы перед',
-      'front raise',
-    ])) {
-      return MovementPattern.lateralRaise;
-    }
-    if (has([
-      'над головой',
-      'overhead',
-      'military',
-      'жим стоя',
-      'жим сидя',
-      'shoulder press',
-      'arnold',
-      'арнольд',
-      'швунг',
-    ])) {
-      return MovementPattern.verticalPress;
-    }
-    if (has([
-      'жим лёжа',
-      'жим лежа',
-      'bench',
-      'отжим',
-      'push-up',
-      'push up',
-      'chest press',
-      'сведение',
-      'fly',
-      'dip',
-      'брусь',
-    ])) {
-      return MovementPattern.horizontalPress;
-    }
-    if (has([
-      'скручиван',
-      'crunch',
-      'sit-up',
-      'пресс',
-      'планка',
-      'plank',
-      'подъём ног',
-      'core',
-    ])) {
-      return MovementPattern.crunch;
-    }
-
-    // Fallback: infer from anatomy + force.
-    final primary = e.primaryMuscles.toSet();
-    if (primary.contains(Muscle.calves)) return MovementPattern.calfRaise;
-    if (primary.contains(Muscle.quads) || primary.contains(Muscle.glutes)) {
-      return e.force == ForceType.pull
-          ? MovementPattern.hinge
-          : MovementPattern.squat;
-    }
-    if (primary.contains(Muscle.hamstrings) ||
-        primary.contains(Muscle.lowerBack)) {
-      return MovementPattern.hinge;
-    }
-    if (primary.contains(Muscle.chest)) return MovementPattern.horizontalPress;
-    if (primary.contains(Muscle.lats) || primary.contains(Muscle.traps)) {
-      return MovementPattern.horizontalPull;
-    }
-    if (primary.contains(Muscle.frontDelts) ||
-        primary.contains(Muscle.sideDelts)) {
-      return primary.contains(Muscle.sideDelts)
-          ? MovementPattern.lateralRaise
-          : MovementPattern.verticalPress;
-    }
-    if (primary.contains(Muscle.biceps)) return MovementPattern.curl;
-    if (primary.contains(Muscle.triceps)) {
-      return MovementPattern.tricepsExtension;
-    }
-    if (primary.contains(Muscle.abs) || primary.contains(Muscle.obliques)) {
-      return MovementPattern.crunch;
-    }
-    return switch (e.force) {
-      ForceType.push => MovementPattern.horizontalPress,
-      ForceType.pull => MovementPattern.horizontalPull,
-      _ => MovementPattern.generic,
-    };
-  }
-}
+import '../../domain/entities/movement_pattern.dart';
 
 /// Draws a side-profile coach avatar that performs one rep of [pattern],
 /// driven by [progress] (0 = start pose, 1 = end pose). Holds the appropriate
@@ -446,6 +265,32 @@ class _FigurePainter extends CustomPainter {
             const _Params(lean: 4, shoulderAng: 150, elbowAng: 120),
             const _Params(lean: 42, shoulderAng: 150, elbowAng: 120),
           ),
+        // Patterns without bespoke keyframes yet reuse the closest motion.
+        MovementPattern.lunge ||
+        MovementPattern.legPress =>
+          _keyframes(MovementPattern.squat),
+        MovementPattern.hipThrust => _keyframes(MovementPattern.hinge),
+        MovementPattern.pushUp ||
+        MovementPattern.dip ||
+        MovementPattern.fly =>
+          _keyframes(MovementPattern.horizontalPress),
+        MovementPattern.pullover ||
+        MovementPattern.facePull ||
+        MovementPattern.rearDeltFly =>
+          _keyframes(MovementPattern.horizontalPull),
+        MovementPattern.shrug ||
+        MovementPattern.uprightRow ||
+        MovementPattern.frontRaise =>
+          _keyframes(MovementPattern.lateralRaise),
+        MovementPattern.wristCurl => _keyframes(MovementPattern.curl),
+        MovementPattern.legExtension ||
+        MovementPattern.legCurl =>
+          _keyframes(MovementPattern.calfRaise),
+        MovementPattern.legRaise ||
+        MovementPattern.plank ||
+        MovementPattern.rollout ||
+        MovementPattern.carry =>
+          _keyframes(MovementPattern.crunch),
         MovementPattern.generic => (
             const _Params(hipY: 52, shoulderAng: 28, elbowAng: 36),
             const _Params(hipY: 57, shoulderAng: 34, elbowAng: 48),

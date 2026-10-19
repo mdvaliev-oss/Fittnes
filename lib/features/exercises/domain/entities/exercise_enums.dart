@@ -10,7 +10,7 @@ enum ExperienceLevel {
   static ExperienceLevel fromDataset(String raw) =>
       switch (raw.toLowerCase().trim()) {
         'beginner' => ExperienceLevel.beginner,
-        'expert' => ExperienceLevel.advanced,
+        'expert' || 'advanced' => ExperienceLevel.advanced,
         _ => ExperienceLevel.intermediate,
       };
 }
@@ -75,6 +75,7 @@ enum Equipment {
         'kettlebells' || 'kettlebell' => Equipment.kettlebell,
         'bands' => Equipment.bands,
         'ez curl bar' => Equipment.ezBar,
+        'smith machine' => Equipment.smithMachine,
         _ => Equipment.other,
       };
 }

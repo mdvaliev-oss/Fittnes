@@ -1,5 +1,6 @@
 import '../../domain/entities/exercise.dart';
 import '../../domain/entities/exercise_enums.dart';
+import '../../domain/entities/movement_pattern.dart';
 import '../../domain/entities/muscle.dart';
 
 /// Maps the bundled seed JSON (and, later, the full free-exercise-db import)
@@ -23,6 +24,7 @@ abstract final class ExerciseDto {
       equipment: Equipment.fromDataset(json['equipment'] as String?),
       mechanic: Mechanic.fromDataset(json['mechanic'] as String?),
       force: ForceType.fromDataset(json['force'] as String?),
+      patternOverride: MovementPattern.fromDataset(json['pattern'] as String?),
       rangeOfMotion: json['rangeOfMotion'] as String?,
       instructions: _strings(json['instructions']),
       tips: _strings(json['tips']),

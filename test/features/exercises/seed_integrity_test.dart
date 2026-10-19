@@ -1,6 +1,7 @@
 import 'package:fittnes/features/exercises/data/exercise_local_data_source.dart';
 import 'package:fittnes/features/exercises/domain/entities/exercise.dart';
-import 'package:fittnes/features/exercises/presentation/widgets/technique_animation.dart';
+import 'package:fittnes/features/exercises/domain/entities/exercise_enums.dart';
+import 'package:fittnes/features/exercises/domain/entities/movement_pattern.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -14,7 +15,7 @@ void main() {
   });
 
   test('catalog is sizeable and every entry parses', () {
-    expect(all.length, greaterThanOrEqualTo(70));
+    expect(all.length, greaterThanOrEqualTo(120));
   });
 
   test('ids are unique', () {
@@ -22,11 +23,21 @@ void main() {
     expect(ids.toSet().length, ids.length);
   });
 
-  test('every exercise has a name, description and instructions', () {
+  test('every exercise has a full description and instructions', () {
     for (final e in all) {
       expect(e.name.trim(), isNotEmpty, reason: '${e.id} name');
-      expect(e.description.trim(), isNotEmpty, reason: '${e.id} description');
-      expect(e.instructions, isNotEmpty, reason: '${e.id} instructions');
+      expect(
+        e.description.trim().length,
+        greaterThanOrEqualTo(80),
+        reason: '${e.id} description is too thin',
+      );
+      expect(
+        e.instructions.length,
+        greaterThanOrEqualTo(3),
+        reason: '${e.id} instructions',
+      );
+      expect(e.tips, isNotEmpty, reason: '${e.id} tips');
+      expect(e.commonMistakes, isNotEmpty, reason: '${e.id} mistakes');
     }
   });
 
@@ -38,15 +49,33 @@ void main() {
     }
   });
 
-  test('every exercise resolves to a concrete movement pattern', () {
-    // "generic" is the fallback; a curated catalog should rarely need it.
-    final generic = all.where(
-      (e) => MovementPattern.forExercise(e) == MovementPattern.generic,
-    );
+  test('every exercise states its movement pattern explicitly', () {
+    for (final e in all) {
+      expect(e.patternOverride, isNotNull, reason: '${e.id} has no pattern');
+      expect(e.pattern, isNot(MovementPattern.generic), reason: e.id);
+    }
+  });
+
+  test('equipment and level never fall back to a default by accident', () {
+    // `other` / `intermediate` are the DTO fallbacks for unknown strings, so a
+    // curated seed should only hit them on purpose (none do today).
+    final other = all.where((e) => e.equipment == Equipment.other);
+    expect(other, isEmpty, reason: other.map((e) => e.id).join(', '));
     expect(
-      generic.length,
-      lessThanOrEqualTo(3),
-      reason: 'Too many generic: ${generic.map((e) => e.id).join(', ')}',
+      all.where((e) => e.level == ExperienceLevel.advanced).length,
+      greaterThanOrEqualTo(8),
     );
+  });
+
+  test('catalog covers every muscle group with several exercises', () {
+    final byMuscle = <String, int>{};
+    for (final e in all) {
+      for (final m in e.primaryMuscles) {
+        byMuscle[m.name] = (byMuscle[m.name] ?? 0) + 1;
+      }
+    }
+    for (final group in ['chest', 'lats', 'quads', 'hamstrings', 'glutes']) {
+      expect(byMuscle[group] ?? 0, greaterThanOrEqualTo(8), reason: group);
+    }
   });
 }
