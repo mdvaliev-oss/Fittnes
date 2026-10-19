@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/bodyweight/presentation/body_weight_screen.dart';
 import '../../features/exercises/presentation/exercise_detail_screen.dart';
 import '../../features/exercises/presentation/exercises_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
@@ -133,6 +134,17 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => CustomTransitionPage<void>(
           key: state.pageKey,
           child: const RecoveryScreen(),
+          transitionDuration: const Duration(milliseconds: 300),
+          transitionsBuilder: (context, animation, secondary, child) =>
+              FadeTransition(opacity: animation, child: child),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootKey,
+        path: AppRoutes.bodyWeight,
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: const BodyWeightScreen(),
           transitionDuration: const Duration(milliseconds: 300),
           transitionsBuilder: (context, animation, secondary, child) =>
               FadeTransition(opacity: animation, child: child),

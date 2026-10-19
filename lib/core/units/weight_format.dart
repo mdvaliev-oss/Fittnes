@@ -18,6 +18,9 @@ extension WeightUnitX on WeightUnit {
 
   /// Natural load increment in this unit (2.5 kg / 5 lb).
   double get step => this == WeightUnit.lb ? 5 : 2.5;
+
+  /// Two-letter label for compact toggles and field suffixes.
+  String get short => this == WeightUnit.lb ? 'lb' : 'кг';
 }
 
 /// Formats a canonical [kg] value in the user's [unit], e.g. `"61 кг"` /

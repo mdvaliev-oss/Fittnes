@@ -1,5 +1,8 @@
 import 'package:fittnes/core/backup/backup_service.dart';
 import 'package:fittnes/core/settings/app_settings.dart';
+import 'package:fittnes/features/bodyweight/data/body_weight_repository_memory.dart';
+import 'package:fittnes/features/bodyweight/domain/entities/body_weight_entry.dart';
+import 'package:fittnes/features/bodyweight/presentation/providers/body_weight_providers.dart';
 import 'package:fittnes/features/workout/data/workout_repository_memory.dart';
 import 'package:fittnes/features/workout/domain/entities/workout_exercise_entry.dart';
 import 'package:fittnes/features/workout/domain/entities/workout_session.dart';
@@ -27,13 +30,18 @@ WorkoutSession _session() => WorkoutSession(
       ],
     );
 
-Future<ProviderContainer> _container(WorkoutRepository repo) async {
+Future<ProviderContainer> _container(
+  WorkoutRepository repo, {
+  BodyWeightRepositoryMemory? weights,
+}) async {
   SharedPreferences.setMockInitialValues({});
   final prefs = await SharedPreferences.getInstance();
   final container = ProviderContainer(
     overrides: [
       sharedPreferencesProvider.overrideWithValue(prefs),
       workoutRepositoryProvider.overrideWithValue(repo),
+      bodyWeightRepositoryProvider
+          .overrideWithValue(weights ?? BodyWeightRepositoryMemory()),
     ],
   );
   addTearDown(container.dispose);
@@ -60,6 +68,27 @@ void main() {
     expect(restored, hasLength(1));
     expect(restored.single.title, 'Push Day');
     expect(restored.single.totalVolume, 500);
+  });
+
+  test('export then import restores body-weight history', () async {
+    final sourceWeights = BodyWeightRepositoryMemory();
+    await sourceWeights.add(
+      BodyWeightEntry(measuredAt: DateTime(2026, 4, 1), kg: 84.2),
+    );
+    await sourceWeights.add(
+      BodyWeightEntry(measuredAt: DateTime(2026, 5, 1), kg: 83),
+    );
+    final source =
+        await _container(WorkoutRepositoryMemory(), weights: sourceWeights);
+    final json = await source.read(backupServiceProvider).export();
+
+    final targetWeights = BodyWeightRepositoryMemory();
+    final target =
+        await _container(WorkoutRepositoryMemory(), weights: targetWeights);
+    await target.read(backupServiceProvider).import(json);
+
+    final restored = await targetWeights.all();
+    expect(restored.map((e) => e.kg), [83, 84.2]);
   });
 
   test('import of a v2 backup ignores the removed nutrition keys', () async {

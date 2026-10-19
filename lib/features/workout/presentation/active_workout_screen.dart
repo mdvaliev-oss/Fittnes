@@ -13,6 +13,7 @@ import '../../../core/units/weight_format.dart';
 import '../../../core/utils/duration_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/primary_button.dart';
+import '../../../core/widgets/weight_unit_toggle.dart';
 import '../../recommendations/domain/progression_engine.dart';
 import '../domain/entities/workout_session.dart';
 import 'providers/active_workout_controller.dart';
@@ -200,13 +201,11 @@ class _Header extends ConsumerWidget {
                 icon: const Icon(Icons.close_rounded),
               ),
               Expanded(child: Text(session.title, style: text.titleLarge)),
-              SizedBox(
-                width: 130,
-                child: PrimaryButton(
-                  label: 'Завершить',
-                  icon: Icons.check_rounded,
-                  onPressed: onFinish,
-                ),
+              PrimaryButton(
+                label: 'Завершить',
+                icon: Icons.check_rounded,
+                expand: false,
+                onPressed: onFinish,
               ),
             ],
           ),
@@ -222,6 +221,14 @@ class _Header extends ConsumerWidget {
               _Stat(
                 label: 'Подходы',
                 value: '${session.completedSets}/${session.totalSets}',
+              ),
+              // Global unit switch right where weights are typed — flips every
+              // set field live (values stay canonical kg).
+              WeightUnitToggle(
+                value: unit,
+                dense: true,
+                onChanged: (u) =>
+                    ref.read(appSettingsProvider.notifier).setUnit(u),
               ),
             ],
           ),

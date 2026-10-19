@@ -1,3 +1,6 @@
+import 'package:fittnes/features/bodyweight/data/body_weight_repository_memory.dart';
+import 'package:fittnes/features/bodyweight/domain/entities/body_weight_entry.dart';
+import 'package:fittnes/features/bodyweight/presentation/providers/body_weight_providers.dart';
 import 'package:fittnes/features/progress/presentation/progress_screen.dart';
 import 'package:fittnes/features/workout/domain/entities/workout_exercise_entry.dart';
 import 'package:fittnes/features/workout/domain/entities/workout_session.dart';
@@ -37,27 +40,38 @@ void main() {
       const ProgressScreen(),
       overrides: [
         workoutHistoryProvider.overrideWith((ref) async => history),
+        bodyWeightRepositoryProvider.overrideWithValue(
+          BodyWeightRepositoryMemory([
+            BodyWeightEntry(measuredAt: DateTime(2026, 1, 1), kg: 85),
+            BodyWeightEntry(measuredAt: DateTime(2026, 2, 1), kg: 84),
+          ]),
+        ),
       ],
     );
     await tester.pumpAndSettle();
 
     expect(find.text('Прогресс'), findsOneWidget);
+    expect(find.text('Вес тела'), findsOneWidget);
     expect(find.text('Тоннаж по тренировкам'), findsOneWidget);
     expect(find.text('Личные рекорды'), findsOneWidget);
     // Appears in both the exercise picker and the personal-records tile.
     expect(find.text('Жим штанги лёжа'), findsWidgets);
   });
 
-  testWidgets('empty history shows the placeholder', (tester) async {
+  testWidgets('empty history still shows body weight card and placeholder',
+      (tester) async {
     await pumpApp(
       tester,
       const ProgressScreen(),
       overrides: [
         workoutHistoryProvider.overrideWith((ref) async => <WorkoutSession>[]),
+        bodyWeightRepositoryProvider
+            .overrideWithValue(BodyWeightRepositoryMemory()),
       ],
     );
     await tester.pumpAndSettle();
 
+    expect(find.text('Вес тела'), findsOneWidget);
     expect(find.text('Здесь появится прогресс'), findsOneWidget);
   });
 }

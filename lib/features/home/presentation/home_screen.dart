@@ -13,6 +13,8 @@ import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/primary_button.dart';
 import '../../../core/widgets/stat_tile.dart';
+import '../../bodyweight/presentation/providers/body_weight_providers.dart';
+import '../../bodyweight/presentation/widgets/body_weight_sheet.dart';
 import '../../workout/domain/services/workout_stats.dart';
 import '../../workout/presentation/providers/active_workout_controller.dart';
 import '../../workout/presentation/providers/workout_providers.dart';
@@ -144,6 +146,9 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
 
+            const SizedBox(height: AppSpacing.sm),
+            const _BodyWeightCard(),
+
             const SizedBox(height: AppSpacing.lg),
             Row(
               children: [
@@ -163,6 +168,74 @@ class HomeScreen extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Current body weight + 30-day trend; tap opens the log, «+» records now.
+class _BodyWeightCard extends ConsumerWidget {
+  const _BodyWeightCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final glass = context.glass;
+    final text = Theme.of(context).textTheme;
+    final unit = ref.watch(appSettingsProvider.select((s) => s.unit));
+    final summary = ref.watch(bodyWeightSummaryProvider);
+    final latest = summary.latest;
+    final change = summary.change;
+
+    final String subtitle;
+    if (latest == null) {
+      subtitle = 'Запиши первый замер — в кг или lb';
+    } else if (change == null) {
+      subtitle = 'Ещё один замер — и покажем динамику';
+    } else {
+      final sign = change > 0 ? '+' : '';
+      subtitle = '$sign${formatWeight(change, unit)} за 30 дней';
+    }
+
+    return GlassCard(
+      onTap: () => context.push(AppRoutes.bodyWeight),
+      child: Row(
+        children: [
+          Icon(Icons.monitor_weight_rounded, color: glass.accent),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      'Вес тела',
+                      style: text.titleLarge?.copyWith(fontSize: 16),
+                    ),
+                    if (latest != null) ...[
+                      const SizedBox(width: AppSpacing.xs),
+                      Text(
+                        formatWeight(latest.kg, unit),
+                        style: text.titleLarge?.copyWith(
+                          fontSize: 16,
+                          color: glass.accent,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+                Text(subtitle, style: text.bodyMedium),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: () => showBodyWeightSheet(context),
+            tooltip: 'Записать вес',
+            icon: Icon(Icons.add_circle_outline_rounded, color: glass.textMid),
+          ),
+        ],
       ),
     );
   }

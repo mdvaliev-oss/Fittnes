@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/settings/app_settings.dart';
@@ -9,6 +11,10 @@ import '../../../core/theme/glass_theme.dart';
 import '../../../core/units/weight_format.dart';
 import '../../../core/widgets/ambient_background.dart';
 import '../../../core/widgets/glass_card.dart';
+import '../../bodyweight/domain/body_weight_series.dart';
+import '../../bodyweight/presentation/providers/body_weight_providers.dart';
+import '../../bodyweight/presentation/widgets/body_weight_chart.dart';
+import '../../bodyweight/presentation/widgets/body_weight_sheet.dart';
 import '../../workout/domain/entities/workout_session.dart';
 import '../../workout/presentation/providers/workout_providers.dart';
 import '../domain/progress_series.dart';
@@ -30,9 +36,7 @@ class ProgressScreen extends ConsumerWidget {
         child: history.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (e, _) => Center(child: Text('Ошибка: $e')),
-          data: (sessions) => sessions.isEmpty
-              ? const _EmptyProgress()
-              : _ProgressBody(sessions: sessions),
+          data: (sessions) => _ProgressBody(sessions: sessions),
         ),
       ),
     );
@@ -54,10 +58,14 @@ class _ProgressBody extends ConsumerWidget {
     final strength = selectedId == null
         ? const <StrengthPoint>[]
         : strengthSeries(sessions, selectedId);
+    final weights =
+        ref.watch(bodyWeightHistoryProvider).valueOrNull ?? const [];
 
     return RefreshIndicator(
       onRefresh: () async {
-        ref.invalidate(workoutHistoryProvider);
+        ref
+          ..invalidate(workoutHistoryProvider)
+          ..invalidate(bodyWeightHistoryProvider);
         await ref.read(workoutHistoryProvider.future);
       },
       child: ListView(
@@ -72,29 +80,47 @@ class _ProgressBody extends ConsumerWidget {
           Text('Прогресс', style: text.headlineLarge),
           const SizedBox(height: AppSpacing.md),
           _ChartCard(
-            title: 'Тоннаж по тренировкам',
-            child: TonnageBarChart(points: tonnage),
+            title: 'Вес тела',
+            onTap: () => context.push(AppRoutes.bodyWeight),
+            trailing: TextButton.icon(
+              onPressed: () => showBodyWeightSheet(context),
+              icon: const Icon(Icons.add_rounded, size: 18),
+              label: const Text('Записать'),
+            ),
+            child: BodyWeightChart(
+              points: bodyWeightChartPoints(weights),
+              unit: unit,
+              height: 160,
+            ),
           ),
           const SizedBox(height: AppSpacing.md),
-          _ChartCard(
-            title: 'Рост силы (e1RM)',
-            trailing: exercises.isEmpty
-                ? null
-                : _ExercisePicker(
-                    exercises: exercises,
-                    selectedId: selectedId,
-                    onChanged: (id) => ref
-                        .read(selectedProgressExerciseProvider.notifier)
-                        .state = id,
-                  ),
-            child: StrengthLineChart(points: strength),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Text('Личные рекорды', style: text.titleLarge),
-          const SizedBox(height: AppSpacing.sm),
-          ...ref
-              .watch(personalRecordsProvider)
-              .map((r) => _RecordTile(record: r, unit: unit)),
+          if (sessions.isEmpty) const _EmptyProgress(),
+          if (sessions.isNotEmpty) ...[
+            _ChartCard(
+              title: 'Тоннаж по тренировкам',
+              child: TonnageBarChart(points: tonnage),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            _ChartCard(
+              title: 'Рост силы (e1RM)',
+              trailing: exercises.isEmpty
+                  ? null
+                  : _ExercisePicker(
+                      exercises: exercises,
+                      selectedId: selectedId,
+                      onChanged: (id) => ref
+                          .read(selectedProgressExerciseProvider.notifier)
+                          .state = id,
+                    ),
+              child: StrengthLineChart(points: strength),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            Text('Личные рекорды', style: text.titleLarge),
+            const SizedBox(height: AppSpacing.sm),
+            ...ref
+                .watch(personalRecordsProvider)
+                .map((r) => _RecordTile(record: r, unit: unit)),
+          ],
         ],
       ),
     );
@@ -102,15 +128,22 @@ class _ProgressBody extends ConsumerWidget {
 }
 
 class _ChartCard extends StatelessWidget {
-  const _ChartCard({required this.title, required this.child, this.trailing});
+  const _ChartCard({
+    required this.title,
+    required this.child,
+    this.trailing,
+    this.onTap,
+  });
   final String title;
   final Widget child;
   final Widget? trailing;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final text = Theme.of(context).textTheme;
     return GlassCard(
+      onTap: onTap,
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,6 +279,7 @@ class _EmptyProgress extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const SizedBox(height: AppSpacing.lg),
             Icon(Icons.insights_rounded, size: 48, color: glass.textLow),
             const SizedBox(height: AppSpacing.md),
             Text('Здесь появится прогресс', style: text.titleLarge),

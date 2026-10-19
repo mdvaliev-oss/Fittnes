@@ -38,8 +38,9 @@ class SetRow extends ConsumerStatefulWidget {
 }
 
 class _SetRowState extends ConsumerState<SetRow> {
-  // Weight is stored in kg; the field shows/edits it in the user's unit.
-  late final WeightUnit _unit = ref.read(appSettingsProvider).unit;
+  // Weight is stored in kg; the field shows/edits it in the user's unit and
+  // is re-expressed live when the unit toggle flips.
+  late WeightUnit _unit = ref.read(appSettingsProvider).unit;
   late final TextEditingController _weight = TextEditingController(
     text: widget.set.weight == null
         ? ''
@@ -103,11 +104,25 @@ class _SetRowState extends ConsumerState<SetRow> {
     );
   }
 
+  void _toggleUnit() {
+    final next = _unit == WeightUnit.kg ? WeightUnit.lb : WeightUnit.kg;
+    ref.read(appSettingsProvider.notifier).setUnit(next);
+  }
+
   @override
   Widget build(BuildContext context) {
     final glass = context.glass;
     final set = widget.set;
     final done = set.isCompleted;
+
+    ref.listen(appSettingsProvider.select((s) => s.unit), (_, next) {
+      if (next == _unit) return;
+      setState(() {
+        _unit = next;
+        final kg = widget.set.weight;
+        _weight.text = kg == null ? '' : formatValue(next.fromKg(kg), next);
+      });
+    });
 
     return Dismissible(
       key: ValueKey('set-${set.id}'),
@@ -142,9 +157,10 @@ class _SetRowState extends ConsumerState<SetRow> {
               child: _NumField(
                 controller: _weight,
                 hint: _weightHint,
-                suffix: _unit.label,
+                suffix: _unit.short,
                 decimal: true,
                 onChanged: _commitWeight,
+                onSuffixTap: _toggleUnit,
               ),
             ),
             const SizedBox(width: AppSpacing.xs),
@@ -257,6 +273,7 @@ class _NumField extends StatelessWidget {
     required this.suffix,
     required this.decimal,
     required this.onChanged,
+    this.onSuffixTap,
   });
 
   final TextEditingController controller;
@@ -265,9 +282,17 @@ class _NumField extends StatelessWidget {
   final bool decimal;
   final ValueChanged<String> onChanged;
 
+  /// When set, the suffix becomes a tap target (used to flip кг ⇄ lb).
+  final VoidCallback? onSuffixTap;
+
   @override
   Widget build(BuildContext context) {
     final glass = context.glass;
+    final suffixStyle = TextStyle(
+      color: onSuffixTap == null ? glass.textLow : glass.accent,
+      fontSize: 12,
+      fontWeight: onSuffixTap == null ? FontWeight.w400 : FontWeight.w700,
+    );
     return TextField(
       controller: controller,
       onChanged: onChanged,
@@ -283,8 +308,19 @@ class _NumField extends StatelessWidget {
         isDense: true,
         hintText: hint,
         hintStyle: TextStyle(color: glass.textLow),
-        suffixText: suffix,
-        suffixStyle: TextStyle(color: glass.textLow, fontSize: 12),
+        suffixText: onSuffixTap == null ? suffix : null,
+        suffixStyle: suffixStyle,
+        suffixIcon: onSuffixTap == null
+            ? null
+            : GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onSuffixTap,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: Text(suffix, style: suffixStyle),
+                ),
+              ),
+        suffixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
         filled: true,
         fillColor: glass.fill,
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),

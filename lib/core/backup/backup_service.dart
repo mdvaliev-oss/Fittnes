@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../features/bodyweight/domain/entities/body_weight_entry.dart';
+import '../../features/bodyweight/presentation/providers/body_weight_providers.dart';
 import '../../features/profile/domain/user_profile.dart';
 import '../../features/profile/presentation/profile_providers.dart';
 import '../../features/programs/domain/workout_program.dart';
@@ -32,12 +34,13 @@ class BackupService {
   BackupService(this._ref);
   final Ref _ref;
 
-  // v2 added nutrition; v3 removed it again. Older backups still import —
-  // their `customFoods` / `foodEntries` keys are simply ignored.
+  // v2 added nutrition; v3 removed it again and added body weight. Older
+  // backups still import — `customFoods` / `foodEntries` are simply ignored.
   static const int schemaVersion = 3;
 
   Future<String> export() async {
     final history = await _ref.read(workoutRepositoryProvider).history();
+    final weights = await _ref.read(bodyWeightRepositoryProvider).all();
     final data = <String, dynamic>{
       'app': 'fittnes',
       'version': schemaVersion,
@@ -47,6 +50,7 @@ class BackupService {
       'customPrograms':
           _ref.read(customProgramsProvider).map((p) => p.toJson()).toList(),
       'sessions': history.map((s) => s.toJson()).toList(),
+      'bodyWeights': weights.map((w) => w.toJson()).toList(),
     };
     return const JsonEncoder.withIndent('  ').convert(data);
   }
@@ -94,6 +98,15 @@ class BackupService {
       sessions++;
     }
     _ref.invalidate(workoutHistoryProvider);
+
+    final weights = _ref.read(bodyWeightRepositoryProvider);
+    for (final w in (data['bodyWeights'] as List?) ?? const []) {
+      // Fresh insert — ids from the source database are meaningless here.
+      await weights.add(
+        BodyWeightEntry.fromJson(w as Map<String, dynamic>).copyWith(id: 0),
+      );
+    }
+    _ref.invalidate(bodyWeightHistoryProvider);
 
     return BackupImportResult(sessions: sessions, programs: programs);
   }
