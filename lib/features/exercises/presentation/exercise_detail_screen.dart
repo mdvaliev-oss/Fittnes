@@ -9,6 +9,7 @@ import '../../../core/widgets/glass_card.dart';
 import '../domain/entities/exercise.dart';
 import '../domain/entities/muscle.dart';
 import 'providers/exercise_providers.dart';
+import 'widgets/exercise_card.dart';
 import 'widgets/muscle_map.dart';
 import 'widgets/technique_viewer.dart';
 
@@ -36,13 +37,16 @@ class ExerciseDetailScreen extends ConsumerWidget {
   }
 }
 
-class _DetailBody extends StatelessWidget {
+class _DetailBody extends ConsumerWidget {
   const _DetailBody({required this.exercise});
   final Exercise exercise;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final text = Theme.of(context).textTheme;
+    final isFavorite = ref.watch(
+      favoriteExercisesProvider.select((s) => s.contains(exercise.id)),
+    );
 
     return SafeArea(
       child: ListView(
@@ -69,6 +73,12 @@ class _DetailBody extends StatelessWidget {
                       Text(exercise.altName!, style: text.bodyMedium),
                   ],
                 ),
+              ),
+              FavoriteButton(
+                isFavorite: isFavorite,
+                onTap: () => ref
+                    .read(favoriteExercisesProvider.notifier)
+                    .toggle(exercise.id),
               ),
             ],
           ),

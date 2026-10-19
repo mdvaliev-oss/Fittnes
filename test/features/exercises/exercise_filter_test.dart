@@ -1,6 +1,7 @@
 import 'package:fittnes/features/exercises/domain/entities/exercise.dart';
 import 'package:fittnes/features/exercises/domain/entities/exercise_enums.dart';
 import 'package:fittnes/features/exercises/domain/entities/muscle.dart';
+import 'package:fittnes/features/exercises/domain/entities/muscle_group.dart';
 import 'package:fittnes/features/exercises/domain/exercise_filter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -71,6 +72,63 @@ void main() {
         equipment: Equipment.barbell,
       );
       expect(f.activeFacetCount, 2);
+    });
+
+    test('region chip matches primary muscles only', () {
+      expect(
+        const ExerciseFilter(group: MuscleGroup.chest).matches(bench),
+        isTrue,
+      );
+      expect(
+        const ExerciseFilter(group: MuscleGroup.arms).matches(bench),
+        isFalse, // triceps is only secondary
+      );
+      expect(
+        const ExerciseFilter(group: MuscleGroup.legs).matches(bench),
+        isFalse,
+      );
+    });
+
+    test('favorites facet only applies when the caller passes the set', () {
+      const f = ExerciseFilter(favoritesOnly: true);
+      expect(f.matches(bench), isTrue);
+      expect(f.matches(bench, favorites: const {}), isFalse);
+      expect(f.matches(bench, favorites: const {'bench'}), isTrue);
+    });
+
+    test('isBrowsing is false once a query or region narrows the catalog', () {
+      expect(const ExerciseFilter().isBrowsing, isTrue);
+      expect(
+        const ExerciseFilter(equipment: Equipment.barbell).isBrowsing,
+        isTrue,
+      );
+      expect(const ExerciseFilter(query: 'x').isBrowsing, isFalse);
+      expect(const ExerciseFilter(group: MuscleGroup.back).isBrowsing, isFalse);
+    });
+
+    test('clearedFacets keeps search, region and favorites', () {
+      const f = ExerciseFilter(
+        query: 'жим',
+        group: MuscleGroup.chest,
+        equipment: Equipment.barbell,
+        level: ExperienceLevel.beginner,
+        favoritesOnly: true,
+      );
+      final cleared = f.clearedFacets();
+      expect(cleared.query, 'жим');
+      expect(cleared.group, MuscleGroup.chest);
+      expect(cleared.favoritesOnly, isTrue);
+      expect(cleared.activeFacetCount, 0);
+    });
+
+    test('every muscle belongs to exactly one region', () {
+      for (final m in Muscle.values) {
+        expect(
+          MuscleGroup.values.where((g) => g.muscles.contains(m)).length,
+          1,
+          reason: m.name,
+        );
+      }
     });
   });
 }
