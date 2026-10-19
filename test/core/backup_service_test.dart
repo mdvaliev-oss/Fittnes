@@ -1,10 +1,5 @@
 import 'package:fittnes/core/backup/backup_service.dart';
 import 'package:fittnes/core/settings/app_settings.dart';
-import 'package:fittnes/features/nutrition/data/nutrition_repository_memory.dart';
-import 'package:fittnes/features/nutrition/domain/entities/food_entry.dart';
-import 'package:fittnes/features/nutrition/domain/entities/food_item.dart';
-import 'package:fittnes/features/nutrition/domain/entities/meal_type.dart';
-import 'package:fittnes/features/nutrition/presentation/providers/nutrition_providers.dart';
 import 'package:fittnes/features/workout/data/workout_repository_memory.dart';
 import 'package:fittnes/features/workout/domain/entities/workout_exercise_entry.dart';
 import 'package:fittnes/features/workout/domain/entities/workout_session.dart';
@@ -32,33 +27,30 @@ WorkoutSession _session() => WorkoutSession(
       ],
     );
 
+Future<ProviderContainer> _container(WorkoutRepository repo) async {
+  SharedPreferences.setMockInitialValues({});
+  final prefs = await SharedPreferences.getInstance();
+  final container = ProviderContainer(
+    overrides: [
+      sharedPreferencesProvider.overrideWithValue(prefs),
+      workoutRepositoryProvider.overrideWithValue(repo),
+    ],
+  );
+  addTearDown(container.dispose);
+  return container;
+}
+
 void main() {
   test('export then import restores workout sessions into a fresh repo',
       () async {
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await SharedPreferences.getInstance();
-
     final sourceRepo = WorkoutRepositoryMemory();
     await sourceRepo.save(_session());
-
-    ProviderContainer containerWith(WorkoutRepository repo) =>
-        ProviderContainer(
-          overrides: [
-            sharedPreferencesProvider.overrideWithValue(prefs),
-            workoutRepositoryProvider.overrideWithValue(repo),
-            nutritionRepositoryProvider
-                .overrideWithValue(NutritionRepositoryMemory()),
-          ],
-        );
-
-    final source = containerWith(sourceRepo);
-    addTearDown(source.dispose);
+    final source = await _container(sourceRepo);
     final json = await source.read(backupServiceProvider).export();
 
     // Import into a fresh, empty repository.
     final targetRepo = WorkoutRepositoryMemory();
-    final target = containerWith(targetRepo);
-    addTearDown(target.dispose);
+    final target = await _container(targetRepo);
 
     expect(await targetRepo.history(), isEmpty);
     final result = await target.read(backupServiceProvider).import(json);
@@ -70,75 +62,31 @@ void main() {
     expect(restored.single.totalVolume, 500);
   });
 
-  test('export then import restores nutrition diary and custom foods',
-      () async {
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await SharedPreferences.getInstance();
+  test('import of a v2 backup ignores the removed nutrition keys', () async {
+    final repo = WorkoutRepositoryMemory();
+    final container = await _container(repo);
 
-    final sourceNutri = NutritionRepositoryMemory();
-    await sourceNutri.saveCustomFood(
-      const FoodItem(
-        id: '',
-        name: 'Мой протеин',
-        kcalPer100: 380,
-        proteinPer100: 75,
-        fatPer100: 5,
-        carbPer100: 8,
-        isCustom: true,
-      ),
-    );
-    await sourceNutri.addEntry(
-      FoodEntry(
-        day: DateTime(2026, 4, 10),
-        meal: MealType.lunch,
-        name: 'Гречка',
-        grams: 150,
-        kcal: 138,
-        protein: 5,
-        fat: 1,
-        carb: 26,
-        createdAt: DateTime(2026, 4, 10, 13),
-      ),
-    );
+    const legacy = '''
+{
+  "app": "fittnes",
+  "version": 2,
+  "settings": {"unit": "lb", "nutritionKcal": 1800},
+  "sessions": [
+    {"id": 7, "title": "Legacy", "startedAt": "2026-01-05T10:00:00.000",
+     "finishedAt": "2026-01-05T11:00:00.000", "entries": []}
+  ],
+  "customFoods": [{"id": "x", "name": "Протеин", "kcalPer100": 380}],
+  "foodEntries": [{"name": "Гречка", "grams": 150}]
+}''';
 
-    ProviderContainer container(NutritionRepositoryMemory n) =>
-        ProviderContainer(
-          overrides: [
-            sharedPreferencesProvider.overrideWithValue(prefs),
-            workoutRepositoryProvider
-                .overrideWithValue(WorkoutRepositoryMemory()),
-            nutritionRepositoryProvider.overrideWithValue(n),
-          ],
-        );
-
-    final source = container(sourceNutri);
-    addTearDown(source.dispose);
-    final json = await source.read(backupServiceProvider).export();
-
-    final targetNutri = NutritionRepositoryMemory();
-    final target = container(targetNutri);
-    addTearDown(target.dispose);
-    await target.read(backupServiceProvider).import(json);
-
-    expect(await targetNutri.customFoods(), hasLength(1));
-    final restored = await targetNutri.entriesForDay(DateTime(2026, 4, 10));
-    expect(restored, hasLength(1));
-    expect(restored.single.name, 'Гречка');
-    expect(restored.single.kcal, 138);
+    final result = await container.read(backupServiceProvider).import(legacy);
+    expect(result.sessions, 1);
+    expect((await repo.history()).single.title, 'Legacy');
+    expect(container.read(appSettingsProvider).unit, WeightUnit.lb);
   });
 
   test('import rejects a backup from a newer schema', () async {
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await SharedPreferences.getInstance();
-    final container = ProviderContainer(
-      overrides: [
-        sharedPreferencesProvider.overrideWithValue(prefs),
-        workoutRepositoryProvider.overrideWithValue(WorkoutRepositoryMemory()),
-        nutritionRepositoryProvider
-            .overrideWithValue(NutritionRepositoryMemory()),
-      ],
-    );
-    addTearDown(container.dispose);
+    final container = await _container(WorkoutRepositoryMemory());
 
     const future = '{"app":"fittnes","version":999,"sessions":[]}';
     expect(
@@ -148,17 +96,7 @@ void main() {
   });
 
   test('import rejects malformed JSON with a BackupException', () async {
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await SharedPreferences.getInstance();
-    final container = ProviderContainer(
-      overrides: [
-        sharedPreferencesProvider.overrideWithValue(prefs),
-        workoutRepositoryProvider.overrideWithValue(WorkoutRepositoryMemory()),
-        nutritionRepositoryProvider
-            .overrideWithValue(NutritionRepositoryMemory()),
-      ],
-    );
-    addTearDown(container.dispose);
+    final container = await _container(WorkoutRepositoryMemory());
 
     expect(
       () => container.read(backupServiceProvider).import('not json'),
@@ -167,17 +105,7 @@ void main() {
   });
 
   test('exported JSON carries settings and is valid', () async {
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await SharedPreferences.getInstance();
-    final container = ProviderContainer(
-      overrides: [
-        sharedPreferencesProvider.overrideWithValue(prefs),
-        workoutRepositoryProvider.overrideWithValue(WorkoutRepositoryMemory()),
-        nutritionRepositoryProvider
-            .overrideWithValue(NutritionRepositoryMemory()),
-      ],
-    );
-    addTearDown(container.dispose);
+    final container = await _container(WorkoutRepositoryMemory());
 
     await container
         .read(appSettingsProvider.notifier)
@@ -186,5 +114,6 @@ void main() {
     final json = await container.read(backupServiceProvider).export();
     expect(json, contains('"remindersEnabled": true'));
     expect(json, contains('"app": "fittnes"'));
+    expect(json, isNot(contains('customFoods')));
   });
 }

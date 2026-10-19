@@ -61,7 +61,6 @@ lib/
    ├─ progress/    # графики силы/тоннажа + личные рекорды (fl_chart)
    ├─ recovery/    # модель усталости мышц → heat-карта (MuscleBodyMap)
    ├─ recommendations/  # ProgressionEngine (двойная прогрессия × RPE/RIR)
-   ├─ nutrition/   # трекер питания: дневник калорий/макросов, каталог продуктов
    └─ profile/     # профиль, настройки, напоминания, экспорт/импорт
 ```
 
@@ -101,12 +100,10 @@ lib/
 - [x] 5 — Экспорт/импорт данных (JSON) + локальные напоминания
 - [x] 6 — Единицы кг/фунт (реальная конверсия), каталог 72 упражнения,
   фирменная иконка/сплэш, ru-локаль
-- [x] 7 — Трекер питания (`features/nutrition`): дневник калорий/макросов по
-  приёмам, кольцо + бары, встроенный каталог продуктов (149) + свои продукты,
-  ручная цель в `AppSettings`. Drift **schema v2** (таблицы `CustomFoods`,
-  `FoodEntries` + `onUpgrade`). Бэкап расширен (schemaVersion 2).
-  Готовые меню (`meal_plans_seed.json`, 7 рационов ~2000 ккал из доступных
-  продуктов): экран списка/деталей, «Применить» = `clearDay` + заполнение дня.
+- [x] 7 — Трекер питания — **УДАЛЁН по решению пользователя** (v0.4). Drift
+  **schema v3**: `onUpgrade` дропает `custom_foods`/`food_entries` и создаёт
+  `body_weights`. Бэкап schemaVersion 3; старые бэкапы v1/v2 импортируются,
+  ключи `customFoods`/`foodEntries` игнорируются. Питание больше не добавлять.
 
 **Версия приложения:** держи `pubspec.yaml` `version:` и
 `lib/core/app_info.dart` `kAppVersion` в синхроне; версия видна в Профиле.
@@ -121,7 +118,7 @@ onboarding-флоу, golden-тесты, юнит-осознанный шаг п�
 flutter pub get
 dart run build_runner build --delete-conflicting-outputs   # ОБЯЗАТЕЛЬНО (Drift)
 flutter analyze        # ожидаем: No issues found!
-flutter test           # ожидаем: All tests passed! (69)
+flutter test           # ожидаем: All tests passed!
 flutter run            # на подключённом устройстве
 ```
 

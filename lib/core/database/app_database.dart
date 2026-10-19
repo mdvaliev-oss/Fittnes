@@ -48,42 +48,17 @@ class SetEntries extends Table {
   TextColumn get note => text().nullable()();
 }
 
-/// A user-created food product (macros per 100 g). Catalog foods ship as a
-/// bundled JSON asset; only user-authored ones live in the database.
-@DataClassName('CustomFoodRow')
-class CustomFoods extends Table {
+/// One body-weight measurement. Stored canonically in kilograms; the UI
+/// converts to/from the user's display unit at the edges.
+@DataClassName('BodyWeightRow')
+class BodyWeights extends Table {
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get name => text()();
-  RealColumn get kcalPer100 => real()();
-  RealColumn get proteinPer100 => real()();
-  RealColumn get fatPer100 => real()();
-  RealColumn get carbPer100 => real()();
-}
-
-/// One logged food in the nutrition diary. Macros are snapshotted at add-time
-/// so history stays stable even if the source product is later edited/removed.
-@DataClassName('FoodEntryRow')
-class FoodEntries extends Table {
-  IntColumn get id => integer().autoIncrement()();
-
-  /// Date-only (midnight) the entry belongs to.
-  DateTimeColumn get day => dateTime()();
-
-  /// Index of [MealType].
-  IntColumn get meal => integer()();
-  TextColumn get name => text()();
-  RealColumn get grams => real()();
-  RealColumn get kcal => real()();
-  RealColumn get protein => real()();
-  RealColumn get fat => real()();
-  RealColumn get carb => real()();
-  DateTimeColumn get createdAt => dateTime()();
+  DateTimeColumn get measuredAt => dateTime()();
+  RealColumn get kg => real()();
 }
 
 /// The app's local-first SQLite database.
-@DriftDatabase(
-  tables: [Sessions, Entries, SetEntries, CustomFoods, FoodEntries],
-)
+@DriftDatabase(tables: [Sessions, Entries, SetEntries, BodyWeights])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
@@ -91,15 +66,18 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.executor);
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onUpgrade: (m, from, to) async {
-          // v2 adds the nutrition tracker tables.
-          if (from < 2) {
-            await m.createTable(customFoods);
-            await m.createTable(foodEntries);
+          // v2 had nutrition tables; v3 removes the feature entirely and adds
+          // body-weight tracking. Dropping is guarded so a v1 → v3 jump (which
+          // never had those tables) is safe too.
+          if (from < 3) {
+            await customStatement('DROP TABLE IF EXISTS food_entries');
+            await customStatement('DROP TABLE IF EXISTS custom_foods');
+            await m.createTable(bodyWeights);
           }
         },
         beforeOpen: (details) async {

@@ -7,7 +7,6 @@ abstract final class AppRoutes {
   static const String home = '/home';
   static const String exercises = '/exercises';
   static const String progress = '/progress';
-  static const String nutrition = '/nutrition';
   static const String profile = '/profile';
 
   // Full-screen (outside the bottom-nav shell) — wired in later modules.
@@ -17,11 +16,7 @@ abstract final class AppRoutes {
   static const String programBuilder = '/program-builder';
   static const String recovery = '/recovery';
   static const String onboarding = '/onboarding';
-  static const String nutritionTargets = '/nutrition/targets';
-  static const String addFood = '/nutrition/add';
-  static const String customFood = '/nutrition/custom-food';
-  static const String mealPlans = '/nutrition/plans';
-  static String mealPlanDetail(String id) => '/nutrition/plans/$id';
+  static const String bodyWeight = '/progress/weight';
 
   static String exerciseDetail(String id) => '/exercises/$id';
   static String programDetail(String id) => '/programs/$id';
