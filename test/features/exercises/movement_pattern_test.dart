@@ -96,7 +96,9 @@ void main() {
       );
       expect(e.pattern, MovementPattern.legPress);
       expect(
-          MovementPattern.fromDataset('hipThrust'), MovementPattern.hipThrust,);
+        MovementPattern.fromDataset('hipThrust'),
+        MovementPattern.hipThrust,
+      );
       expect(MovementPattern.fromDataset('nope'), isNull);
       expect(MovementPattern.fromDataset(null), isNull);
     });
