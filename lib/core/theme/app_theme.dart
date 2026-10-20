@@ -50,6 +50,7 @@ abstract final class AppTheme {
       brightness: brightness,
       scaffoldBackgroundColor: scaffold,
       colorScheme: colorScheme,
+      fontFamily: AppTypography.fontFamily,
       textTheme: AppTypography.textTheme(textHi, textMid),
       splashFactory: InkSparkle.splashFactory,
       extensions: [glass],

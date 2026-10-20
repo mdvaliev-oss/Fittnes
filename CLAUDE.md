@@ -25,7 +25,7 @@
 | Каталог упражнений | bundled JSON → in-memory репозиторий (read-only, без БД) |
 | Графики | fl_chart |
 | Напоминания | flutter_local_notifications + timezone |
-| Прочее | flutter_svg, google_fonts (Inter); анимации — свои виджеты в `core/widgets` |
+| Прочее | flutter_svg; шрифт Inter — **бандл** `assets/fonts` (OFL), без google_fonts; анимации — свои виджеты в `core/widgets` |
 
 ## Архитектура и конвенции
 
@@ -135,6 +135,11 @@ lib/
   (prefs с таймаутом 4 с → in-memory fallback + `prefsDegradedProvider`;
   `StartupErrorApp` показывает текст исключения вместо чёрного экрана),
   напоминания инициализируются после `runApp`. Тесты в CI теперь блокируют APK.
+- [x] 10 — 0.4.2: `google_fonts` удалён (на телефоне без доступа к Google он
+  сыпал ошибками), Inter 400/500/600/700 лежит в `assets/fonts` и объявлен в
+  `pubspec.yaml` → `fonts:`; `AppTypography.inter()` — обёртка над `TextStyle`.
+  Защита старта смягчена: `StartupErrorApp` только для ошибок **до** первого
+  кадра, `FlutterError` не эскалируется.
 
 **Версия приложения:** держи `pubspec.yaml` `version:` и
 `lib/core/app_info.dart` `kAppVersion` в синхроне; версия видна в Профиле.
@@ -185,8 +190,7 @@ flutter run            # на подключённом устройстве
   упадёт.
 - Для web-превью со скриншотами нужен ВРЕМЕННЫЙ слой (НЕ коммитить):
   conditional DB-connection (native/web), `web/sqlite3.wasm` + скомпилированный
-  `web/drift_worker.js` (берутся из пакета drift в pub-cache), бандл-шрифт
-  DejaVu (кириллица оффлайн, т.к. google_fonts не качается), демо-сид данных,
+  `web/drift_worker.js` (берутся из пакета drift в pub-cache), демо-сид данных,
   сборка `flutter build web --release --no-web-resources-cdn`. После скриншотов
   всё откатывается (`git checkout` + `rm`), дерево остаётся чистым.
 
