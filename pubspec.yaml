@@ -1,7 +1,7 @@
 name: fittnes
 description: "Персональный тренер по силовым тренировкам — professional strength training companion."
 publish_to: "none"
-version: 0.4.0+5
+version: 0.4.1+6
 
 environment:
   sdk: ">=3.5.0 <4.0.0"
@@ -30,6 +30,15 @@ dependencies:
 
   # Lightweight key-value storage (settings & profile)
   shared_preferences: ^2.3.2
+  # PINNED: 2.5.0 switched the Android backend to Pigeon JNI and hangs
+  # SharedPreferences.getInstance() on device → black screen on launch
+  # (v0.4.0). 2.4.27 is the last build verified on a phone.
+  shared_preferences_android: 2.4.27
+  # PINNED with it: the JNI bridge used by path_provider_android. 1.0.3/1.0.2
+  # are the versions from the last phone-verified build (0.3.1); 1.1.0 landed
+  # in the broken one.
+  jni: 1.0.3
+  jni_flutter: 1.0.2
 
   # Local reminder notifications
   flutter_local_notifications: ^17.2.3

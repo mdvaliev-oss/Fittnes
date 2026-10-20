@@ -6,7 +6,8 @@
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
-pubspec.lock
+# pubspec.lock IS committed: CI must build the exact dependency set that was
+# tested on a phone (an unpinned transitive update broke startup in v0.4.0).
 
 # Generated code (codegen — regenerate with build_runner)
 *.g.dart

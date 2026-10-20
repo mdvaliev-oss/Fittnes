@@ -127,8 +127,22 @@ lib/
     (`beatsPersonalRecord` в domain/services). Reduce-motion уважается.
   - `flutter_animate` больше не используется (убран из pubspec).
 
+- [x] 9 — Hotfix 0.4.1: чёрный экран на старте. Причина — незакоммиченный
+  `pubspec.lock`: CI подтянул `shared_preferences_android 2.5.0` (новый
+  Pigeon-JNI бэкенд), `SharedPreferences.getInstance()` зависал до `runApp`.
+  Фикс: пин `shared_preferences_android: 2.4.27`, **`pubspec.lock` теперь в
+  git** (CI: `flutter pub get --enforce-lockfile`), `core/startup/startup_guard.dart`
+  (prefs с таймаутом 4 с → in-memory fallback + `prefsDegradedProvider`;
+  `StartupErrorApp` показывает текст исключения вместо чёрного экрана),
+  напоминания инициализируются после `runApp`. Тесты в CI теперь блокируют APK.
+
 **Версия приложения:** держи `pubspec.yaml` `version:` и
 `lib/core/app_info.dart` `kAppVersion` в синхроне; версия видна в Профиле.
+
+**Зависимости:** lock-файл закоммичен и сгенерирован на той же версии Flutter,
+что в CI (3.44.7). Обновлять зависимости только осознанно (`flutter pub upgrade`
+→ проверка на телефоне). Пин `shared_preferences_android` не снимать, пока
+новый JNI-бэкенд не проверен на реальном устройстве.
 
 **Не входит (осознанно):** облачная синхронизация, домашние виджеты
 (платформо-зависимые), онлайн-база продуктов/штрихкоды. Возможные улучшения:
@@ -165,7 +179,10 @@ flutter run            # на подключённом устройстве
   `gstatic.com`) и **GitHub raw/releases** → нельзя ставить Android SDK/NDK и
   качать ассеты. Поэтому APK собирается только в GitHub Actions, а не локально.
 - Flutter в контейнере ставится клоном в `/opt/flutter` (эфемерно, может
-  пропасть после рестарта).
+  пропасть после рестарта). Ставить **тег 3.44.7** (как в CI):
+  `git clone --depth 1 -b 3.44.7 https://github.com/flutter/flutter.git /opt/flutter`
+  — иначе `pubspec.lock` потребует более новый SDK и CI с `--enforce-lockfile`
+  упадёт.
 - Для web-превью со скриншотами нужен ВРЕМЕННЫЙ слой (НЕ коммитить):
   conditional DB-connection (native/web), `web/sqlite3.wasm` + скомпилированный
   `web/drift_worker.js` (берутся из пакета drift в pub-cache), бандл-шрифт

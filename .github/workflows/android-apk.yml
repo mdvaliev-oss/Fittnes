@@ -31,8 +31,10 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: Install dependencies (exact versions from pubspec.lock)
+        run: |
+          flutter pub get --enforce-lockfile
+          flutter pub deps --style=compact | grep -E "shared_preferences|drift|go_router|sqlite3" || true
 
       - name: Generate code (Drift)
         run: dart run build_runner build --delete-conflicting-outputs
@@ -45,7 +47,6 @@ jobs:
 
       - name: Run tests
         run: flutter test
-        continue-on-error: true
 
       - name: Build release APK
         run: flutter build apk --release
